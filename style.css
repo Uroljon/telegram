@@ -1,0 +1,112 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+}
+
+#telegram {
+  font-family: "Roboto", sans-serif;
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 27.5% 1fr 25%;
+}
+#telegram #column-left {
+  height: 100vh;
+}
+#telegram #column-center {
+  height: 100vh;
+  overflow: auto;
+}
+#telegram #column-center .container {
+  padding: 0 13px;
+  width: 100%;
+}
+#telegram #column-center .main-header {
+  cursor: pointer;
+  height: 56px;
+  padding: 0 3px;
+  background-color: #fff;
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.21);
+  position: fixed;
+  display: flex;
+  align-items: center;
+  z-index: 1;
+  width: 47.5%;
+}
+#telegram #column-center .main-header .person {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  width: 100%;
+}
+#telegram #column-center .main-header .person .avatar {
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  overflow: hidden;
+}
+#telegram #column-center .main-header .person .avatar img {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+#telegram #column-center .main-header .person .info {
+  padding-left: 18px;
+  font-size: 16px;
+}
+#telegram #column-center .main-header .person .info #name {
+  font-weight: 500;
+}
+#telegram #column-center .main-header .person .info #status {
+  font-size: 14px;
+  margin-top: 1px;
+  color: #707579;
+}
+#telegram #column-center .main-header .person .search-btn,
+#telegram #column-center .main-header .person .more-btn {
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  margin-left: 8px;
+  text-align: center;
+  border-radius: 50%;
+}
+#telegram #column-center .main-header .person .search-btn:hover,
+#telegram #column-center .main-header .person .more-btn:hover {
+  background-color: rgba(128, 128, 128, 0.486);
+}
+#telegram #column-center .main-header .person .search-btn i,
+#telegram #column-center .main-header .person .more-btn i {
+  font-size: 24px;
+  color: #707579;
+}
+#telegram #column-center .main-chat {
+  padding-top: 56px;
+  background: #e6ebee url(https://web.telegram.org/k/assets/img/bg.jpeg) center center no-repeat;
+  background-size: cover;
+  height: 100%;
+}
+#telegram #column-center .main-chat .message {
+  font-family: sans-serif;
+  padding: 6px 8px 6px 10px;
+  margin: 4px 0;
+  max-width: 480px;
+  line-height: 1.3125;
+  position: relative;
+  font-weight: 400;
+  border-radius: 10px;
+}
+#telegram #column-center .main-chat .message.to-me {
+  text-align: left;
+  background-color: white;
+}
+#telegram #column-center .main-chat .message.from-me {
+  text-align: right;
+  background-color: #eeffde;
+}
+#telegram #column-right {
+  height: 100vh;
+}/*# sourceMappingURL=style.css.map */
