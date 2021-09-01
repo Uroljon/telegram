@@ -23,12 +23,11 @@
   overflow: auto;
 }
 #telegram #column-center .container {
-  padding: 0 13px;
+  padding: 0 16px;
   width: 100%;
 }
 #telegram #column-center .main-header {
   cursor: pointer;
-  height: 56px;
   padding: 0 3px;
   background-color: #fff;
   box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.21);
@@ -41,6 +40,8 @@
 #telegram #column-center .main-header .person {
   display: grid;
   grid-template-columns: auto 1fr auto auto;
+  grid-template-rows: 56px;
+  align-items: center;
   width: 100%;
 }
 #telegram #column-center .main-header .person .avatar {
@@ -69,9 +70,10 @@
 #telegram #column-center .main-header .person .more-btn {
   width: 40px;
   height: 40px;
-  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-left: 8px;
-  text-align: center;
   border-radius: 50%;
 }
 #telegram #column-center .main-header .person .search-btn:hover,
@@ -80,7 +82,7 @@
 }
 #telegram #column-center .main-header .person .search-btn i,
 #telegram #column-center .main-header .person .more-btn i {
-  font-size: 24px;
+  font-size: 17px;
   color: #707579;
 }
 #telegram #column-center .main-chat {
@@ -92,7 +94,7 @@
 #telegram #column-center .main-chat .message {
   font-family: sans-serif;
   padding: 6px 8px 6px 10px;
-  margin: 4px 0;
+  margin: 4px 0 8px 0;
   max-width: 480px;
   line-height: 1.3125;
   position: relative;
@@ -102,18 +104,25 @@
 #telegram #column-center .main-chat .message .tail {
   position: absolute;
   bottom: 0;
-  right: -15px;
   display: inline-block;
   border: 15px solid transparent;
-  border-bottom-color: white;
 }
 #telegram #column-center .main-chat .message.to-me {
   text-align: left;
   background-color: white;
 }
+#telegram #column-center .main-chat .message.to-me .tail {
+  border-bottom-color: white;
+  left: -15px;
+}
 #telegram #column-center .main-chat .message.from-me {
   text-align: right;
   background-color: #eeffde;
+  margin: 0 0 0 auto;
+}
+#telegram #column-center .main-chat .message.from-me .tail {
+  border-bottom-color: #eeffde;
+  right: -15px;
 }
 #telegram #column-right {
   height: 100vh;
