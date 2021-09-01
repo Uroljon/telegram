@@ -99,6 +99,14 @@
   font-weight: 400;
   border-radius: 10px;
 }
+#telegram #column-center .main-chat .message .tail {
+  position: absolute;
+  bottom: 0;
+  right: -15px;
+  display: inline-block;
+  border: 15px solid transparent;
+  border-bottom-color: white;
+}
 #telegram #column-center .main-chat .message.to-me {
   text-align: left;
   background-color: white;

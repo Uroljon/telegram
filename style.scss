@@ -99,9 +99,23 @@
                 position: relative;
                 font-weight: 400;
                 border-radius: 10px;
+                .tail {
+                    position: absolute;
+                    bottom: 0;
+                    right: -15px;
+                    display: inline-block;
+                    // border-color: transparent;
+                    border: 15px solid transparent;
+
+                    border-bottom-color: white;
+                }
                 &.to-me {
                     text-align: left;
                     background-color: white;
+
+                    .tail{
+                        
+                    }
                 }
                 &.from-me {
                     text-align: right;
