@@ -1,3 +1,25 @@
+// search function styles
+document.querySelector("#search").addEventListener("focus", ()=>{
+    document.querySelector(".search-wrapper").style.border = "2px solid #3390ec";
+    document.querySelector(".fa-search").style.color = "#3390ec";
+    document.querySelector(".clear-search-btn").style.opacity = "1";
+
+});
+document.querySelector("#search").addEventListener("blur", ()=>{
+    document.querySelector(".search-wrapper").style.border = "1px solid #dfe1e5";
+    document.querySelector(".fa-search").style.color = "#dfe1e5";
+    document.querySelector(".clear-search-btn").style.opacity = "0";
+
+});
+// toggle settings window
+document.querySelector(".toggle-settings").addEventListener("click", ()=>{
+    document.querySelector(".settings").classList.toggle("hide");
+})
+// chat-tabs navigation match
+document.querySelectorAll(".navbar li").forEach((elem)=>{
+    console.log(elem)
+})
+
 let DATA = {
     users: [
         {
