@@ -20,7 +20,36 @@
 <body>
     <div id="telegram">
         <!-- left -->
-        <div id="column-left"></div>
+        <div id="column-left">
+            <div class="left-header">
+                <div class="container">
+                    <div class="toggle-settings"><i class="fa fa-bars" aria-hidden="true"></i></div>
+                    <div class="search-wrapper">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                        <input type="text" placeholder="Search" id="search">
+                    </div>
+                </div>
+            </div>
+            <div class="left-navigation">
+                <ul class="navbar">
+                    <li data-target="all_chats">All Chats</li>
+                    <li data-target="people">People</li>
+                    <li data-target="groups">Groups</li>
+                    <li data-target="bots">Bots</li>
+                    <li data-target="channels">Channels</li>
+                </ul>
+                <div id="all_chats">all_chats</div>
+                <div id="people">people</div>
+                <div id="groups">groups</div>
+                <div id="bots">bots</div>
+                <div id="channels">channels</div>
+            </div>
+            <div class="left-chatlist">
+                <div class="container">
+                    <div class="chat_item"></div>
+                </div>
+            </div>
+        </div>
         <!-- center -->
         <div id="column-center">
             <div class="main-header">
@@ -95,7 +124,7 @@
                         omnis debitis quae voluptatem modi, ipsa ad.
                         <div class="tail"></div>
                     </div>
-                   
+
                 </div>
 
             </div>
@@ -116,7 +145,70 @@
 
         </div>
         <!-- right -->
-        <div id="column-right"></div>
+        <div id="column-right">
+            <div class="right-header">
+                <div class="container">
+                    <div class="profile">
+                        <div class="close-btn"><i class="fa fa-times" aria-hidden="true"></i></div>
+                    </div>
+                    <div class="profile-text">Profile</div>
+                    <div class="edit-btn"><i class="fa fa-pencil" aria-hidden="true"></i></div>
+                </div>
+            </div>
+            <div class="carousel">
+                <img style="width: 200px; height: 200px" src="https://images.unsplash.com/photo-1593642532009-6ba71e22f468?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
+                    alt="test photo">
+            </div>
+            <div class="right-main">
+                <div class="phone">
+                    <div class="phone-icon"><i class="fa fa-phone" aria-hidden="true"></i></div>
+                    <div class="phone-number">
+                        <div>+998974940727</div>
+                        <span>Phone</span>
+                    </div>
+                </div>
+                <div class="username">
+                    <div class="email-icon">@</div>
+                    <div class="username-text">
+                        <div>custom_username</div>
+                        <span>Username</span>
+                    </div>
+                </div>
+                <div class="bio">
+                    <div class="info-icon"><i class="fa fa-info-circle" aria-hidden="true"></i></div>
+                    <div class="bio-text">
+                        <div>custom_bio</div>
+                        <span>Bio</span>
+                    </div>
+                </div>
+                <div class="bio">
+                    <div class="bell-icon"><i class="fa fa-bell-o" aria-hidden="true"></i></div>
+                    <div class="bio-text">
+                        <span>Notifications</span>
+                        <button class="toggle-notification">
+                            <i class="fa fa-toggle-on" aria-hidden="true"></i>
+                            <i class="fa fa-toggle-off" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+            <div class="right-footer">
+
+                <ul class="shared-media">
+                    <li data-target="media">Media</li>
+                    <li data-target="files">Files</li>
+                    <li data-target="links">Links</li>
+                    <li data-target="music">Music</li>
+                    <li data-target="voice">Voice</li>
+                </ul>
+                <div id="media">media</div>
+                <div id="files">files</div>
+                <div id="links">links</div>
+                <div id="music">music</div>
+                <div id="voice">voice</div>
+            </div>
+        </div>
     </div>
 
     <script src="./main.js"></script>
