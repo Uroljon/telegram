@@ -17,7 +17,22 @@ document.querySelector(".toggle-settings").addEventListener("click", ()=>{
 })
 // chat-tabs navigation match
 document.querySelectorAll(".navbar li").forEach((elem)=>{
-    console.log(elem)
+    elem.addEventListener("click", (e)=>{
+
+        let location = e.target.getAttribute("data-target");
+
+        // toggle .active on tabs
+        document.querySelectorAll(".navbar li").forEach((elem)=>{
+            elem.classList.remove("active");
+        })
+        e.target.classList.add("active");
+
+        // corresponding tabs will be shown
+        document.querySelectorAll(".tabs-content").forEach((elem)=>{
+            elem.classList.remove("active");
+        });
+        document.querySelector(`#${location}`).classList.add("active");
+    })
 })
 
 let DATA = {

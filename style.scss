@@ -38,40 +38,41 @@
     display: grid;
 
     #column-left {
+        overflow: auto;
         height: 100vh;
-        .left-header{
+        .left-header {
             @include header-style($column-left-width);
             z-index: 6;
-            .left-header-wrapper{
+            .left-header-wrapper {
                 display: grid;
                 grid-template-columns: 40px 1fr;
                 grid-template-rows: $header-height;
                 align-items: center;
                 justify-items: center;
                 position: relative;
-                .settings{
+                .settings {
                     transition: 300ms;
                     position: absolute;
                     bottom: 0;
                     background-color: white;
                     box-shadow: 0px 1px 5px 0px rgb(0 0 0 / 21%);
-                    &.hide{
+                    &.hide {
                         transform: scale(0);
                     }
                 }
-                .toggle-settings{
+                .toggle-settings {
                     cursor: pointer;
                     width: 40px;
                     height: 40px;
                     display: grid;
                     place-items: center;
                     transition: 300ms;
-                    &:hover{
+                    &:hover {
                         background-color: rgba(128, 128, 128, 0.479);
                         border-radius: 50%;
                     }
                 }
-                .search-wrapper{
+                .search-wrapper {
                     width: 100%;
                     line-height: 42px;
                     border-radius: 22px;
@@ -80,65 +81,136 @@
                     grid-template-columns: auto 1fr auto;
                     grid-template-rows: 40px;
                     align-items: center;
-                    i{
+                    i {
                         width: 42px;
                         text-align: center;
                         font-size: 17px;
                         color: rgba(128, 128, 128, 0.596);
                         border-radius: 50%;
-                        &:last-child{
+                        &:last-child {
                             opacity: 0;
                             cursor: pointer;
                             padding: 30% 0;
                             font-size: 19px;
                             color: #3390ec;
                             transition: 300ms;
-                            &:hover{
+                            &:hover {
                                 background-color: rgba(0, 102, 255, 0.151);
                             }
                         }
                     }
-                    input{
+                    input {
                         height: 40px;
                         outline: none;
                         font-size: 100%;
                         border: none;
                     }
                 }
-              
             }
         }
-        .left-navigation{
+        .left-navigation {
             padding-left: 11px;
             padding-top: $header-height;
-            .navbar{
+            .navbar {
+                // min-width: 120%;//bu overflow ga xalaqit berdi
                 display: flex;
                 list-style: none;
                 overflow-x: auto;
-                li{
+                li {
+                    position: relative;
                     height: 3rem;
                     padding: 0 1rem;
                     cursor: pointer;
-                    // text-align: center;
-                    min-width: 100px;
                     font-size: 1rem;
                     font-weight: 500;
                     color: $secondary-text-color;
                     display: flex;
                     flex-wrap: nowrap;
+                    white-space: nowrap; //shunga ancha vaqtim ketti. all chats bolinmasligi kk edi
                     justify-content: center;
                     align-items: center;
                     transition: 300ms;
-                    &:hover{
+                    &:hover {
                         background-color: rgba(128, 128, 128, 0.219);
                         border-top-right-radius: 6px;
                         border-top-left-radius: 6px;
+                    }
+                    &.active {
+                        color: #3390ec;
+                    }
+                    &.active::after {
+                        content: "";
+                        position: absolute;
+                        bottom: 0;
+                        display: block;
+                        width: 70%;
+                        height: 3px;
+                        background-color: #3390ec;
+                    }
+                }
+            }
+        }
+        .chats_wrapper {
+            .tabs-content {
+                width: 100%;
+                display: none;
+                border-top: 1px solid #dfe1e5;
+                padding: 8px;
+                &.active {
+                    display: block;
+                }
+                .chat_item {
+                    cursor: pointer;
+                    padding: 0.5625rem;
+                    border-radius: 10px;
+                    height: 72px;
+                    display: grid;
+                    grid-template-columns: auto 1fr;
+                    align-items: center;
+                    position: relative;
+                    overflow: hidden;
+                    &:hover {
+                        background-color: rgba(128, 128, 128, 0.082);
+                    }
+                    .chat_avatar {
+                        width: 54px;
+                        height: 54px;
+                        border-radius: 50%;
+                        overflow: hidden;
+                        background: linear-gradient(#72d5fd #2a9ef1);
+                        img {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                        }
+                    }
+                    .user_caption {
+                        padding: 0.0625rem 0.4375rem 0.0625rem 0.5625rem;
+                        .diolog_title {
+                            display: grid;
+                            align-items: center;
+                            grid-template-columns: 1fr auto;
+                            .diolog_title_details {
+                                font-size: 0.75rem;
+                                color: $secondary-text-color;
+                                display: block;
+                                i {
+                                    color: green;
+                                }
+                            }
+                        }
+                        .dialog_subtitle {
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            line-height: 27px;
+                            color: $secondary-text-color;
+                        }
                     }
                 }
             }
         }
     }
-
 
     #column-center {
         height: 100vh;
