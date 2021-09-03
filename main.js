@@ -1,3 +1,4 @@
+
 let DATA = {
 
     people: [
@@ -132,7 +133,7 @@ let DATA = {
                 {
                     id: 2,
                     is_from_me: true,
-                    text: "lorem ipsum dolor sit amet...",
+                    text: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestias error fuga possimus cum, ab animi quaerat autem omnis fugiat mollitia delectus perferendis quo, placeat, quis totam maxime quae voluptatem esse?",
                     time: new Date(2021, 8, 1, 11, 11, 50)
                 },
             ]
@@ -210,6 +211,9 @@ let DATA = {
 
     }
 }
+// set DATA to localStrage
+localStorage.setItem("DATA", JSON.stringify(DATA));
+
 let weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 // search function styles
@@ -253,7 +257,7 @@ document.querySelectorAll(".navbar li").forEach((elem) => {
     })
 })
 
-
+// renders DATA to left column
 function fill_left_column(location) {
     if (location === "all_chats") {
         for (let i in DATA) {
@@ -313,7 +317,7 @@ function fill_left_column(location) {
         })
     }
 }
-
+// renders DATA to middle column
 function fill_middle_column(what) {
 
     console.log(what.getAttribute("data-username"))
@@ -331,9 +335,11 @@ function fill_middle_column(what) {
                 document.querySelector(".main-chat .container").innerHTML = "";
                 chatItem.messages.forEach((message) => {
                     document.querySelector(".main-chat .container").innerHTML += `
+                    <div style="display: flex; ${message.is_from_me ? 'justify-content: flex-end;' : ''}">
                     <div class="message ${message.is_from_me ? "from-me" : "to-me"} has-tail">
                         ${message.text}
                     <div class="tail"></div>
+                    </div>
                     </div>
                     `
                 })
@@ -343,6 +349,27 @@ function fill_middle_column(what) {
 
 
 }
+
+// INPUT NEW MESSAGE
+document.querySelector(".new-message-text").addEventListener("keyup", (e) => {
+    // document.querySelector(".new-message-text").value;
+    document.querySelector(".new-message-voice i").classList.remove("fa-microphone");
+    document.querySelector(".new-message-voice i").classList.add("fa-paper-plane");
+    if (!e.target.value) {
+        document.querySelector(".new-message-voice i").classList.add("fa-microphone");
+        document.querySelector(".new-message-voice i").classList.remove("fa-paper-plane");
+    }
+});
+// send button only works when input isn't empty
+document.querySelector(".new-message-voice").addEventListener("click", (e)=>{
+    if(e.target.children.classList.contains("fa-paper-plane")){
+        
+    }
+    console.log(e.target)
+})
+
+
+
 
 /***garbage
  *     // sets event listener for chat items
