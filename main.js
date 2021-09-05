@@ -262,12 +262,96 @@ document.querySelector("#search").addEventListener("blur", () => {
     document.querySelector(".clear-search-btn").style.opacity = "0";
 
 });
+
+// live search
+document.querySelector("#search").addEventListener("keyup", (e) => {
+    search_for = e.target.value;
+    let regex = new RegExp(search_for, "g");
+    let location = document.querySelector(".navbar li.active").getAttribute("data-target");
+    let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
+    // render qilishdan avval tozalab olsinchi:
+    // document.querySelector(`#${location}`).innerHTML = "";
+
+    if (location === "all_chats") {
+        for (let i in DATA_from_local_storage) {
+            DATA_from_local_storage[i].forEach((item) => {
+                // console.log(regex, "selected")
+                // console.log(item.user_name && (item.user_name.search(regex) !== -1))
+                if((item.user_name && item.user_name.search(regex) !== -1)){
+                    console.log(Boolean(item.user_name && item.user_name.search(regex) !== -1),item.user_name, item)
+                }
+            //     document.querySelector(`#${location}`).innerHTML += `
+            // <div class="chat_item" onClick="fill_middle_column(this)" data-username="${item.user_name}">
+            //     <div class="chat_avatar">
+            //         <img src="${item.avatar[0] ? item.avatar[0] : "https://icon-library.com/images/no-profile-picture-icon/no-profile-picture-icon-11.jpg"}" alt="avatar">
+            //     </div>
+            //     <div class="user_caption">
+            //         <div class="diolog_title">
+            //             <p>${item.first_name ? item.first_name : item.name} ${item.last_name ? item.last_name : ""}</p> 
+            //             <div class="diolog_title_details">
+            //                 <i class="fa fa-check message_status" aria-hidden="true"></i>
+            //                 <span class="message_time">${weekDays[new Date(item.messages[item.messages.length - 1].time).getDay()]}</span>
+            //             </div>
+            //         </div>
+            //         <div class="dialog_subtitle">
+            //             <p>${item.messages[item.messages.length - 1].text}</p>
+            //             <div class="diolog_subtitle_details">
+            //                 <span class="unread_message_count">${item.messages[item.messages.length - 1].is_from_me ? "" : 1}</span>
+            //             </div>
+            //         </div>
+            //     </div>
+            // </div>
+            //     `;
+            });
+
+
+        }
+    } 
+    // else {//one location for one tab
+    //     DATA_from_local_storage[location].forEach((item) => {
+    //         document.querySelector(`#${location}`).innerHTML += `
+    //     <div class="chat_item" onClick="fill_middle_column(this)" data-username="${item.user_name}">
+    //         <div class="chat_avatar">
+    //             <img src="${item.avatar[0] ? item.avatar[0] : "https://simg.nicepng.com/png/small/930-9302865_notes-from-reasons-to-conference-brighton-whatsapp-profile.png"}" alt="avatar">
+    //         </div>
+    //         <div class="user_caption">
+    //             <div class="diolog_title">
+    //                 <p>${item.first_name ? item.first_name : item.name} ${item.last_name ? item.last_name : ""}</p> 
+    //                 <div class="diolog_title_details">
+    //                     <i class="fa fa-check message_status" aria-hidden="true"></i>
+    //                     <span class="message_time">${weekDays[new Date(item.messages[item.messages.length - 1].time).getDay()]}</span>
+    //                 </div>
+    //             </div>
+    //             <div class="dialog_subtitle">
+    //                 <p>${item.messages[item.messages.length - 1].text}</p>
+    //                 <div class="diolog_subtitle_details">
+    //                     <span class="unread_message_count">${item.messages[item.messages.length - 1].is_from_me ? "" : 1}</span>
+    //                 </div>
+                
+    //             </div>
+    //         </div>
+    //     </div>
+    //         `;
+    //     })
+    // }
+
+});
+// clear search input button
+document.querySelector(".clear-search-btn").addEventListener("click", ()=>{
+    document.querySelector("#search").value = "";
+})
+
 // toggle settings window
 document.querySelector(".toggle-settings").addEventListener("click", () => {
     document.querySelector(".settings").classList.toggle("hide");
 })
 // chat-tabs navigation match
 document.querySelectorAll(".navbar li").forEach((elem) => {
+
+    // INITIATE FIRST RENDER on active tab
+    fill_left_column(document.querySelector(".navbar li.active").getAttribute("data-target"));
+
+    // next render according to click
     elem.addEventListener("click", (e) => {
 
         selected_chatlist = e.target.getAttribute("data-target");
@@ -489,7 +573,7 @@ function fill_right_column() {
     // clear carousel images AND TABS before rendering
     document.querySelector(".carousel-items").innerHTML = "";
     document.querySelector(".carousel-items-tabs").innerHTML = "";
-    
+
     // render data
     Object.keys(DATA_from_local_storage).forEach((tab) => {
         DATA_from_local_storage[tab].forEach((individ) => {
@@ -629,6 +713,38 @@ document.querySelectorAll(".carousel-items-arrow").forEach((navbtn) => {
             }
         }
     });
+});
+
+// chat-tabs navigation match
+document.querySelectorAll(".shared-media li").forEach((elem) => {
+    elem.addEventListener("click", (e) => {
+
+        let selected_medialist = e.target.getAttribute("data-target");
+
+        // toggle .active on tabs
+        document.querySelectorAll(".shared-media li").forEach((elem) => {
+            elem.classList.remove("active");
+        })
+        e.target.classList.add("active");
+
+        // corresponding tabs will be shown
+        document.querySelectorAll(".shared_media_content").forEach((elem) => {
+            elem.classList.remove("active");
+            //elem.innerHTML = ""; // qolgan tab larni ichini tozalaydi
+        });
+        document.querySelector(`#${selected_medialist}`).classList.add("active");
+        // tanlangan chat ni ichini kontent bilan to'ldiradi
+
+        /***
+                    groups_common: 4,
+            shared_links: 15,
+            shared_files: 1,
+            shared_photos: 20,
+            shared_voice: 15,
+            shared_videos: 11,
+        */
+
+    })
 })
 
 
@@ -647,7 +763,8 @@ document.querySelectorAll(".carousel-items-arrow").forEach((navbtn) => {
 
 
 
-/***garbage
+
+/***garbage  ISHLAMAGAN KODLAR
 
  *     // sets event listener for chat items
     // document.querySelectorAll(".chat-item").forEach((item)=>{
