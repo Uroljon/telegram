@@ -3,6 +3,13 @@
     margin: 0;
     box-sizing: border-box;
 }
+$secondary-text-color: #707579;
+$column-left-width: 27.5%;
+$column-center-width-shrinked: 47.5%;
+$column-center-width: 72.5%;
+$column-right-width-expanded: 25%;
+$column-right-width: 0%;
+$header-height: 56px;
 
 ::-webkit-scrollbar {
     width: 0px;
@@ -38,17 +45,45 @@
         color: #707579;
     }
 }
+%navbar-style {
+    display: flex;
+    list-style: none;
+    overflow-x: auto;
+    li {
+        position: relative;
+        height: 3rem;
+        padding: 0 1rem;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 500;
+        color: $secondary-text-color;
+        display: flex;
+        flex-wrap: nowrap;
+        white-space: nowrap; //shunga ancha vaqtim ketti. all chats bolinmasligi kk edi
+        justify-content: center;
+        align-items: center;
+        transition: 300ms;
+        &:hover {
+            background-color: rgba(128, 128, 128, 0.219);
+            border-top-right-radius: 6px;
+            border-top-left-radius: 6px;
+        }
+        &.active {
+            color: #3390ec;
+        }
+        &.active::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            display: block;
+            width: 70%;
+            height: 3px;
+            background-color: #3390ec;
+        }
+    }
+}
 #telegram {
     grid-template-columns: 27.5% 1fr 0%;
-    $secondary-text-color: #707579;
-    $column-left-width: 27.5%;
-    $column-center-width-shrinked: 47.5%;
-    $column-center-width: 72.5%;
-    $column-right-width-expanded: 25%;
-    $column-right-width: 0%;
-
-    $header-height: 56px;
-
     font-family: "Roboto", sans-serif;
     width: 100%;
     height: 100vh;
@@ -121,41 +156,7 @@
             padding-top: $header-height;
             .navbar {
                 // min-width: 120%;//bu overflow ga xalaqit berdi
-                display: flex;
-                list-style: none;
-                overflow-x: auto;
-                li {
-                    position: relative;
-                    height: 3rem;
-                    padding: 0 1rem;
-                    cursor: pointer;
-                    font-size: 1rem;
-                    font-weight: 500;
-                    color: $secondary-text-color;
-                    display: flex;
-                    flex-wrap: nowrap;
-                    white-space: nowrap; //shunga ancha vaqtim ketti. all chats bolinmasligi kk edi
-                    justify-content: center;
-                    align-items: center;
-                    transition: 300ms;
-                    &:hover {
-                        background-color: rgba(128, 128, 128, 0.219);
-                        border-top-right-radius: 6px;
-                        border-top-left-radius: 6px;
-                    }
-                    &.active {
-                        color: #3390ec;
-                    }
-                    &.active::after {
-                        content: "";
-                        position: absolute;
-                        bottom: 0;
-                        display: block;
-                        width: 70%;
-                        height: 3px;
-                        background-color: #3390ec;
-                    }
-                }
+                @extend %navbar-style;
             }
         }
         .chats_wrapper {
@@ -242,7 +243,8 @@
     }
 
     #column-center {
-        .container {// !shrink uchun
+        .container {
+            // !shrink uchun
             width: 728px;
             margin: auto;
         }
@@ -254,7 +256,7 @@
 
         .main-header {
             .container {
-                width: 100%;// !shrink uchun
+                width: 100%; // !shrink uchun
             }
             @include header-style($column-center-width);
             cursor: pointer;
@@ -307,7 +309,7 @@
             height: 90%;
             overflow-y: auto;
             .container {
-                padding-right: 83px;// !shrink uchun
+                padding-right: 83px; // !shrink uchun
             }
             .message {
                 font-family: sans-serif;
@@ -428,7 +430,8 @@
         }
         // when column is shrinked :
         &.shrinked {
-            .main-header, .main-footer{
+            .main-header,
+            .main-footer {
                 width: $column-center-width-shrinked;
             }
             .container {
@@ -580,9 +583,80 @@
             }
         }
 
+        .right-main {
+            padding: 8px;
+            .right-main-item {
+                width: 100%;
+                display: grid;
+                grid-template-columns: 56px 1fr;
+                align-items: center;
+                border-radius: 7px;
+                transition: 300ms;
+                &:hover {
+                    background-color: rgba(128, 128, 128, 0.103);
+                }
+                .r_icon {
+                    color: $secondary-text-color;
+                    font-size: 24px;
+                    display: grid;
+                    place-items: center;
+                }
+                .r_text {
+                    padding: 11px 16px;
+                    word-break: break-word;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    color: rgba(0, 0, 0, 0.788);
+                    span {
+                        color: $secondary-text-color;
+                        font-size: 0.875rem;
+                        line-height: 1.3125;
+                    }
+                    &.bell-text {
+                        display: flex;
+                        justify-content: space-between;
+                        .toggle-notification {
+                            border: none;
+                            background-color: transparent;
+                            outline: none;
+                            cursor: pointer;
+                            i {
+                                width: 37px; //shu ishlamadida
+                                pointer-events: none;
+                                font-size: 25px;
+                                &.fa-toggle-on {
+                                    color: rgba(0, 0, 255, 0.795);
+                                }
+                                &.fa-toggle-off {
+                                    color: #4e4e4e;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .right-footer {
+            background-color: rgba(128, 128, 128, 0.103);
+            padding-top: 12px;
+            .shared-media {
+                @extend %navbar-style;
+                background-color: white;
+                li {
+                    flex: 1 1 auto;
+                    height: 56px;
+                    &:hover {
+                        border-radius: unset;
+                    }
+                    &.active:hover{
+                        background-color: rgba(0, 195, 255, 0.11);
+                    }
+                }
+            }
+        }
         // when expanded:
         &.expanded {
-            .right-header{
+            .right-header {
                 width: $column-right-width-expanded;
             }
         }

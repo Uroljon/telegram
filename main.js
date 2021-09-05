@@ -1,5 +1,7 @@
 // let ism = prompt("Ismingizni kiritasizmi ?");
 // let familiya = prompt("Familiyangizni kiritasizmi ?");
+let ism = "O'roljon";
+let familiya = "Xidirboyev";
 
 let DATA = {
 
@@ -10,6 +12,7 @@ let DATA = {
             last_name: "Watson",
             avatar: ["https://i.pinimg.com/originals/15/0e/29/150e29ffdb2cacf19879054c98a93d0a.jpg", "https://i.pinimg.com/originals/1d/59/61/1d59616089e50bf3fef50b2ad8f6d9de.jpg", "https://media.vanityfair.com/photos/60a3d27e292c88dd8b5007a1/9:16/w_1683,h_2992,c_limit/480403143", "https://i.pinimg.com/originals/f0/04/bb/f004bb780a52fd401e851425d2542c13.jpg", "https://popularnetworth.com/wp-content/uploads/2021/05/6495d05033eb2029300f4a6fe5151952.jpg", "https://media.vanityfair.com/photos/5335ae418632c544280001e0/master/pass/emma-watson.jpg", "http://images4.fanpop.com/image/photos/24400000/Hermione-Granger-Wallpaper-hermione-granger-24488212-1024-768.jpg", "https://i.pinimg.com/originals/65/3d/01/653d01c977ea7ce63d9eb06f5a273d7d.jpg", "https://i.pinimg.com/736x/80/70/88/80708859419592e5444828f4718d7d0b.jpg", "http://images4.fanpop.com/image/photos/20000000/Hermione-Granger-hermione-granger-20053436-936-1197.jpg", "https://i.pinimg.com/originals/ca/76/b6/ca76b6cd8a6d31efc386c4cbf4385dcf.jpg", "https://www.oshonews.com/wp-content/uploads/2017/08/020-Hermione2-667x370-600x333.png"],
             bio: "Hogwarts",
+            phone_number: "+44 777 777 77 77",
             user_name: "@Emma_Watson",
             groups_common: 4,
             shared_links: 15,
@@ -38,6 +41,7 @@ let DATA = {
             last_name: "Radcliffle",
             avatar: ["https://broncolor.swiss/assets/img/Stories/Inspiration/Daniel-Radcliffe/_contentWithShareBar23/DANIEL-RADCLIFFE-featured.jpg", "https://static.independent.co.uk/s3fs-public/thumbnails/image/2016/09/29/15/hp.jpg?width=982&height=726&auto=webp&quality=75", "https://images.indianexpress.com/2018/07/wp-harrypotter-01.jpg", "https://www.biography.com/.image/t_share/MTQ3OTg2NjQ0NDg0NDk4OTEx/hp_cropped_gettyimages-113941726.jpg", "https://www.irishtimes.com/polopoly_fs/1.3101809.1497028489!/image/image.jpg_gen/derivatives/ratio_1x1_w1200/image.jpg"],
             bio: "Hogwarts",
+            phone_number: "+44 707 777 77 77",
             user_name: "@Daniel_Radcliffe",
             groups_common: 5,
             shared_links: 10,
@@ -66,6 +70,7 @@ let DATA = {
             last_name: "Admin",
             avatar: ["https://static10.tgstat.ru/channels/_0/4b/4bee0aec8083826b79c227eac9d2cf27.jpg"],
             bio: "Fulfil education va Instant company bo'yicha savollaringizni bering!",
+            phone_number: "+99 890 777 77 77",
             user_name: "@fulfiledu",
             groups_common: 1,
             shared_links: 6,
@@ -87,8 +92,9 @@ let DATA = {
             id: 4,
             first_name: "Asadbek",
             last_name: "Zoirov",
-            avatar: null,
+            avatar: [],
             bio: null,
+            phone_number: "+99 890 777 77 77",
             user_name: "@ZoirovAsadbek",
             groups_common: 1,
             shared_links: 0,
@@ -116,7 +122,7 @@ let DATA = {
         {
             id: 1,
             name: "MERN va PERN F-13",
-            avatar: null,
+            avatar: [],
             bio: "Vazifalar uchun: @mernperntasksbot",
             user_name: "private_group_mern",
             shared_links: 15,
@@ -153,7 +159,6 @@ let DATA = {
             
             Omad yordir dovyuraklarga! • Судьба благоволит храбрым! • Fates Favors the Brave!
             Murojaat uchun: @Odilbek_Mirzayev_aloqabot`,
-
             user_name: "@OdilbekMirzayev",
             shared_links: 94,
             shared_files: 1,
@@ -186,7 +191,6 @@ let DATA = {
             Listen to and download any music! 
             Contact & Ads: @vkmowner
             Our media: @vekaem`,
-
             user_name: "@vkm_bot",
             shared_links: 22,
             shared_files: 0,
@@ -209,17 +213,42 @@ let DATA = {
             ]
         }
     ],
-    me: {
-        // first_name : ism,
-        // last_name : familiya
-    }
+    me: [
+        {
+            first_name: ism,
+            last_name: familiya,
+            avatar: ["https://uroljon.github.io/Khidirboev/img/back.png"],
+            bio: `CEO at uroljon.ml | lotin-kirill.ga`,
+            phone_number: "+99 890 152 75 11",
+            user_name: "@Uroljon_Khidirboev",
+            shared_links: 10,
+            shared_files: 20,
+            shared_photos: 30,
+            shared_voice: 0,
+            activity: "Online",
+            messages: [
+                {
+                    id: 1,
+                    is_from_me: true,
+                    text: "lorem ipsum dolor sit amet...",
+                    time: new Date(2021, 8, 1, 11, 11, 11).getTime()
+                },
+                {
+                    id: 2,
+                    is_from_me: true,
+                    text: "This is Saved Messages section. You can use it for your own private cloud. Enjoy Telegram :)",
+                    time: new Date(2021, 8, 1, 11, 11, 11).getTime()
+                },
+            ]
+        }
+    ]
 }
 // set DATA to localStrage ONLY IF localstorage is empty at "DATA" key
 !localStorage.getItem("DATA") && localStorage.setItem("DATA", JSON.stringify(DATA));
 
 let weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 let selected_chat_username;
-
+let selected_chatlist;
 // search function styles
 document.querySelector("#search").addEventListener("focus", () => {
     document.querySelector(".search-wrapper").style.border = "2px solid #3390ec";
@@ -241,7 +270,7 @@ document.querySelector(".toggle-settings").addEventListener("click", () => {
 document.querySelectorAll(".navbar li").forEach((elem) => {
     elem.addEventListener("click", (e) => {
 
-        let location = e.target.getAttribute("data-target");
+        selected_chatlist = e.target.getAttribute("data-target");
 
         // toggle .active on tabs
         document.querySelectorAll(".navbar li").forEach((elem) => {
@@ -254,9 +283,9 @@ document.querySelectorAll(".navbar li").forEach((elem) => {
             elem.classList.remove("active");
             elem.innerHTML = ""; // qolgan tab larni ichini tozalaydi
         });
-        document.querySelector(`#${location}`).classList.add("active");
+        document.querySelector(`#${selected_chatlist}`).classList.add("active");
         // tanlangan chat ni ichini kontent bilan to'ldiradi
-        fill_left_column(location);
+        fill_left_column(selected_chatlist);
 
     })
 })
@@ -264,10 +293,12 @@ document.querySelectorAll(".navbar li").forEach((elem) => {
 // renders DATA to left column
 function fill_left_column(location) {
     let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
+    // render qilishdan avval tozalab olsinchi:
+    document.querySelector(`#${location}`).innerHTML = "";
+
     if (location === "all_chats") {
         for (let i in DATA_from_local_storage) {
             DATA_from_local_storage[i].forEach((item) => {
-
 
                 document.querySelector(`#${location}`).innerHTML += `
             <div class="chat_item" onClick="fill_middle_column(this)" data-username="${item.user_name}">
@@ -297,7 +328,6 @@ function fill_left_column(location) {
         }
     } else {//one location for one tab
         DATA_from_local_storage[location].forEach((item) => {
-
             document.querySelector(`#${location}`).innerHTML += `
         <div class="chat_item" onClick="fill_middle_column(this)" data-username="${item.user_name}">
             <div class="chat_avatar">
@@ -329,7 +359,7 @@ function fill_middle_column(what) {
     let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
 
     selected_chat_username = what.getAttribute("data-username"); //tanlangan userning id(username) sini saqlab qo'ymoqda
-
+    // chats and middle-navbar rendering
     for (let tabs in DATA_from_local_storage) {
         DATA_from_local_storage[tabs].forEach((chatItem) => {
             if (chatItem.user_name === selected_chat_username) {
@@ -356,6 +386,10 @@ function fill_middle_column(what) {
         })
     }
 
+    // render right column in case it's expanded:
+    if (document.querySelector("#column-right").classList.contains("expanded")) {
+        fill_right_column();
+    }
 
 }
 
@@ -416,6 +450,9 @@ document.querySelector(".new-message-voice").addEventListener("click", (e) => {
                         // input ni tozalab qoyadi
                         document.querySelector(".new-message-text input").value = "";
 
+                        // LEFT column a re-render bo'lyapti. Yangilab qoysin chatlarni
+                        fill_left_column(selected_chatlist);
+
                     }
                 })
             });
@@ -429,16 +466,20 @@ document.querySelector(".new-message-voice").addEventListener("click", (e) => {
 
 // toggle right column window 
 document.querySelector(".person").addEventListener("click", (e) => {
+    // if any tab is Selected
+    if (!(document.querySelector("#name").textContent === "Select a chat to start messaging")) {
 
-    if (!document.querySelector("#column-center").classList.contains("shrinked")) {
-        document.querySelector("#telegram").style.gridTemplateColumns = "27.5% 1fr 25%";
-    } else {
-        document.querySelector("#telegram").style.gridTemplateColumns = "27.5% 1fr 0%";
+        if (!document.querySelector("#column-center").classList.contains("shrinked")) {
+            document.querySelector("#telegram").style.gridTemplateColumns = "27.5% 1fr 25%";
+        } else {
+            document.querySelector("#telegram").style.gridTemplateColumns = "27.5% 1fr 0%";
+        }
+        document.querySelector("#column-center").classList.toggle("shrinked");
+        document.querySelector("#column-right").classList.toggle("expanded");
+
+        fill_right_column();
+
     }
-    document.querySelector("#column-center").classList.toggle("shrinked");
-    document.querySelector("#column-right").classList.toggle("expanded");
-    
-    fill_right_column();
 });
 
 // renders DATA to right column
@@ -453,16 +494,87 @@ function fill_right_column() {
             if (individ.user_name === selected_chat_username) {
 
                 // carousel image rendering
-                individ.avatar.forEach((img, index) => {
-                    document.querySelector(".carousel-items").innerHTML += `
-                        <div class="carousel-item ${index === 0 ? 'active' : ''}">
-                            <img class="carousel-item-image" src="${img ? img : 'https://picsum.photos/500/384'}">
+                if (individ.avatar.length === 0) {//if there's no image
+                    // put rainy image on carousel
+                    document.querySelector(".carousel-items").innerHTML = `
+                        <div class="carousel-item active">
+                            <img class="carousel-item-image" src="https://picsum.photos/id/115/400/384">
                         </div>
                         `;
-                });
+                    // set one tab on carousel navbar
+                    document.querySelector(".carousel-items-tabs").innerHTML = `<div class="carousel-items-tab active"></div>`;
+
+                } else { //if there are images
+                    // render avatars
+                    individ.avatar.forEach((img, index) => {
+                        document.querySelector(".carousel-items").innerHTML += `
+                            <div class="carousel-item ${index === 0 ? 'active' : ''}">
+                                <img class="carousel-item-image" src="${img ? img : 'https://picsum.photos/500/384'}">
+                            </div>
+                            `;
+                    });
+                    // render nav  tabs as many as avatars
+                    individ.avatar.forEach((img, index) => {
+                        document.querySelector(".carousel-items-tabs").innerHTML += `<div class="carousel-items-tab ${index === 0 ? 'active' : ''}"></div>`;
+                    });
+
+                }
                 // render name and status
                 document.querySelector(".carousel-items-info .profile-name").innerHTML = `${individ.first_name ? individ.first_name : individ.name} ${individ.last_name && individ.last_name}`;
                 document.querySelector(".carousel-items-info .profile-subtitle").innerHTML = `${individ.activity}`;
+
+                // balo battar ma'lumomtlar bori namoyon bo'lur :)
+                document.querySelector(".right-main").innerHTML = "";//tozalavol
+                // phone
+                if (individ.hasOwnProperty("phone_number")) {
+                    document.querySelector(".right-main").innerHTML += `
+                <div class="right-main-item">
+                    <div class="r_icon"><i class="fa fa-phone" aria-hidden="true"></i></div>
+                    <div class="r_text">
+                        <div>${individ.phone_number ? individ.phone_number : 'hidden'}</div>
+                        <span>Phone</span>
+                    </div>
+                </div>`;
+                }
+                // username
+                if (individ.user_name) {
+                    document.querySelector(".right-main").innerHTML += `
+                <div class="right-main-item">
+                    <div class="r_icon">@</div>
+                    <div class="r_text">
+                        <div>${individ.user_name}</div>
+                        <span>Username</span>
+                    </div>
+                </div>`;
+                }
+                // bio
+                if (individ.bio) {
+                    document.querySelector(".right-main").innerHTML += `
+                <div class="right-main-item">
+                    <div class="r_icon"><i class="fa fa-info-circle" aria-hidden="true"></i></div>
+                    <div class="r_text">
+                        <div>${individ.bio}</div>
+                        <span>Bio</span>
+                    </div>
+                </div>`;
+                }
+                // notifications
+                document.querySelector(".right-main").innerHTML += `
+            <div class="right-main-item">
+                <div class="r_icon"><i class="fa fa-bell-o" aria-hidden="true"></i></div>
+                <div class="r_text bell-text">
+                    <div>Notifications</div>
+                    <button class="toggle-notification">
+                        <i class="fa fa-toggle-on" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>`;
+                // notification event listener  // toggle-notification 
+                document.querySelector(".toggle-notification").addEventListener("click", () => {
+                    document.querySelector(".toggle-notification").firstElementChild.classList.toggle("fa-toggle-on");
+                    document.querySelector(".toggle-notification").firstElementChild.classList.toggle("fa-toggle-off");
+                });
+
 
             }
         })
@@ -476,29 +588,39 @@ let carousel_items = document.querySelector(".carousel-items");
 document.querySelectorAll(".carousel-items-arrow").forEach((navbtn) => {
     navbtn.addEventListener("click", (e) => {
         if (e.target.classList.contains("arrow-next")) {
+            // next avatar
             for (let i = 0; i < carousel_items.children.length; i++) {
 
                 if (carousel_items.children[i].classList.contains("active")) {
-
+                    // remove active class on avatar and nav tab :
                     carousel_items.children[i].classList.remove("active");
+                    document.querySelector(".carousel-items-tabs").children[i].classList.remove("active");
+
                     if (i === carousel_items.children.length - 1) {//if it's the last pic:
                         carousel_items.children[0].classList.add("active");//show first pic
+                        document.querySelector(".carousel-items-tabs").children[0].classList.add("active");//shine first tab
                     } else {
                         carousel_items.children[i + 1].classList.add("active");
+                        document.querySelector(".carousel-items-tabs").children[i + 1].classList.add("active");
                     }
                     break;
                 }
             }
         } else if (e.target.classList.contains("arrow-prev")) {
+            // prev avatar
             for (let i = 0; i < carousel_items.children.length; i++) {
 
                 if (carousel_items.children[i].classList.contains("active")) {
 
                     carousel_items.children[i].classList.remove("active");
+                    document.querySelector(".carousel-items-tabs").children[i].classList.remove("active");
+
                     if (i === 0) {//if it's the first pic:
                         carousel_items.children[carousel_items.children.length - 1].classList.add("active");//show last pic
+                        document.querySelector(".carousel-items-tabs").children[carousel_items.children.length - 1].classList.add("active");//shine last tab
                     } else {
                         carousel_items.children[i - 1].classList.add("active");
+                        document.querySelector(".carousel-items-tabs").children[i - 1].classList.add("active");
                     }
                     break;
                 }
@@ -506,6 +628,7 @@ document.querySelectorAll(".carousel-items-arrow").forEach((navbtn) => {
         }
     });
 })
+
 
 
 
@@ -541,4 +664,17 @@ document.querySelectorAll(".carousel-items-arrow").forEach((navbtn) => {
     //     }
 
     // });
+
+
+      // Object.keys(individ).forEach((property)=>{
+                //     document.querySelector(".right-main").innerHTML += `
+                // <div class="right-main-item">
+                //     <div class="r_icon"><i class="fa fa-phone" aria-hidden="true"></i></div>
+                //     <div class="r_text">
+                //         <div>+99 890 152 75 11</div>
+                //         <span>Phone</span>
+                //     </div>
+                // </div>
+                //     `;
+                // })
  */
