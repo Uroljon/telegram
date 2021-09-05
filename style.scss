@@ -19,17 +19,34 @@
     background-color: #fff;
     box-shadow: 0px 1px 5px 0px rgb(0 0 0 / 21%);
     position: fixed;
-    // display: flex;
-    // align-items: center;
     z-index: 1;
     width: $width;
 }
+%button-style {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    transition: 300ms;
+    border-radius: 35%;
+    &:hover {
+        background-color: rgba(128, 128, 128, 0.103);
+        border-radius: 50%;
+    }
+    i {
+        color: #707579;
+    }
+}
 #telegram {
-    grid-template-columns: 27.5% 1fr 25%;
+    grid-template-columns: 27.5% 1fr 0%;
     $secondary-text-color: #707579;
-    $column-center-width: 47.5%;
     $column-left-width: 27.5%;
-    $column-right-width: 25%;
+    $column-center-width-shrinked: 47.5%;
+    $column-center-width: 72.5%;
+    $column-right-width-expanded: 25%;
+    $column-right-width: 0%;
+
     $header-height: 56px;
 
     font-family: "Roboto", sans-serif;
@@ -61,16 +78,7 @@
                     }
                 }
                 .toggle-settings {
-                    cursor: pointer;
-                    width: 40px;
-                    height: 40px;
-                    display: grid;
-                    place-items: center;
-                    transition: 300ms;
-                    &:hover {
-                        background-color: rgba(128, 128, 128, 0.479);
-                        border-radius: 50%;
-                    }
+                    @extend %button-style; //inherited from style written above
                 }
                 .search-wrapper {
                     width: 100%;
@@ -190,7 +198,7 @@
                             display: grid;
                             align-items: center;
                             grid-template-columns: 1fr auto;
-                            p{
+                            p {
                                 max-width: 90%;
                                 white-space: nowrap;
                                 overflow: hidden;
@@ -200,7 +208,7 @@
                                 font-size: 0.75rem;
                                 color: $secondary-text-color;
                                 display: block;
-                                
+
                                 i {
                                     color: green;
                                 }
@@ -210,7 +218,7 @@
                             display: grid;
                             align-items: center;
                             grid-template-columns: 1fr auto;
-                            p{
+                            p {
                                 max-width: 100%;
                                 white-space: nowrap;
                                 overflow: hidden;
@@ -218,7 +226,7 @@
                                 line-height: 27px;
                                 color: $secondary-text-color;
                             }
-                            .diolog_subtitle_details{
+                            .diolog_subtitle_details {
                                 margin: 4px 0 0 8px;
                                 padding: 0 8px;
                                 background-color: rgba(128, 128, 128, 0.493);
@@ -226,7 +234,6 @@
                                 border-radius: 30px;
                                 line-height: 1.5rem;
                             }
-                           
                         }
                     }
                 }
@@ -235,6 +242,10 @@
     }
 
     #column-center {
+        .container {// !shrink uchun
+            width: 728px;
+            margin: auto;
+        }
         height: 100vh;
         // overflow: auto; //buni .main chat qildi
         background: #e6ebee url(https://web.telegram.org/k/assets/img/bg.jpeg)
@@ -242,6 +253,9 @@
         background-size: cover;
 
         .main-header {
+            .container {
+                width: 100%;// !shrink uchun
+            }
             @include header-style($column-center-width);
             cursor: pointer;
             // height: 56px;//grid -tem-row qildi buni ishini
@@ -278,17 +292,9 @@
                 }
                 .search-btn,
                 .more-btn {
-                    transition: 300ms;
-                    width: 40px;
-                    height: 40px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
+                    @extend %button-style;
                     margin-left: 7px;
-                    border-radius: 50%;
-                    &:hover {
-                        background-color: rgba(128, 128, 128, 0.486);
-                    }
+
                     i {
                         font-size: 17px;
                         color: #707579;
@@ -297,15 +303,18 @@
             }
         }
         .main-chat {
-            padding: 58px 0 0;
+            padding: $header-height 0 0;
             height: 90%;
             overflow-y: auto;
-
+            .container {
+                padding-right: 83px;// !shrink uchun
+            }
             .message {
                 font-family: sans-serif;
-                padding: 6px 10px 6px 10px;
+                padding: 6px 55px 6px 10px;
                 margin: 4px 0 8px 0;
                 max-width: 480px;
+                min-height: 30px;
                 display: inline-block;
                 line-height: 1.3125;
                 // word-break: break-word;
@@ -313,6 +322,14 @@
                 position: relative;
                 font-weight: 400;
                 border-radius: 10px;
+                text-align: left;
+                .message_time {
+                    font-size: 12px;
+                    position: absolute;
+                    bottom: 4px;
+                    right: 8px;
+                    color: #4fae4e;
+                }
                 .tail {
                     position: absolute;
                     bottom: 0;
@@ -320,8 +337,6 @@
                     border: 10px solid transparent;
                 }
                 &.to-me {
-                    padding-left: 15px;
-                    text-align: left;
                     background-color: white;
 
                     .tail {
@@ -330,8 +345,6 @@
                     }
                 }
                 &.from-me {
-                    padding-right: 15px;
-                    text-align: left;
                     background-color: #eeffde;
                     margin-left: auto;
                     .tail {
@@ -403,6 +416,9 @@
                     background-color: white;
                     color: $secondary-text-color;
                     box-shadow: 0px 1px 5px 0px rgb(0 0 0 / 21%);
+                    .fa-paper-plane {
+                        color: blue;
+                    }
                     i {
                         font-size: 24px;
                         pointer-events: none;
@@ -410,9 +426,165 @@
                 }
             }
         }
+        // when column is shrinked :
+        &.shrinked {
+            .main-header, .main-footer{
+                width: $column-center-width-shrinked;
+            }
+            .container {
+                width: unset;
+                margin: unset;
+            }
+            .main-chat {
+                .container {
+                    padding-right: 16px;
+                }
+            }
+        }
     }
     #column-right {
         height: 100vh;
         overflow-y: auto;
+        .right-header {
+            @include header-style($column-right-width);
+            .profile {
+                display: grid;
+                grid-template-columns: auto 1fr auto;
+                grid-template-rows: $header-height;
+                align-items: center;
+                width: 100%;
+                .close-btn {
+                    @extend %button-style;
+                    i {
+                        font-size: 1.5rem;
+                        line-height: 1;
+                    }
+                }
+                .profile-text {
+                    padding-left: 24px;
+                    font-weight: 500;
+                    font-size: 1.25rem;
+                }
+                .edit-btn {
+                    @extend %button-style;
+                    i {
+                        font-size: 1.2rem;
+                    }
+                }
+            }
+        }
+        .carousel {
+            width: 100%;
+            padding-top: $header-height;
+            position: relative;
+            cursor: pointer;
+            .carousel-items {
+                overflow: hidden;
+                position: relative;
+                width: 100%;
+                height: 384px;
+                .carousel-item {
+                    position: absolute;
+                    left: 101%;
+                    width: 100%;
+                    height: 100%;
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                    &.active {
+                        left: 0;
+                    }
+                }
+            }
+            .carousel-items-gradient {
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                height: 80px;
+                background: linear-gradient(
+                    360deg,
+                    rgba(0, 0, 0, 0.3) 8.98%,
+                    rgba(0, 0, 0, 0) 100%
+                );
+            }
+
+            .carousel-items-info {
+                position: absolute;
+                bottom: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                left: 1.5rem;
+                bottom: 0.5625rem;
+                pointer-events: none;
+                color: white;
+                .profile-name {
+                    font-size: 20px;
+                    line-height: 1.3125;
+                    font-weight: 500;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    word-break: break-word;
+                    max-width: 340px;
+                }
+                .profile-subtitle {
+                    font-size: 14px;
+                    opacity: 0.7;
+                }
+            }
+            .carousel-items-tabs {
+                display: flex;
+                position: absolute;
+                top: 15%;
+                left: 0.375rem;
+                right: 0.375rem;
+                height: 0.125rem;
+                pointer-events: none;
+                .carousel-items-tab {
+                    flex: 1 1 auto;
+                    border-radius: 4px;
+                    margin: 0 0.125rem;
+                    background-color: rgb(255, 255, 255);
+                    opacity: 0.5;
+                    transition: opacity 0.2s ease-in-out;
+                    height: 2px;
+                    &.active {
+                        opacity: 1;
+                    }
+                }
+            }
+            .carousel-items-arrow {
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                width: calc(100% / 3);
+                opacity: 0;
+                background-image: url(https://web.telegram.org/k/assets/img/avatarprevious.svg);
+                background-position: 1.125rem 55%;
+                background-repeat: no-repeat;
+                background-size: 1.25rem;
+                transition: 300ms;
+                &.arrow-next {
+                    left: auto;
+                    right: 0;
+                    background-image: url(https://web.telegram.org/k/assets/img/avatarnext.svg);
+                    background-position: calc(100% - 1.125rem) 55%;
+                }
+                &:hover {
+                    opacity: 1;
+                }
+            }
+        }
+
+        // when expanded:
+        &.expanded {
+            .right-header{
+                width: $column-right-width-expanded;
+            }
+        }
     }
 }
