@@ -486,8 +486,10 @@ document.querySelector(".person").addEventListener("click", (e) => {
 function fill_right_column() {
     let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
 
-    // clear carousel images before rendering
+    // clear carousel images AND TABS before rendering
     document.querySelector(".carousel-items").innerHTML = "";
+    document.querySelector(".carousel-items-tabs").innerHTML = "";
+    
     // render data
     Object.keys(DATA_from_local_storage).forEach((tab) => {
         DATA_from_local_storage[tab].forEach((individ) => {
@@ -512,10 +514,10 @@ function fill_right_column() {
                                 <img class="carousel-item-image" src="${img ? img : 'https://picsum.photos/500/384'}">
                             </div>
                             `;
-                    });
-                    // render nav  tabs as many as avatars
-                    individ.avatar.forEach((img, index) => {
+
+                        // render nav  tabs as many as avatars
                         document.querySelector(".carousel-items-tabs").innerHTML += `<div class="carousel-items-tab ${index === 0 ? 'active' : ''}"></div>`;
+
                     });
 
                 }
