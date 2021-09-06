@@ -265,79 +265,28 @@ document.querySelector("#search").addEventListener("blur", () => {
 
 // live search
 document.querySelector("#search").addEventListener("keyup", (e) => {
-    search_for = e.target.value;
-    let regex = new RegExp(search_for, "g");
-    let location = document.querySelector(".navbar li.active").getAttribute("data-target");
-    let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
-    // render qilishdan avval tozalab olsinchi:
-    // document.querySelector(`#${location}`).innerHTML = "";
 
-    if (location === "all_chats") {
-        for (let i in DATA_from_local_storage) {
-            DATA_from_local_storage[i].forEach((item) => {
-                // console.log(regex, "selected")
-                // console.log(item.user_name && (item.user_name.search(regex) !== -1))
-                if((item.user_name && item.user_name.search(regex) !== -1)){
-                    console.log(Boolean(item.user_name && item.user_name.search(regex) !== -1),item.user_name, item)
-                }
-            //     document.querySelector(`#${location}`).innerHTML += `
-            // <div class="chat_item" onClick="fill_middle_column(this)" data-username="${item.user_name}">
-            //     <div class="chat_avatar">
-            //         <img src="${item.avatar[0] ? item.avatar[0] : "https://icon-library.com/images/no-profile-picture-icon/no-profile-picture-icon-11.jpg"}" alt="avatar">
-            //     </div>
-            //     <div class="user_caption">
-            //         <div class="diolog_title">
-            //             <p>${item.first_name ? item.first_name : item.name} ${item.last_name ? item.last_name : ""}</p> 
-            //             <div class="diolog_title_details">
-            //                 <i class="fa fa-check message_status" aria-hidden="true"></i>
-            //                 <span class="message_time">${weekDays[new Date(item.messages[item.messages.length - 1].time).getDay()]}</span>
-            //             </div>
-            //         </div>
-            //         <div class="dialog_subtitle">
-            //             <p>${item.messages[item.messages.length - 1].text}</p>
-            //             <div class="diolog_subtitle_details">
-            //                 <span class="unread_message_count">${item.messages[item.messages.length - 1].is_from_me ? "" : 1}</span>
-            //             </div>
-            //         </div>
-            //     </div>
-            // </div>
-            //     `;
-            });
+    let excluded_keys = [18, 20, 17, 16, 9]; //Alt, Caps Lock, Ctrl, Shift, tab
 
+    if(!excluded_keys.includes(e.keyCode)){ //exclude keys above
 
-        }
-    } 
-    // else {//one location for one tab
-    //     DATA_from_local_storage[location].forEach((item) => {
-    //         document.querySelector(`#${location}`).innerHTML += `
-    //     <div class="chat_item" onClick="fill_middle_column(this)" data-username="${item.user_name}">
-    //         <div class="chat_avatar">
-    //             <img src="${item.avatar[0] ? item.avatar[0] : "https://simg.nicepng.com/png/small/930-9302865_notes-from-reasons-to-conference-brighton-whatsapp-profile.png"}" alt="avatar">
-    //         </div>
-    //         <div class="user_caption">
-    //             <div class="diolog_title">
-    //                 <p>${item.first_name ? item.first_name : item.name} ${item.last_name ? item.last_name : ""}</p> 
-    //                 <div class="diolog_title_details">
-    //                     <i class="fa fa-check message_status" aria-hidden="true"></i>
-    //                     <span class="message_time">${weekDays[new Date(item.messages[item.messages.length - 1].time).getDay()]}</span>
-    //                 </div>
-    //             </div>
-    //             <div class="dialog_subtitle">
-    //                 <p>${item.messages[item.messages.length - 1].text}</p>
-    //                 <div class="diolog_subtitle_details">
-    //                     <span class="unread_message_count">${item.messages[item.messages.length - 1].is_from_me ? "" : 1}</span>
-    //                 </div>
-                
-    //             </div>
-    //         </div>
-    //     </div>
-    //         `;
-    //     })
-    // }
+        let search_for = new RegExp(e.target.value, "gi");
+        let search_list = "#" + document.querySelector(".navbar li.active").getAttribute("data-target") + " .diolog_title p";
 
+        document.querySelectorAll(`${search_list}`).forEach((item)=>{
+            if(search_for.test(item.textContent)){
+                item.parentElement.parentElement.parentElement.style.display = "grid";
+            }else{
+                item.parentElement.parentElement.parentElement.style.display = "none";
+            }
+        })
+        
+    }
+    
 });
+
 // clear search input button
-document.querySelector(".clear-search-btn").addEventListener("click", ()=>{
+document.querySelector(".clear-search-btn").addEventListener("click", () => {
     document.querySelector("#search").value = "";
 })
 
@@ -442,7 +391,11 @@ function fill_left_column(location) {
 function fill_middle_column(what) {
     let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
 
-    selected_chat_username = what.getAttribute("data-username"); //tanlangan userning id(username) sini saqlab qo'ymoqda
+    // if one chat is selected, show new message input (main-footer)
+    document.querySelector(".main-footer").style.display = "block";
+
+    //tanlangan userning id(username) sini saqlab qo'ymoqda
+    selected_chat_username = what.getAttribute("data-username"); 
     // chats and middle-navbar rendering
     for (let tabs in DATA_from_local_storage) {
         DATA_from_local_storage[tabs].forEach((chatItem) => {

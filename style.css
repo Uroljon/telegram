@@ -337,6 +337,7 @@
   right: -10px;
 }
 #telegram #column-center .main-footer {
+  display: none;
   position: fixed;
   bottom: 1rem;
   width: 72.5%;

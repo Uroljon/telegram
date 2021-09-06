@@ -357,6 +357,7 @@ $header-height: 56px;
             }
         }
         .main-footer {
+            display: none;
             position: fixed;
             bottom: 1rem;
             width: $column-center-width;
@@ -643,21 +644,20 @@ $header-height: 56px;
                 @extend %navbar-style;
                 background-color: white;
                 li {
-
                     flex: 1 1 auto;
                     height: 56px;
                     &:hover {
                         border-radius: unset;
                     }
-                    &.active:hover{
+                    &.active:hover {
                         background-color: rgba(0, 195, 255, 0.11);
                     }
                 }
             }
-            .shared_media_content{
+            .shared_media_content {
                 transition: 250ms;
                 transform: scale(0);
-                &.active{
+                &.active {
                     transform: scale(1);
                 }
             }
