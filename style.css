@@ -284,6 +284,7 @@
 }
 #telegram #column-center .main-header .person .search-btn i,
 #telegram #column-center .main-header .person .more-btn i {
+  pointer-events: none;
   font-size: 17px;
   color: #707579;
 }

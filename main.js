@@ -249,6 +249,7 @@ let DATA = {
 let weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 let selected_chat_username;
 let selected_chatlist;
+let is_searching_messages = false;
 // search function styles
 document.querySelector("#search").addEventListener("focus", () => {
     document.querySelector(".search-wrapper").style.border = "2px solid #3390ec";
@@ -261,28 +262,31 @@ document.querySelector("#search").addEventListener("blur", () => {
     document.querySelector(".fa-search").style.color = "#dfe1e5";
     document.querySelector(".clear-search-btn").style.opacity = "0";
 
+    is_searching_messages = false;
 });
 
 // live search
 document.querySelector("#search").addEventListener("keyup", (e) => {
-
     let excluded_keys = [18, 20, 17, 16, 9]; //Alt, Caps Lock, Ctrl, Shift, tab
 
-    if(!excluded_keys.includes(e.keyCode)){ //exclude keys above
+    if (!excluded_keys.includes(e.keyCode)) { //exclude keys above
 
-        let search_for = new RegExp(e.target.value, "gi");
-        let search_list = "#" + document.querySelector(".navbar li.active").getAttribute("data-target") + " .diolog_title p";
+        // if searching messages
+        if (is_searching_messages) {
 
-        document.querySelectorAll(`${search_list}`).forEach((item)=>{
-            if(search_for.test(item.textContent)){
-                item.parentElement.parentElement.parentElement.style.display = "grid";
-            }else{
-                item.parentElement.parentElement.parentElement.style.display = "none";
-            }
-        })
-        
+        } else {
+            let search_for = new RegExp(e.target.value, "gi");
+            let search_list = "#" + document.querySelector(".navbar li.active").getAttribute("data-target") + " .diolog_title p";
+
+            document.querySelectorAll(`${search_list}`).forEach((item) => {
+                if (search_for.test(item.textContent)) {
+                    item.parentElement.parentElement.parentElement.style.display = "grid";
+                } else {
+                    item.parentElement.parentElement.parentElement.style.display = "none";
+                }
+            })
+        }
     }
-    
 });
 
 // clear search input button
@@ -387,15 +391,16 @@ function fill_left_column(location) {
         })
     }
 }
-// renders DATA to middle column
+// renders DATA to middle column and adds related functionality like search and newMessage input
 function fill_middle_column(what) {
+
     let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
 
     // if one chat is selected, show new message input (main-footer)
     document.querySelector(".main-footer").style.display = "block";
 
     //tanlangan userning id(username) sini saqlab qo'ymoqda
-    selected_chat_username = what.getAttribute("data-username"); 
+    selected_chat_username = what.getAttribute("data-username");
     // chats and middle-navbar rendering
     for (let tabs in DATA_from_local_storage) {
         DATA_from_local_storage[tabs].forEach((chatItem) => {
@@ -501,21 +506,29 @@ document.querySelector(".new-message-voice").addEventListener("click", (e) => {
 
 });
 
-// toggle right column window 
+// toggle right column window + search + more btn
 document.querySelector(".person").addEventListener("click", (e) => {
-    // if any tab is Selected
+    // if any chat is Selected
     if (!(document.querySelector("#name").textContent === "Select a chat to start messaging")) {
 
-        if (!document.querySelector("#column-center").classList.contains("shrinked")) {
-            document.querySelector("#telegram").style.gridTemplateColumns = "27.5% 1fr 25%";
+        // if search btn is clicked
+        if (e.target.classList.contains("search-btn")) {
+            document.querySelector("#search").focus();
+            is_searching_messages = true;
+        } else if (e.target.classList.contains("more-btn")) {//if more btn is clicked
+            // document.querySelector(".more-btn-modal").classList.toggle("active");
+            console.log("modal korinadi")
         } else {
-            document.querySelector("#telegram").style.gridTemplateColumns = "27.5% 1fr 0%";
+            if (!document.querySelector("#column-center").classList.contains("shrinked")) {
+                document.querySelector("#telegram").style.gridTemplateColumns = "27.5% 1fr 25%";
+            } else {
+                document.querySelector("#telegram").style.gridTemplateColumns = "27.5% 1fr 0%";
+            }
+            document.querySelector("#column-center").classList.toggle("shrinked");
+            document.querySelector("#column-right").classList.toggle("expanded");
+
+            fill_right_column();
         }
-        document.querySelector("#column-center").classList.toggle("shrinked");
-        document.querySelector("#column-right").classList.toggle("expanded");
-
-        fill_right_column();
-
     }
 });
 
