@@ -136,7 +136,7 @@ let DATA = {
                 {
                     id: 5,
                     is_from_me: true,
-                    text: "test",
+                    text: "Yangi xabar yozilsa, location.href ga o'sha chat id berilyapti",
                     time: new Date(2021, 8, 2, 11, 20, 11).getTime()
                 },
                 {
@@ -292,6 +292,7 @@ let weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 let selected_chat_username;
 let selected_chatlist;
 let is_searching_messages = false;
+
 // search function styles
 document.querySelector("#search").addEventListener("focus", () => {
     document.querySelector(".search-wrapper").style.border = "2px solid #3390ec";
@@ -492,8 +493,6 @@ function fill_middle_column(what) {
     let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
     let message_to_show = what.lastElementChild.lastElementChild.firstElementChild.getAttribute("message_id");
 
-    // location.href = `/#${message_to_show}`;
-    console.log(location.href);
     // if one chat is selected, show new message input (main-footer)
     document.querySelector(".main-footer").style.display = "block";
 
@@ -531,6 +530,8 @@ function fill_middle_column(what) {
         fill_right_column();
     }
 
+    // go to the last or target message (middle column uchun)
+    location.href = `#${message_to_show}`;
 }
 
 // when input new message, button alsa changes
@@ -572,6 +573,10 @@ document.querySelector(".new-message-text input").addEventListener("keyup", (e) 
                         `;
                         // input ni tozalab qoyadi
                         document.querySelector(".new-message-text input").value = "";
+
+                        // go to last or selected message
+                        location.href = `#${last_message.id}`;
+
                         // send btn ham ishlamaydi, chunki input pustoy
                         document.querySelector(".new-message-voice i").classList.add("fa-microphone");
                         document.querySelector(".new-message-voice i").classList.remove("fa-paper-plane");
@@ -636,6 +641,10 @@ document.querySelector(".new-message-voice").addEventListener("click", (e) => {
                         `;
                         // input ni tozalab qoyadi
                         document.querySelector(".new-message-text input").value = "";
+
+                        // go to last or selected message
+                        location.href = `#${last_message.id}`;
+
                         // send btn ham ishlamaydi, chunki input pustoy
                         document.querySelector(".new-message-voice i").classList.add("fa-microphone");
                         document.querySelector(".new-message-voice i").classList.remove("fa-paper-plane");
