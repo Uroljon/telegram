@@ -25,14 +25,26 @@ let DATA = {
                     id: 1,
                     is_from_me: false,
                     text: "Hello",
-                    time: new Date(2021, 7, 16, 11, 11, 11).getTime()
+                    time: new Date(2021, 7, 16, 11, 10, 05).getTime()
                 },
                 {
                     id: 2,
                     is_from_me: true,
                     text: "Hi",
-                    time: new Date(2021, 7, 16, 11, 11, 11).getTime()
-                }
+                    time: new Date(2021, 7, 16, 11, 11, 10).getTime()
+                },
+                {
+                    id: 3,
+                    is_from_me: false,
+                    text: "How are you ?",
+                    time: new Date(2021, 7, 16, 11, 11, 15).getTime()
+                },
+                {
+                    id: 4,
+                    is_from_me: true,
+                    text: "🙂 and you ?",
+                    time: new Date(2021, 7, 16, 11, 12, 50).getTime()
+                },
             ]
         },
         {
@@ -110,10 +122,40 @@ let DATA = {
                     time: new Date(2021, 8, 1, 11, 11, 11).getTime()
                 },
                 {
-                    id: 2,
+                    id: 3,
                     is_from_me: true,
-                    text: "Va alaykum assalom. Qalaysiz Asadbek ?",
-                    time: new Date(2021, 8, 2, 11, 11, 11).getTime()
+                    text: "Live search ishladi",
+                    time: new Date(2021, 8, 2, 11, 16, 11).getTime()
+                },
+                {
+                    id: 4,
+                    is_from_me: true,
+                    text: "Messagelarni id sini olyapti",
+                    time: new Date(2021, 8, 2, 11, 17, 11).getTime()
+                },
+                {
+                    id: 5,
+                    is_from_me: true,
+                    text: "test",
+                    time: new Date(2021, 8, 2, 11, 20, 11).getTime()
+                },
+                {
+                    id: 6,
+                    is_from_me: true,
+                    text: "test",
+                    time: new Date(2021, 8, 2, 11, 20, 11).getTime()
+                },
+                {
+                    id: 7,
+                    is_from_me: true,
+                    text: "test",
+                    time: new Date(2021, 8, 2, 11, 20, 11).getTime()
+                },
+                {
+                    id: 8,
+                    is_from_me: true,
+                    text: "test",
+                    time: new Date(2021, 8, 2, 11, 20, 11).getTime()
                 },
             ]
         }
@@ -261,8 +303,6 @@ document.querySelector("#search").addEventListener("blur", () => {
     document.querySelector(".search-wrapper").style.border = "1px solid #dfe1e5";
     document.querySelector(".fa-search").style.color = "#dfe1e5";
     document.querySelector(".clear-search-btn").style.opacity = "0";
-
-    is_searching_messages = false;
 });
 
 // live search
@@ -271,11 +311,52 @@ document.querySelector("#search").addEventListener("keyup", (e) => {
 
     if (!excluded_keys.includes(e.keyCode)) { //exclude keys above
 
-        // if searching messages
-        if (is_searching_messages) {
+        let search_for = new RegExp(e.target.value, "gi");
 
-        } else {
-            let search_for = new RegExp(e.target.value, "gi");
+        if (is_searching_messages) {// if searching messages
+
+            let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
+            let where_to_render = `#${document.querySelector(".navbar li.active").getAttribute("data-target")}`;
+            // render new chatlist related to search query  
+            Object.keys(DATA_from_local_storage).forEach((tab) => {
+                DATA_from_local_storage[tab].forEach((individ) => {
+                    if (individ.user_name === selected_chat_username) {
+
+                        document.querySelector(`${where_to_render}`).innerHTML = "";//cleaning output area
+
+                        individ.messages.forEach((message, index, arr) => {
+                            if (search_for.test(message.text)) {
+
+                                document.querySelector(`${where_to_render}`).innerHTML += `
+                                <div class="chat_item" onClick="fill_middle_column(this)" data-username="${individ.user_name}">
+                                    <div class="chat_avatar">
+                                        <img src="${individ.avatar[0] ? individ.avatar[0] : "https://icon-library.com/images/no-profile-picture-icon/no-profile-picture-icon-11.jpg"}" alt="avatar">
+                                    </div>
+                                    <div class="user_caption">
+                                        <div class="diolog_title">
+                                            <p>${individ.first_name ? individ.first_name : individ.name} ${individ.last_name ? individ.last_name : ""}</p> 
+                                            <div class="diolog_title_details">
+                                                <i class="fa fa-check message_status" aria-hidden="true"></i>
+                                                <span class="message_time">${weekDays[new Date(message.time).getDay()]}</span>
+                                            </div>
+                                        </div>
+                                        <div class="dialog_subtitle">
+                                            <p message_id="${message.id}">${message.text}</p>
+                                            <div class="diolog_subtitle_details">
+                                                <span class="unread_message_count">${(index === arr.length - 1) ? (message.is_from_me ? '' : 1) : ''}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`;
+
+                            }
+                        })
+
+                    }
+                })
+            });
+
+        } else {//if searching chats
             let search_list = "#" + document.querySelector(".navbar li.active").getAttribute("data-target") + " .diolog_title p";
 
             document.querySelectorAll(`${search_list}`).forEach((item) => {
@@ -291,7 +372,21 @@ document.querySelector("#search").addEventListener("keyup", (e) => {
 
 // clear search input button
 document.querySelector(".clear-search-btn").addEventListener("click", () => {
+
     document.querySelector("#search").value = "";
+    document.querySelector("#search").focus();
+
+    if (is_searching_messages) {//if message search finished, re-render original chatlist
+        let where_to_render = `${document.querySelector(".navbar li.active").getAttribute("data-target")}`;
+        fill_left_column(where_to_render);
+        is_searching_messages = false;
+    } else { //if chat search finished, restore all chats' display:grid style
+        let search_list = "#" + document.querySelector(".navbar li.active").getAttribute("data-target") + " .diolog_title p";
+        document.querySelectorAll(`${search_list}`).forEach((item) => {
+            item.parentElement.parentElement.parentElement.style.display = "grid";
+        })
+    }
+
 })
 
 // toggle settings window
@@ -302,8 +397,8 @@ document.querySelector(".toggle-settings").addEventListener("click", () => {
 document.querySelectorAll(".navbar li").forEach((elem) => {
 
     // INITIATE FIRST RENDER on active tab
-    fill_left_column(document.querySelector(".navbar li.active").getAttribute("data-target"));
-
+    selected_chatlist = document.querySelector(".navbar li.active").getAttribute("data-target");
+    fill_left_column(selected_chatlist);
     // next render according to click
     elem.addEventListener("click", (e) => {
 
@@ -351,7 +446,7 @@ function fill_left_column(location) {
                         </div>
                     </div>
                     <div class="dialog_subtitle">
-                        <p>${item.messages[item.messages.length - 1].text}</p>
+                        <p message_id="${item.messages[item.messages.length - 1].id}">${item.messages[item.messages.length - 1].text}</p>
                         <div class="diolog_subtitle_details">
                             <span class="unread_message_count">${item.messages[item.messages.length - 1].is_from_me ? "" : 1}</span>
                         </div>
@@ -379,7 +474,7 @@ function fill_left_column(location) {
                     </div>
                 </div>
                 <div class="dialog_subtitle">
-                    <p>${item.messages[item.messages.length - 1].text}</p>
+                    <p message_id="${item.messages[item.messages.length - 1].id}">${item.messages[item.messages.length - 1].text}</p>
                     <div class="diolog_subtitle_details">
                         <span class="unread_message_count">${item.messages[item.messages.length - 1].is_from_me ? "" : 1}</span>
                     </div>
@@ -395,7 +490,10 @@ function fill_left_column(location) {
 function fill_middle_column(what) {
 
     let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
+    let message_to_show = what.lastElementChild.lastElementChild.firstElementChild.getAttribute("message_id");
 
+    // location.href = `/#${message_to_show}`;
+    console.log(location.href);
     // if one chat is selected, show new message input (main-footer)
     document.querySelector(".main-footer").style.display = "block";
 
@@ -416,13 +514,13 @@ function fill_middle_column(what) {
                 chatItem.messages.forEach((message) => {
                     document.querySelector(".main-chat .container").innerHTML += `
                     <div style="display: flex; ${message.is_from_me ? 'justify-content: flex-end;' : ''}">
-                    <div class="message ${message.is_from_me ? "from-me" : "to-me"} has-tail">
+                    <div id="${message.id}" class="message ${message.is_from_me ? "from-me" : "to-me"} has-tail">
                         ${message.text}
                         <div class="message_time">${new Date(message.time).getHours()}:${new Date(message.time).getMinutes()} ${message.is_from_me ? '<i class="fa fa-check" aria-hidden="true"></i>' : ''}</div>
                         <div class="tail"></div>
                     </div>
-                    </div>
-                    `
+                    </div>`;
+
                 })
             }
         })
@@ -436,11 +534,58 @@ function fill_middle_column(what) {
 }
 
 // when input new message, button alsa changes
-document.querySelector(".new-message-text").addEventListener("keyup", (e) => {
-    // document.querySelector(".new-message-text").value;
-    document.querySelector(".new-message-voice i").classList.remove("fa-microphone");
-    document.querySelector(".new-message-voice i").classList.add("fa-paper-plane");
-    if (!e.target.value) {
+document.querySelector(".new-message-text input").addEventListener("keyup", (e) => {
+
+    if (e.target.value && e.target.value.trim()) { //if input isn't empty
+        document.querySelector(".new-message-voice i").classList.remove("fa-microphone");
+        document.querySelector(".new-message-voice i").classList.add("fa-paper-plane");
+        if (e.keyCode === 13) {//if enter is pressed, send message
+
+            // NEW MESSAGE CODES HERE
+            let new_message = document.querySelector(".new-message-text input").value;
+            let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
+            Object.keys(DATA_from_local_storage).forEach((tab) => {
+                DATA_from_local_storage[tab].forEach((individ) => {
+                    if (individ.user_name === selected_chat_username) {
+
+                        // writes new message to local var
+                        individ.messages.push({
+                            id: individ.messages[individ.messages.length - 1].id + 1,
+                            is_from_me: true,
+                            text: new_message,
+                            time: new Date().getTime()
+                        });
+                        // sets new message to localStorage
+                        localStorage.setItem("DATA", JSON.stringify(DATA_from_local_storage))
+
+                        // re-render middle column with new messages
+                        let last_message = individ.messages[individ.messages.length - 1];//clean code uchun ohirgi message ni qisqa nomlash
+
+                        document.querySelector(".main-chat .container").innerHTML += `
+                        <div style="display: flex; ${last_message.is_from_me ? 'justify-content: flex-end;' : ''}">
+                        <div id="${last_message.id}" class="message ${last_message.is_from_me ? "from-me" : "to-me"} has-tail">
+                            ${last_message.text}
+                            <div class="message_time">${new Date(last_message.time).getHours()}:${new Date(last_message.time).getMinutes()} ${last_message.is_from_me ? '<i class="fa fa-check" aria-hidden="true"></i>' : ''}</div>
+                            <div class="tail"></div>
+                        </div>
+                        </div>
+                        `;
+                        // input ni tozalab qoyadi
+                        document.querySelector(".new-message-text input").value = "";
+                        // send btn ham ishlamaydi, chunki input pustoy
+                        document.querySelector(".new-message-voice i").classList.add("fa-microphone");
+                        document.querySelector(".new-message-voice i").classList.remove("fa-paper-plane");
+                        document.querySelector(".new-message-text input").focus();
+                        // LEFT column a re-render bo'lyapti. Yangilab qoysin chatlarni
+                        fill_left_column(selected_chatlist);
+
+                    }
+                })
+            });
+
+        }
+    }
+    else {//if input is empty
         document.querySelector(".new-message-voice i").classList.add("fa-microphone");
         document.querySelector(".new-message-voice i").classList.remove("fa-paper-plane");
     }
@@ -482,7 +627,7 @@ document.querySelector(".new-message-voice").addEventListener("click", (e) => {
 
                         document.querySelector(".main-chat .container").innerHTML += `
                         <div style="display: flex; ${last_message.is_from_me ? 'justify-content: flex-end;' : ''}">
-                        <div class="message ${last_message.is_from_me ? "from-me" : "to-me"} has-tail">
+                        <div id="${last_message.id}" class="message ${last_message.is_from_me ? "from-me" : "to-me"} has-tail">
                             ${last_message.text}
                             <div class="message_time">${new Date(last_message.time).getHours()}:${new Date(last_message.time).getMinutes()} ${last_message.is_from_me ? '<i class="fa fa-check" aria-hidden="true"></i>' : ''}</div>
                             <div class="tail"></div>
@@ -491,7 +636,10 @@ document.querySelector(".new-message-voice").addEventListener("click", (e) => {
                         `;
                         // input ni tozalab qoyadi
                         document.querySelector(".new-message-text input").value = "";
-
+                        // send btn ham ishlamaydi, chunki input pustoy
+                        document.querySelector(".new-message-voice i").classList.add("fa-microphone");
+                        document.querySelector(".new-message-voice i").classList.remove("fa-paper-plane");
+                        document.querySelector(".new-message-text input").focus();
                         // LEFT column a re-render bo'lyapti. Yangilab qoysin chatlarni
                         fill_left_column(selected_chatlist);
 
@@ -499,9 +647,6 @@ document.querySelector(".new-message-voice").addEventListener("click", (e) => {
                 })
             });
         }
-
-
-
     }
 
 });

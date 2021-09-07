@@ -298,7 +298,7 @@
 }
 #telegram #column-center .main-chat .message {
   font-family: sans-serif;
-  padding: 6px 55px 6px 10px;
+  padding: 6px 42px 6px 10px;
   margin: 4px 0 8px 0;
   max-width: 480px;
   min-height: 30px;
@@ -330,6 +330,7 @@
   left: -10px;
 }
 #telegram #column-center .main-chat .message.from-me {
+  padding-right: 58px;
   background-color: #eeffde;
   margin-left: auto;
 }
@@ -365,6 +366,9 @@
 }
 #telegram #column-center .main-footer .main-footer-wrapper .new-message-wrapper .new-message-text {
   padding: 0 5px;
+  height: 100%;
+  display: grid;
+  align-self: center;
 }
 #telegram #column-center .main-footer .main-footer-wrapper .new-message-wrapper .new-message-text input {
   font-size: 16px;
