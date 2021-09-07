@@ -288,6 +288,56 @@
   font-size: 17px;
   color: #707579;
 }
+#telegram #column-center .main-header .person .more-btn-content {
+  position: absolute;
+  right: 2%;
+  top: 100%;
+  transform: scale(0);
+  transition: 300ms;
+}
+#telegram #column-center .main-header .person .more-btn-content.active {
+  transform: scale(1);
+}
+#telegram #column-center .main-header .person .more-btn-content ul {
+  margin-top: 0.5rem;
+  list-style: none;
+  padding: 0.5rem 0;
+  background-color: white;
+  border-radius: 10px;
+}
+#telegram #column-center .main-header .person .more-btn-content ul li {
+  display: flex;
+  font-size: 16px;
+  padding: 0 40px 0 1rem;
+  height: 56px;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  align-items: center;
+  text-align: left;
+  color: rgba(0, 0, 0, 0.781);
+}
+#telegram #column-center .main-header .person .more-btn-content ul li:nth-child(4) {
+  color: #e60505;
+}
+#telegram #column-center .main-header .person .more-btn-content ul li:hover {
+  background: rgba(128, 128, 128, 0.116);
+}
+#telegram #column-center .main-header .person .more-btn-content ul li i {
+  pointer-events: none;
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  font-size: 19px;
+  display: grid;
+  align-items: center;
+  margin-right: 20px;
+  color: #707579;
+}
+#telegram #column-center .main-header .person .more-btn-content ul li i.fa-exclamation-triangle {
+  color: #e60505;
+}
 #telegram #column-center .main-chat {
   padding: 56px 0 0;
   height: 90%;
@@ -637,7 +687,7 @@
 #telegram #column-right.expanded .right-header {
   width: 25%;
 }
-#telegram .edit_contact_modal {
+#telegram .contact_modal {
   position: absolute;
   top: 0;
   left: 0;
@@ -652,18 +702,21 @@
   transform: scale(0);
   transition: 300ms;
 }
-#telegram .edit_contact_modal .edit_contact_wrapper {
+#telegram .contact_modal.active {
+  transform: scale(1);
+}
+#telegram .contact_modal .contact_modal_wrapper {
   width: 25%;
   padding: 2%;
   background-color: #12242e;
   z-index: 11;
 }
-#telegram .edit_contact_modal .edit_contact_wrapper .row_1 {
+#telegram .contact_modal .contact_modal_wrapper .row_1 {
   display: flex;
   align-items: center;
   margin: 5% 0;
 }
-#telegram .edit_contact_modal .edit_contact_wrapper .row_1 .img_avatar {
+#telegram .contact_modal .contact_modal_wrapper .row_1 .img_avatar {
   width: 54px;
   height: 54px;
   border-radius: 50%;
@@ -671,25 +724,25 @@
   background: linear-gradient(#72d5fd #2a9ef1);
   margin-right: 5%;
 }
-#telegram .edit_contact_modal .edit_contact_wrapper .row_1 .img_avatar img {
+#telegram .contact_modal .contact_modal_wrapper .row_1 .img_avatar img {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
 }
-#telegram .edit_contact_modal .edit_contact_wrapper .row_1 .tel_and_status h5 {
+#telegram .contact_modal .contact_modal_wrapper .row_1 .tel_and_status h5 {
   color: #3c6880;
 }
-#telegram .edit_contact_modal .edit_contact_wrapper .row_2 {
+#telegram .contact_modal .contact_modal_wrapper .row_2 {
   display: flex;
   flex-direction: column;
   margin: 5% 0;
 }
-#telegram .edit_contact_modal .edit_contact_wrapper .row_2 label {
+#telegram .contact_modal .contact_modal_wrapper .row_2 label {
   color: #648597;
   padding-bottom: 2%;
 }
-#telegram .edit_contact_modal .edit_contact_wrapper .row_2 input {
+#telegram .contact_modal .contact_modal_wrapper .row_2 input {
   background-color: transparent;
   border: none;
   outline: none;
@@ -697,13 +750,13 @@
   font-size: 1.1rem;
   color: white;
 }
-#telegram .edit_contact_modal .edit_contact_wrapper .row_2 input:focus {
+#telegram .contact_modal .contact_modal_wrapper .row_2 input:focus {
   border-color: #648597;
 }
-#telegram .edit_contact_modal .edit_contact_wrapper .row_3 {
+#telegram .contact_modal .contact_modal_wrapper .row_3 {
   text-align: right;
 }
-#telegram .edit_contact_modal .edit_contact_wrapper .row_3 button {
+#telegram .contact_modal .contact_modal_wrapper .row_3 button {
   background-color: transparent;
   outline: none;
   border: none;
@@ -714,6 +767,6 @@
   transition: 300ms;
   cursor: pointer;
 }
-#telegram .edit_contact_modal .edit_contact_wrapper .row_3 button:hover {
+#telegram .contact_modal .contact_modal_wrapper .row_3 button:hover {
   background-color: #2d3c44;
 }/*# sourceMappingURL=style.css.map */

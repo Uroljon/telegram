@@ -303,6 +303,56 @@ $header-height: 56px;
                         color: #707579;
                     }
                 }
+                .more-btn-content{
+                    position: absolute;
+                    right: 2%;
+                    top: 100%;
+                    transform: scale(0);
+                    &.active{
+                        transform: scale(1);
+                    }
+                    transition: 300ms;
+                    ul{
+                        margin-top: 0.5rem;
+                        list-style: none;
+                        padding: 0.5rem 0;
+                        background-color: white;
+                        border-radius: 10px;
+                        li{
+                            display: flex;
+                            font-size: 16px;
+                            padding: 0 40px 0 1rem;
+                            height: 56px;
+                            cursor: pointer;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            align-items: center;
+                            text-align: left;
+                            color: rgba(0, 0, 0, 0.781);
+                            &:nth-child(4){
+                                color: rgb(230, 5, 5);
+                            }
+                            &:hover{
+                                background: rgba(128, 128, 128, 0.116);
+                            }
+                            i{  
+                                pointer-events: none;
+                                width: 24px;
+                                height: 24px;
+                                display: inline-block;
+                                font-size: 19px;
+                                display: grid;
+                                align-items: center;
+                                margin-right: 20px; 
+                                color: $secondary-text-color;
+                                &.fa-exclamation-triangle{
+                                    color: rgb(230, 5, 5);
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
         .main-chat {
@@ -677,7 +727,7 @@ $header-height: 56px;
     }
 
     // edit contact modal
-    .edit_contact_modal {
+    .contact_modal {
         position: absolute;
         top: 0;
         left: 0;
@@ -691,7 +741,10 @@ $header-height: 56px;
         z-index: 10;
         transform: scale(0);
         transition: 300ms;
-        .edit_contact_wrapper {
+        &.active{
+            transform: scale(1);
+        }
+        .contact_modal_wrapper {
             width: 25%;
             padding: 2%;
             background-color: rgb(18, 36, 46);

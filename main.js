@@ -142,7 +142,7 @@ let DATA = {
                 {
                     id: 6,
                     is_from_me: true,
-                    text: "test",
+                    text: "Edit contact ishlayapti",
                     time: new Date(2021, 8, 2, 11, 20, 11).getTime()
                 },
                 {
@@ -670,9 +670,21 @@ document.querySelector(".person").addEventListener("click", (e) => {
             document.querySelector("#search").focus();
             is_searching_messages = true;
         } else if (e.target.classList.contains("more-btn")) {//if more btn is clicked
-            // document.querySelector(".more-btn-modal").classList.toggle("active");
-            console.log("modal korinadi")
-        } else {
+            document.querySelector(".more-btn-content").classList.toggle("active");
+        } else if(e.target.classList.contains("more_btn_event_handler")){//more btn contents menu xullas aji buji :)
+            if(e.target.firstElementChild.classList.contains("fa-pencil")){
+                edit_btn_function();
+            }else if(e.target.firstElementChild.classList.contains("fa-trash")){
+                document.querySelector(".delete_contact_modal").classList.toggle("active");
+            }else if(e.target.firstElementChild.classList.contains("fa-history")){
+                
+            }else if(e.target.firstElementChild.classList.contains("fa-exclamation-triangle")){
+                
+            }else if(e.target.firstElementChild.classList.contains("fa-lock")){
+                
+            }
+        }
+        else {
             if (!document.querySelector("#column-center").classList.contains("shrinked")) {
                 document.querySelector("#telegram").style.gridTemplateColumns = "27.5% 1fr 25%";
             } else {
@@ -874,8 +886,10 @@ document.querySelector(".close-btn").addEventListener("click", (e) => {
 });
 
 // edit contact button (modal)
-document.querySelector(".edit-btn").addEventListener("click", () => {
-    document.querySelector(".edit_contact_modal").style.transform = "scale(1)";
+document.querySelector(".edit-btn").addEventListener("click", edit_btn_function);
+
+function edit_btn_function() {
+    document.querySelector(".edit_contact_modal").classList.toggle("active");
 
     let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
     // render data
@@ -883,7 +897,7 @@ document.querySelector(".edit-btn").addEventListener("click", () => {
         DATA_from_local_storage[tab].forEach((individ) => {
             if (individ.user_name === selected_chat_username) {
 
-                document.querySelector("#edit_avatar").innerHTML = ` ${individ.avatar[0]} `;
+                document.querySelector(".modal_avatar").src = ` ${individ.avatar[0] ? individ.avatar[0] : 'https://picsum.photos/id/115/400/384'} `;
                 document.querySelector("#edit_tel").innerHTML = ` ${individ.phone_number} `;
                 document.querySelector("#edit_status").innerHTML = `${individ.activity} `;
                 document.querySelector("#edit_first_name").value = `${individ.first_name ? individ.first_name : individ.name} `;
@@ -891,18 +905,19 @@ document.querySelector(".edit-btn").addEventListener("click", () => {
             }
         })
     })
-})
+};
+
 document.querySelector(".edit_contact_modal").addEventListener("click", (e) => {
     //close modal on click to outer area
     if (e.target.classList.contains("edit_contact_modal") | e.target.classList.contains("edit_contact_cancel")) {
-        document.querySelector(".edit_contact_modal").style.transform = "scale(0)";
+        document.querySelector(".edit_contact_modal").classList.toggle("active");
     } else if (e.target.classList.contains("edit_contact_done")) {//when edit is done
 
         let firstName = document.querySelector("#edit_first_name").value;
         let lastName = document.querySelector("#edit_last_name").value;
 
         let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
-        // render data
+        // refresh data with new changes
         Object.keys(DATA_from_local_storage).forEach((tab) => {
             DATA_from_local_storage[tab].forEach((individ) => {
                 if (individ.user_name === selected_chat_username) {
@@ -915,14 +930,16 @@ document.querySelector(".edit_contact_modal").addEventListener("click", (e) => {
                 }
             })
         });
-        localStorage.setItem("DATA", JSON.stringify(DATA_from_local_storage));
-
+        localStorage.setItem("DATA", JSON.stringify(DATA_from_local_storage));//sets to local storage
+        document.querySelector(".edit_contact_modal").classList.toggle("active");//closes modal
+        //renders new data to right AND middle columns
         document.querySelectorAll(".chat_item").forEach((what)=>{
             if(what.getAttribute("data-username") === `${selected_chat_username}`){
                 fill_middle_column(what)
             }
         })
         fill_right_column();
+
     }
 });
 

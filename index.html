@@ -72,6 +72,15 @@
                         </div>
                         <div class="search-btn"><i class="fa fa-search" aria-hidden="true"></i></div>
                         <div class="more-btn"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></div>
+                        <div class="more-btn-content">
+                            <ul>
+                                <li class="more_btn_event_handler"><i class="fa fa-pencil" aria-hidden="true"></i> Edit contact</li>
+                                <li class="more_btn_event_handler"><i class="fa fa-trash" aria-hidden="true"></i> Delete contact</li>
+                                <li class="more_btn_event_handler"><i class="fa fa-history" aria-hidden="true"></i> Clear history</li>
+                                <li class="more_btn_event_handler"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Delete chat</li>
+                                <li class="more_btn_event_handler"><i class="fa fa-lock" aria-hidden="true"></i> Block user</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -145,12 +154,12 @@
         </div>
 
         <!-- edit contact modal -->
-        <div class="edit_contact_modal">
-            <div class="edit_contact_wrapper">
+        <div class="edit_contact_modal contact_modal">
+            <div class="contact_modal_wrapper">
                 <h2>Edit contact name</h2>
                 <div class="row_1">
                     <div class="img_avatar">
-                        <img id="edit_avatar" src="https://picsum.photos/500/384" alt="avatar">
+                        <img class="modal_avatar" src="https://picsum.photos/500/384" alt="avatar">
                     </div>
                     <div class="tel_and_status">
                         <h3 id="edit_tel">tel</h3>
@@ -171,6 +180,23 @@
                 </div>
             </div>
         </div>
+        <!-- delete contact modal -->
+        <div class="delete_contact_modal contact_modal">
+            <div class="contact_modal_wrapper">
+                <h2>Delete contact</h2>
+                <div class="row_1">
+                    <div class="img_avatar">
+                        <img class="modal_avatar" src="https://picsum.photos/500/384" alt="avatar">
+                    </div>
+                </div>
+             
+                <div class="row_3">
+                    <button class="delete_contact_cancel">Cancel</button>
+                    <button class="delete_contact_done">Delete</button>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 
