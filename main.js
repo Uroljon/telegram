@@ -788,7 +788,6 @@ function fill_right_column() {
 
 }
 
-
 // carousel next/prev buttons
 let carousel_items = document.querySelector(".carousel-items");
 document.querySelectorAll(".carousel-items-arrow").forEach((navbtn) => {
@@ -867,6 +866,87 @@ document.querySelectorAll(".shared-media li").forEach((elem) => {
     })
 })
 
+// close right column btn
+document.querySelector(".close-btn").addEventListener("click", (e) => {
+    document.querySelector("#telegram").style.gridTemplateColumns = "27.5% 1fr 0%";
+    document.querySelector("#column-center").classList.toggle("shrinked");
+    document.querySelector("#column-right").classList.toggle("expanded");
+});
+
+// edit contact button (modal)
+document.querySelector(".edit-btn").addEventListener("click", () => {
+    document.querySelector(".edit_contact_modal").style.transform = "scale(1)";
+
+    let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
+    // render data
+    Object.keys(DATA_from_local_storage).forEach((tab) => {
+        DATA_from_local_storage[tab].forEach((individ) => {
+            if (individ.user_name === selected_chat_username) {
+
+                document.querySelector("#edit_avatar").innerHTML = ` ${individ.avatar[0]} `;
+                document.querySelector("#edit_tel").innerHTML = ` ${individ.phone_number} `;
+                document.querySelector("#edit_status").innerHTML = `${individ.activity} `;
+                document.querySelector("#edit_first_name").value = `${individ.first_name ? individ.first_name : individ.name} `;
+                document.querySelector("#edit_last_name").value = `${individ.last_name ? individ.last_name : ''} `;
+            }
+        })
+    })
+})
+document.querySelector(".edit_contact_modal").addEventListener("click", (e) => {
+    //close modal on click to outer area
+    if (e.target.classList.contains("edit_contact_modal") | e.target.classList.contains("edit_contact_cancel")) {
+        document.querySelector(".edit_contact_modal").style.transform = "scale(0)";
+    } else if (e.target.classList.contains("edit_contact_done")) {//when edit is done
+
+        let firstName = document.querySelector("#edit_first_name").value;
+        let lastName = document.querySelector("#edit_last_name").value;
+
+        let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
+        // render data
+        Object.keys(DATA_from_local_storage).forEach((tab) => {
+            DATA_from_local_storage[tab].forEach((individ) => {
+                if (individ.user_name === selected_chat_username) {
+                    if(individ.name){
+                        individ.name = `${firstName ? firstName : ''} ${lastName ? lastName : ''}`;
+                    }else{
+                        individ.first_name = firstName;
+                        individ.last_name = lastName;
+                    }
+                }
+            })
+        });
+        localStorage.setItem("DATA", JSON.stringify(DATA_from_local_storage));
+
+        document.querySelectorAll(".chat_item").forEach((what)=>{
+            if(what.getAttribute("data-username") === `${selected_chat_username}`){
+                fill_middle_column(what)
+            }
+        })
+        fill_right_column();
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+// document.querySelectorAll(".row_2 input").forEach((input) => {
+//     input.addEventListener("keyup", (e) => {
+//         console.log(e.target.nodeName);
+//         if (e.target.nodeName === "INPUT"){
+//             let firstName = "ASa"
+
+//         }
+//     })
+// })
 
 
 

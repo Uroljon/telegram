@@ -464,6 +464,7 @@ $header-height: 56px;
                 .close-btn {
                     @extend %button-style;
                     i {
+                        pointer-events: none;
                         font-size: 1.5rem;
                         line-height: 1;
                     }
@@ -476,6 +477,7 @@ $header-height: 56px;
                 .edit-btn {
                     @extend %button-style;
                     i {
+                        pointer-events: none;
                         font-size: 1.2rem;
                     }
                 }
@@ -670,6 +672,89 @@ $header-height: 56px;
         &.expanded {
             .right-header {
                 width: $column-right-width-expanded;
+            }
+        }
+    }
+
+    // edit contact modal
+    .edit_contact_modal {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.836);
+        color: rgba(255, 255, 255, 0.822);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+        transform: scale(0);
+        transition: 300ms;
+        .edit_contact_wrapper {
+            width: 25%;
+            padding: 2%;
+            background-color: rgb(18, 36, 46);
+            z-index: 11;
+            .row_1 {
+                display: flex;
+                align-items: center;
+                margin: 5% 0;
+                .img_avatar {
+                    width: 54px;
+                    height: 54px;
+                    border-radius: 50%;
+                    overflow: hidden;
+                    background: linear-gradient(#72d5fd #2a9ef1);
+                    margin-right: 5%;
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                }
+                .tel_and_status {
+                    h5 {
+                        color: rgb(60, 104, 128);
+                    }
+                }
+            }
+            .row_2 {
+                display: flex;
+                flex-direction: column;
+                margin: 5% 0;
+                label {
+                    color: rgb(100, 133, 151);
+                    padding-bottom: 2%;
+                }
+                input {
+                    background-color: transparent;
+                    border: none;
+                    outline: none;
+                    border-bottom: 1px solid white;
+                    font-size: 1.1rem;
+                    color: white;
+                    &:focus {
+                        border-color: rgb(100, 133, 151);
+                    }
+                }
+            }
+            .row_3 {
+                text-align: right;
+                button {
+                    background-color: transparent;
+                    outline: none;
+                    border: none;
+                    text-transform: uppercase;
+                    color: rgb(100, 133, 151);
+                    padding: 3%;
+                    border-radius: 5px;
+                    transition: 300ms;
+                    cursor: pointer;
+                    &:hover {
+                        background-color: rgb(45, 60, 68);
+                    }
+                }
             }
         }
     }
