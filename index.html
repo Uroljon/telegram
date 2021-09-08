@@ -73,12 +73,17 @@
                         <div class="search-btn"><i class="fa fa-search" aria-hidden="true"></i></div>
                         <div class="more-btn"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></div>
                         <div class="more-btn-content">
-                            <ul>
-                                <li class="more_btn_event_handler"><i class="fa fa-pencil" aria-hidden="true"></i> Edit contact</li>
-                                <li class="more_btn_event_handler"><i class="fa fa-trash" aria-hidden="true"></i> Delete contact</li>
-                                <li class="more_btn_event_handler"><i class="fa fa-history" aria-hidden="true"></i> Clear history</li>
-                                <li class="more_btn_event_handler"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Delete chat</li>
-                                <li class="more_btn_event_handler"><i class="fa fa-lock" aria-hidden="true"></i> Block user</li>
+                            <ul id="control_menu_2">
+                                <li class="more_btn_event_handler"><i class="fa fa-pencil" aria-hidden="true"></i> Edit
+                                    contact</li>
+                                <li class="more_btn_event_handler"><i class="fa fa-trash" aria-hidden="true"></i> Delete
+                                    contact</li>
+                                <li class="more_btn_event_handler"><i class="fa fa-history" aria-hidden="true"></i>
+                                    Clear history</li>
+                                <li class="more_btn_event_handler"><i class="fa fa-exclamation-triangle"
+                                        aria-hidden="true"></i> Delete chat</li>
+                                <li class="more_btn_event_handler"><i class="fa fa-lock" aria-hidden="true"></i> Block
+                                    user</li>
                             </ul>
                         </div>
                     </div>
@@ -186,13 +191,53 @@
                 <h2>Delete contact</h2>
                 <div class="row_1">
                     <div class="img_avatar">
-                        <img class="modal_avatar" src="https://picsum.photos/500/384" alt="avatar">
+                        <img class="modal_avatar delete_contact_avatar" src="https://picsum.photos/500/384"
+                            alt="avatar">
                     </div>
+                    <p>Are you sure you want to delete <span id="delete_contact_name"></span> from your contact list ?
+                    </p>
                 </div>
-             
                 <div class="row_3">
                     <button class="delete_contact_cancel">Cancel</button>
                     <button class="delete_contact_done">Delete</button>
+                </div>
+            </div>
+        </div>
+        <!-- clear history modal -->
+        <div class="clear_history_modal contact_modal">
+            <div class="contact_modal_wrapper">
+                <h2>Clear chat history</h2>
+                <div class="row_1">
+                    <div class="img_avatar">
+                        <img class="modal_avatar clear_history_avatar" src="https://picsum.photos/500/384" alt="avatar">
+                    </div>
+                    <p>Are you sure you want to delete all message history with <span id="clear_history_name"></span>?
+                    </p>
+                </div>
+                <div class="row_2">This action cannot be undone !</div>
+                <div class="row_3">
+                    <button class="clear_history_cancel">Cancel</button>
+                    <button class="clear_history_done">Clear</button>
+                </div>
+            </div>
+        </div>
+        <!-- delete chat modal -->
+        <div class="delete_chat_modal contact_modal">
+            <div class="contact_modal_wrapper">
+                <h2>Delete chat</h2>
+                <div class="row_1">
+                    <div class="img_avatar">
+                        <img class="modal_avatar delete_chat_avatar" src="https://picsum.photos/500/384" alt="avatar">
+                    </div>
+                    <p>Are you absolutely sure you want to delete the chat with <span class="delete_chat_name"></span>?</p>
+                </div>
+                <div class="also_delete_for">
+                    <input type="checkbox" name="also_delete_for">
+                    <p>Also delete for <span class="delete_chat_name"></span></p>
+                </div>
+                <div class="row_3">
+                    <button class="delete_chat_cancel">Cancel</button>
+                    <button class="delete_chat_done">Delete</button>
                 </div>
             </div>
         </div>

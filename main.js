@@ -148,17 +148,40 @@ let DATA = {
                 {
                     id: 7,
                     is_from_me: true,
-                    text: "test",
+                    text: "delete contact, clear history ishlayapti",
                     time: new Date(2021, 8, 2, 11, 20, 11).getTime()
                 },
                 {
                     id: 8,
-                    is_from_me: true,
-                    text: "test",
+                    is_from_me: false,
+                    is_service_notifications: true,
+                    text: "service notifications",
                     time: new Date(2021, 8, 2, 11, 20, 11).getTime()
                 },
+                // {
+                //     id: 9,
+                //     is_from_me: true,
+                //     text: "delete contact, clear history ishlayapti",
+                //     time: new Date(2021, 8, 2, 13, 20, 11).getTime()
+                // },
             ]
-        }
+        },
+        {
+            id: 5,
+            first_name: "Elon",
+            last_name: "Musk",
+            avatar: [],
+            bio: null,
+            phone_number: "+!@#$%^&*:)))",
+            user_name: "@Elon_Musk",
+            groups_common: 10,
+            shared_links: 0,
+            shared_files: 0,
+            shared_photos: 0,
+            shared_voice: 0,
+            activity: "typing...",
+            messages: []
+        },
     ],
     groups: [
         {
@@ -433,10 +456,42 @@ function fill_left_column(location) {
         for (let i in DATA_from_local_storage) {
             DATA_from_local_storage[i].forEach((item) => {
 
+                // if you have ever interacted with this user 
+                if (item.messages.length !== 0) {
+                    document.querySelector(`#${location}`).innerHTML += `
+                <div class="chat_item" onClick="fill_middle_column(this)" data-username="${item.user_name}">
+                    <div class="chat_avatar">
+                        <img src="${item.avatar[0] ? item.avatar[0] : "https://icon-library.com/images/no-profile-picture-icon/no-profile-picture-icon-11.jpg"}" alt="avatar">
+                    </div>
+                    <div class="user_caption">
+                        <div class="diolog_title">
+                            <p>${item.first_name ? item.first_name : item.name} ${item.last_name ? item.last_name : ""}</p> 
+                            <div class="diolog_title_details">
+                                <i class="fa fa-check message_status" aria-hidden="true"></i>
+                                <span class="message_time">${weekDays[new Date(item.messages[item.messages.length - 1].time).getDay()]}</span>
+                            </div>
+                        </div>
+                        <div class="dialog_subtitle">
+                            <p message_id="${item.messages[item.messages.length - 1].id}">${item.messages[item.messages.length - 1].text}</p>
+                            <div class="diolog_subtitle_details">
+                                <span class="unread_message_count">${item.messages[item.messages.length - 1].is_from_me ? "" : (item.messages[item.messages.length - 1].is_service_notifications ? '' : 1)}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    `;
+                }
+
+            });
+        }
+    } else {//one location for one tab
+        DATA_from_local_storage[location].forEach((item) => {
+            // if you have ever interacted with this user 
+            if (item.messages.length !== 0) {
                 document.querySelector(`#${location}`).innerHTML += `
             <div class="chat_item" onClick="fill_middle_column(this)" data-username="${item.user_name}">
                 <div class="chat_avatar">
-                    <img src="${item.avatar[0] ? item.avatar[0] : "https://icon-library.com/images/no-profile-picture-icon/no-profile-picture-icon-11.jpg"}" alt="avatar">
+                    <img src="${item.avatar[0] ? item.avatar[0] : "https://simg.nicepng.com/png/small/930-9302865_notes-from-reasons-to-conference-brighton-whatsapp-profile.png"}" alt="avatar">
                 </div>
                 <div class="user_caption">
                     <div class="diolog_title">
@@ -449,41 +504,14 @@ function fill_left_column(location) {
                     <div class="dialog_subtitle">
                         <p message_id="${item.messages[item.messages.length - 1].id}">${item.messages[item.messages.length - 1].text}</p>
                         <div class="diolog_subtitle_details">
-                            <span class="unread_message_count">${item.messages[item.messages.length - 1].is_from_me ? "" : 1}</span>
+                            <span class="unread_message_count">${item.messages[item.messages.length - 1].is_from_me ? "" : (item.messages[item.messages.length - 1].is_service_notifications ? '' : 1)}</span>
                         </div>
+                    
                     </div>
                 </div>
             </div>
                 `;
-            });
-
-
-        }
-    } else {//one location for one tab
-        DATA_from_local_storage[location].forEach((item) => {
-            document.querySelector(`#${location}`).innerHTML += `
-        <div class="chat_item" onClick="fill_middle_column(this)" data-username="${item.user_name}">
-            <div class="chat_avatar">
-                <img src="${item.avatar[0] ? item.avatar[0] : "https://simg.nicepng.com/png/small/930-9302865_notes-from-reasons-to-conference-brighton-whatsapp-profile.png"}" alt="avatar">
-            </div>
-            <div class="user_caption">
-                <div class="diolog_title">
-                    <p>${item.first_name ? item.first_name : item.name} ${item.last_name ? item.last_name : ""}</p> 
-                    <div class="diolog_title_details">
-                        <i class="fa fa-check message_status" aria-hidden="true"></i>
-                        <span class="message_time">${weekDays[new Date(item.messages[item.messages.length - 1].time).getDay()]}</span>
-                    </div>
-                </div>
-                <div class="dialog_subtitle">
-                    <p message_id="${item.messages[item.messages.length - 1].id}">${item.messages[item.messages.length - 1].text}</p>
-                    <div class="diolog_subtitle_details">
-                        <span class="unread_message_count">${item.messages[item.messages.length - 1].is_from_me ? "" : 1}</span>
-                    </div>
-                
-                </div>
-            </div>
-        </div>
-            `;
+            }
         })
     }
 }
@@ -513,13 +541,12 @@ function fill_middle_column(what) {
                 chatItem.messages.forEach((message) => {
                     document.querySelector(".main-chat .container").innerHTML += `
                     <div style="display: flex; ${message.is_from_me ? 'justify-content: flex-end;' : ''}">
-                    <div id="${message.id}" class="message ${message.is_from_me ? "from-me" : "to-me"} has-tail">
+                    <div id="${message.id}" class="message ${message.is_from_me ? "from-me" : "to-me"} ${message.is_service_notifications ? 'service_notification' : 'has-tail'} ">
                         ${message.text}
                         <div class="message_time">${new Date(message.time).getHours()}:${new Date(message.time).getMinutes()} ${message.is_from_me ? '<i class="fa fa-check" aria-hidden="true"></i>' : ''}</div>
                         <div class="tail"></div>
                     </div>
                     </div>`;
-
                 })
             }
         })
@@ -670,18 +697,44 @@ document.querySelector(".person").addEventListener("click", (e) => {
             document.querySelector("#search").focus();
             is_searching_messages = true;
         } else if (e.target.classList.contains("more-btn")) {//if more btn is clicked
+
+            if(selected_chatlist === "")
+            let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
+
+            Object.keys(DATA_from_local_storage).forEach((tab) => {
+                DATA_from_local_storage[tab].forEach((individ) => {
+                    if (individ.user_name === selected_chat_username) {
+                        // more btn uchun menyular chat ga qarab o'zgaradi
+document.querySelector("#control_menu_2").innerHTML = ``;
+/***
+<li class="more_btn_event_handler"><i class="fa fa-pencil" aria-hidden="true"></i> Edit contact</li>
+<li class="more_btn_event_handler"><i class="fa fa-trash" aria-hidden="true"></i> Delete contact</li>
+<li class="more_btn_event_handler"><i class="fa fa-history" aria-hidden="true"></i> Clear history</li>
+<li class="more_btn_event_handler"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Delete chat</li>
+<li class="more_btn_event_handler"><i class="fa fa-lock" aria-hidden="true"></i> Block user</li>
+*/
+                    }
+                })
+            })
+
+
+
             document.querySelector(".more-btn-content").classList.toggle("active");
-        } else if(e.target.classList.contains("more_btn_event_handler")){//more btn contents menu xullas aji buji :)
-            if(e.target.firstElementChild.classList.contains("fa-pencil")){
-                edit_btn_function();
-            }else if(e.target.firstElementChild.classList.contains("fa-trash")){
-                document.querySelector(".delete_contact_modal").classList.toggle("active");
-            }else if(e.target.firstElementChild.classList.contains("fa-history")){
-                
-            }else if(e.target.firstElementChild.classList.contains("fa-exclamation-triangle")){
-                
-            }else if(e.target.firstElementChild.classList.contains("fa-lock")){
-                
+        } else if (e.target.classList.contains("more_btn_event_handler")) {//more btn contents menu xullas aji buji :)
+            if (e.target.firstElementChild.classList.contains("fa-pencil")) {
+                edit_contact_modal();
+                document.querySelector(".more-btn-content").classList.remove("active");
+            } else if (e.target.firstElementChild.classList.contains("fa-trash")) {
+                delete_contact_modal();
+                document.querySelector(".more-btn-content").classList.remove("active");
+            } else if (e.target.firstElementChild.classList.contains("fa-history")) {
+                clear_history_modal();
+                document.querySelector(".more-btn-content").classList.remove("active");
+            } else if (e.target.firstElementChild.classList.contains("fa-exclamation-triangle")) {
+                delete_chat_modal();
+                document.querySelector(".more-btn-content").classList.remove("active");
+            } else if (e.target.firstElementChild.classList.contains("fa-lock")) {
+
             }
         }
         else {
@@ -886,9 +939,8 @@ document.querySelector(".close-btn").addEventListener("click", (e) => {
 });
 
 // edit contact button (modal)
-document.querySelector(".edit-btn").addEventListener("click", edit_btn_function);
-
-function edit_btn_function() {
+document.querySelector(".edit-btn").addEventListener("click", edit_contact_modal);
+function edit_contact_modal() {
     document.querySelector(".edit_contact_modal").classList.toggle("active");
 
     let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
@@ -906,44 +958,176 @@ function edit_btn_function() {
         })
     })
 };
-
-document.querySelector(".edit_contact_modal").addEventListener("click", (e) => {
-    //close modal on click to outer area
-    if (e.target.classList.contains("edit_contact_modal") | e.target.classList.contains("edit_contact_cancel")) {
-        document.querySelector(".edit_contact_modal").classList.toggle("active");
-    } else if (e.target.classList.contains("edit_contact_done")) {//when edit is done
-
-        let firstName = document.querySelector("#edit_first_name").value;
-        let lastName = document.querySelector("#edit_last_name").value;
-
-        let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
-        // refresh data with new changes
-        Object.keys(DATA_from_local_storage).forEach((tab) => {
-            DATA_from_local_storage[tab].forEach((individ) => {
-                if (individ.user_name === selected_chat_username) {
-                    if(individ.name){
-                        individ.name = `${firstName ? firstName : ''} ${lastName ? lastName : ''}`;
-                    }else{
-                        individ.first_name = firstName;
-                        individ.last_name = lastName;
-                    }
-                }
-            })
-        });
-        localStorage.setItem("DATA", JSON.stringify(DATA_from_local_storage));//sets to local storage
-        document.querySelector(".edit_contact_modal").classList.toggle("active");//closes modal
-        //renders new data to right AND middle columns
-        document.querySelectorAll(".chat_item").forEach((what)=>{
-            if(what.getAttribute("data-username") === `${selected_chat_username}`){
-                fill_middle_column(what)
+//delete contact modal button
+function delete_contact_modal() {
+    document.querySelector(".delete_contact_modal").classList.toggle("active");
+    let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
+    // render data
+    Object.keys(DATA_from_local_storage).forEach((tab) => {
+        DATA_from_local_storage[tab].forEach((individ) => {
+            if (individ.user_name === selected_chat_username) {
+                document.querySelector(".delete_contact_avatar").src = ` ${individ.avatar[0] ? individ.avatar[0] : 'https://picsum.photos/id/115/400/384'} `;
+                document.querySelector("#delete_contact_name").innerHTML = `${individ.first_name ? individ.first_name : individ.name} ${individ.last_name && individ.last_name}`;
             }
         })
-        fill_right_column();
+    })
+}
+//clear history modal button
+function clear_history_modal() {
+    document.querySelector(".clear_history_modal").classList.toggle("active");
+    let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
+    // render data
+    Object.keys(DATA_from_local_storage).forEach((tab) => {
+        DATA_from_local_storage[tab].forEach((individ) => {
+            if (individ.user_name === selected_chat_username) {
+                document.querySelector(".clear_history_avatar").src = ` ${individ.avatar[0] ? individ.avatar[0] : 'https://picsum.photos/id/115/400/384'} `;
+                document.querySelector("#clear_history_name").innerHTML = `${individ.first_name ? individ.first_name : individ.name} ${individ.last_name && individ.last_name}`;
+            }
+        })
+    })
+}
+//clear history modal button
+function delete_chat_modal() {
+    document.querySelector(".delete_chat_modal").classList.toggle("active");
+    let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
+    // render data
+    Object.keys(DATA_from_local_storage).forEach((tab) => {
+        DATA_from_local_storage[tab].forEach((individ) => {
+            if (individ.user_name === selected_chat_username) {
+                document.querySelector(".delete_chat_avatar").src = ` ${individ.avatar[0] ? individ.avatar[0] : 'https://picsum.photos/id/115/400/384'} `;
+                document.querySelectorAll(".delete_chat_name").forEach((name) => {
+                    name.innerHTML = `${individ.first_name ? individ.first_name : individ.name} ${individ.last_name && individ.last_name}`;
+                });
+            }
+        })
+    })
+}
 
-    }
-});
 
 
+
+
+
+
+
+
+
+
+
+document.querySelectorAll(".contact_modal").forEach((modal) => {
+    modal.addEventListener("click", (e) => {
+
+        //close modal on click to outer area
+        if (e.target.classList.contains("contact_modal") | e.target.classList.contains("edit_contact_cancel") | e.target.classList.contains("delete_contact_cancel") | e.target.classList.contains("clear_history_cancel") | e.target.classList.contains("delete_chat_cancel")) {
+            document.querySelectorAll(".contact_modal").forEach((modal_to_close) => {
+                modal_to_close.classList.remove("active");
+            })
+
+        } else if (e.target.classList.contains("edit_contact_done")) {//when edit is done
+
+            let firstName = document.querySelector("#edit_first_name").value;
+            let lastName = document.querySelector("#edit_last_name").value;
+
+            let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
+            // refresh data with new changes
+            Object.keys(DATA_from_local_storage).forEach((tab) => {
+                DATA_from_local_storage[tab].forEach((individ) => {
+                    if (individ.user_name === selected_chat_username) {
+                        if (individ.name) {
+                            individ.name = `${firstName ? firstName : ''} ${lastName ? lastName : ''}`;
+                        } else {
+                            individ.first_name = firstName;
+                            individ.last_name = lastName;
+                        }
+                    }
+                })
+            });
+            localStorage.setItem("DATA", JSON.stringify(DATA_from_local_storage));//sets to local storage
+            document.querySelector(".edit_contact_modal").classList.toggle("active");//closes modal
+            //renders new data 
+            re_render();
+        } else if (e.target.classList.contains("delete_contact_done")) {//when delete contact is done
+            let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
+            // refresh data with new changes
+            Object.keys(DATA_from_local_storage).forEach((tab) => {
+                DATA_from_local_storage[tab].forEach((individ) => {
+                    if (individ.user_name === selected_chat_username) {
+                        if (individ.name) {
+                            individ.name = `Unknown Organisation`;
+                        } else {
+                            individ.first_name = "Unknown";
+                            individ.last_name = "User";
+                        }
+                    }
+                })
+            });
+            localStorage.setItem("DATA", JSON.stringify(DATA_from_local_storage));//sets to local storage
+            document.querySelector(".delete_contact_modal").classList.remove("active");//closes modal
+            //renders new data 
+            re_render();
+        } else if (e.target.classList.contains("clear_history_done")) {//when history is cleared
+            let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
+            // refresh data with new changes
+            Object.keys(DATA_from_local_storage).forEach((tab) => {
+                DATA_from_local_storage[tab].forEach((individ) => {
+                    if (individ.user_name === selected_chat_username) {
+                        individ.shared_files = individ.shared_files && 0;
+                        individ.shared_links = individ.shared_links && 0;
+                        individ.shared_photos = individ.shared_photos && 0;
+                        individ.shared_voice = individ.shared_voice && 0;
+                        individ.shared_videos = individ.shared_videos && 0;
+                        individ.messages = [{
+                            id: 1,
+                            is_from_me: false,
+                            is_service_notifications: true,
+                            text: "History was cleared :(",
+                            time: new Date().getTime()
+                        }];
+                    }
+                })
+            });
+            localStorage.setItem("DATA", JSON.stringify(DATA_from_local_storage));//sets to local storage
+            document.querySelector(".clear_history_modal").classList.remove("active");//closes modal
+            //renders new data 
+            re_render();
+        } else if (e.target.classList.contains("delete_chat_done")) {//when chat is deleted
+            let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
+            // refresh data with new changes
+            Object.keys(DATA_from_local_storage).forEach((tab) => {
+                DATA_from_local_storage[tab].forEach((individ) => {
+                    if (individ.user_name === selected_chat_username) {
+                        individ.shared_files = individ.shared_files && 0;
+                        individ.shared_links = individ.shared_links && 0;
+                        individ.shared_photos = individ.shared_photos && 0;
+                        individ.shared_voice = individ.shared_voice && 0;
+                        individ.shared_videos = individ.shared_videos && 0;
+                        individ.messages = [];
+                    }
+                })
+            });
+            localStorage.setItem("DATA", JSON.stringify(DATA_from_local_storage));//sets to local storage
+            document.querySelector(".delete_chat_modal").classList.remove("active");//closes modal
+            //renders new data 
+            re_render();
+        }
+    });
+})
+
+
+//renders new data 
+function re_render() {
+    // TO LEFT COLUMN
+    selected_chatlist = document.querySelector(".navbar li.active").getAttribute("data-target");
+    fill_left_column(selected_chatlist);
+    // TO MIDDLE COLUMN
+    document.querySelectorAll(".chat_item").forEach((what) => {
+        if (what.getAttribute("data-username") === `${selected_chat_username}`) {
+            fill_middle_column(what)
+        }
+    });
+    // TO RIGHT COLUMN
+    fill_right_column();
+}
 
 
 

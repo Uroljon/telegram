@@ -303,22 +303,22 @@ $header-height: 56px;
                         color: #707579;
                     }
                 }
-                .more-btn-content{
+                .more-btn-content {
                     position: absolute;
                     right: 2%;
                     top: 100%;
                     transform: scale(0);
-                    &.active{
+                    &.active {
                         transform: scale(1);
                     }
                     transition: 300ms;
-                    ul{
+                    ul {
                         margin-top: 0.5rem;
                         list-style: none;
                         padding: 0.5rem 0;
                         background-color: white;
                         border-radius: 10px;
-                        li{
+                        li {
                             display: flex;
                             font-size: 16px;
                             padding: 0 40px 0 1rem;
@@ -330,13 +330,13 @@ $header-height: 56px;
                             align-items: center;
                             text-align: left;
                             color: rgba(0, 0, 0, 0.781);
-                            &:nth-child(4){
+                            &:nth-child(4) {
                                 color: rgb(230, 5, 5);
                             }
-                            &:hover{
+                            &:hover {
                                 background: rgba(128, 128, 128, 0.116);
                             }
-                            i{  
+                            i {
                                 pointer-events: none;
                                 width: 24px;
                                 height: 24px;
@@ -344,9 +344,9 @@ $header-height: 56px;
                                 font-size: 19px;
                                 display: grid;
                                 align-items: center;
-                                margin-right: 20px; 
+                                margin-right: 20px;
                                 color: $secondary-text-color;
-                                &.fa-exclamation-triangle{
+                                &.fa-exclamation-triangle {
                                     color: rgb(230, 5, 5);
                                 }
                             }
@@ -386,8 +386,13 @@ $header-height: 56px;
                 .tail {
                     position: absolute;
                     bottom: 0;
-                    display: inline-block;
+                    display: none;
                     border: 10px solid transparent;
+                }
+                &.has-tail {
+                    .tail {
+                        display: inline-block;
+                    }
                 }
                 &.to-me {
                     background-color: white;
@@ -405,6 +410,10 @@ $header-height: 56px;
                         border-bottom-color: #eeffde;
                         right: -10px;
                     }
+                }
+                &.service_notification {
+                    text-align: center;
+                    margin: 4px auto 8px auto !important;
                 }
             }
         }
@@ -734,42 +743,51 @@ $header-height: 56px;
         right: 0;
         bottom: 0;
         background-color: rgba(0, 0, 0, 0.836);
-        color: rgba(255, 255, 255, 0.822);
+        color: black;
         display: flex;
         align-items: center;
         justify-content: center;
         z-index: 10;
         transform: scale(0);
         transition: 300ms;
-        &.active{
+        &.active {
             transform: scale(1);
         }
         .contact_modal_wrapper {
             width: 25%;
-            padding: 2%;
-            background-color: rgb(18, 36, 46);
+            padding: 1rem 1.5rem 0.8125rem;
+            border-radius: 10px;
+            background-color: rgb(252, 252, 252);
+            box-shadow: 0 0 5px 0 black;
             z-index: 11;
             .row_1 {
-                display: flex;
+                display: grid;
                 align-items: center;
                 margin: 5% 0;
+                grid-template-columns: auto 1fr;
                 .img_avatar {
-                    width: 54px;
-                    height: 54px;
+                    width: 55px;
+                    height: 55px;
                     border-radius: 50%;
                     overflow: hidden;
                     background: linear-gradient(#72d5fd #2a9ef1);
-                    margin-right: 5%;
+                    // gap: 5%;
                     img {
                         width: 100%;
                         height: 100%;
                         object-fit: cover;
                     }
                 }
+                p,
                 .tel_and_status {
-                    h5 {
-                        color: rgb(60, 104, 128);
+                    padding-left: 0.6875rem;
+                    font-weight: 300;
+                    span {
+                        font-weight: 400;
                     }
+                }
+                h5 {
+                    color: rgb(60, 104, 128);
                 }
             }
             .row_2 {
@@ -784,9 +802,8 @@ $header-height: 56px;
                     background-color: transparent;
                     border: none;
                     outline: none;
-                    border-bottom: 1px solid white;
-                    font-size: 1.1rem;
-                    color: white;
+                    border-bottom: 1px solid rgb(0, 0, 0);
+                    font-size: 1.15rem;
                     &:focus {
                         border-color: rgb(100, 133, 151);
                     }
@@ -799,14 +816,37 @@ $header-height: 56px;
                     outline: none;
                     border: none;
                     text-transform: uppercase;
-                    color: rgb(100, 133, 151);
+                    color: #3390ec;
+                    font-weight: 500;
+                    font-size: 100%;
+                    line-height: 1.15;
                     padding: 3%;
                     border-radius: 5px;
                     transition: 300ms;
                     cursor: pointer;
-                    &:hover {
-                        background-color: rgb(45, 60, 68);
+                    &:nth-child(2) {
+                        color: rgb(202, 0, 0);
                     }
+                    &:hover {
+                        background-color: rgba(31, 110, 153, 0.089);
+                    }
+                }
+            }
+            .also_delete_for{
+                display: grid;
+                align-items: center;
+                grid-template-columns: auto 1fr;
+                font-weight: 300;
+                margin-bottom: 1rem;
+                input{
+                    display: inline-block;
+                    margin-right: 1rem;
+                    height: 24px;
+                    width: 24px;
+                    line-height: 26px;
+                }
+                span{
+                    font-weight: 400;
                 }
             }
         }
