@@ -394,6 +394,7 @@
 #telegram #column-center .main-chat .message.service_notification {
   text-align: center;
   margin: 4px auto 8px auto !important;
+  background-color: #acd8da;
 }
 #telegram #column-center .main-footer {
   display: none;

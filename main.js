@@ -698,21 +698,33 @@ document.querySelector(".person").addEventListener("click", (e) => {
             is_searching_messages = true;
         } else if (e.target.classList.contains("more-btn")) {//if more btn is clicked
 
-            if(selected_chatlist === "")
             let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
 
             Object.keys(DATA_from_local_storage).forEach((tab) => {
                 DATA_from_local_storage[tab].forEach((individ) => {
-                    if (individ.user_name === selected_chat_username) {
+                    if (individ.user_name === "selected_chat_username") {/////////////SHETTA
+                        if (tab === "people") {
+                            document.querySelector("#control_menu_2").innerHTML = `
+                            <li class="more_btn_event_handler"><i class="fa fa-pencil" aria-hidden="true"></i> Edit contact</li>
+                            <li class="more_btn_event_handler"><i class="fa fa-trash" aria-hidden="true"></i> Delete contact</li>
+                            <li class="more_btn_event_handler"><i class="fa fa-history" aria-hidden="true"></i> Clear history</li>
+                            <li class="more_btn_event_handler"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Delete chat</li>
+                            <li class="more_btn_event_handler"><i class="fa fa-lock" aria-hidden="true"></i> Block user</li>`;
+                        } else if (tab === "groups") {
+
+                        } else if (tab === "channels") {
+                            console.log("kanali mirzacho'l");
+                        } else if (tab === "bots") {
+                            console.log("botlar");
+                        }
                         // more btn uchun menyular chat ga qarab o'zgaradi
-document.querySelector("#control_menu_2").innerHTML = ``;
-/***
-<li class="more_btn_event_handler"><i class="fa fa-pencil" aria-hidden="true"></i> Edit contact</li>
-<li class="more_btn_event_handler"><i class="fa fa-trash" aria-hidden="true"></i> Delete contact</li>
-<li class="more_btn_event_handler"><i class="fa fa-history" aria-hidden="true"></i> Clear history</li>
-<li class="more_btn_event_handler"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Delete chat</li>
-<li class="more_btn_event_handler"><i class="fa fa-lock" aria-hidden="true"></i> Block user</li>
-*/
+                        /***
+                        <li class="more_btn_event_handler"><i class="fa fa-pencil" aria-hidden="true"></i> Edit contact</li>
+                        <li class="more_btn_event_handler"><i class="fa fa-trash" aria-hidden="true"></i> Delete contact</li>
+                        <li class="more_btn_event_handler"><i class="fa fa-history" aria-hidden="true"></i> Clear history</li>
+                        <li class="more_btn_event_handler"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Delete chat</li>
+                        <li class="more_btn_event_handler"><i class="fa fa-lock" aria-hidden="true"></i> Block user</li>
+                        */
                     }
                 })
             })
@@ -734,7 +746,8 @@ document.querySelector("#control_menu_2").innerHTML = ``;
                 delete_chat_modal();
                 document.querySelector(".more-btn-content").classList.remove("active");
             } else if (e.target.firstElementChild.classList.contains("fa-lock")) {
-
+                block_user_modal();
+                document.querySelector(".more-btn-content").classList.remove("active");
             }
         }
         else {
@@ -1002,6 +1015,22 @@ function delete_chat_modal() {
         })
     })
 }
+//clear history modal button
+function block_user_modal() {
+    document.querySelector(".block_user_modal").classList.toggle("active");
+    let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
+    // render data
+    Object.keys(DATA_from_local_storage).forEach((tab) => {
+        DATA_from_local_storage[tab].forEach((individ) => {
+            if (individ.user_name === selected_chat_username) {
+                document.querySelector(".block_user_avatar").src = ` ${individ.avatar[0] ? individ.avatar[0] : 'https://picsum.photos/id/115/400/384'} `;
+                document.querySelectorAll(".block_user_name").forEach((name) => {
+                    name.innerHTML = `${individ.first_name ? individ.first_name : individ.name} ${individ.last_name && individ.last_name}`;
+                });
+            }
+        })
+    })
+}
 
 
 
@@ -1109,6 +1138,26 @@ document.querySelectorAll(".contact_modal").forEach((modal) => {
             document.querySelector(".delete_chat_modal").classList.remove("active");//closes modal
             //renders new data 
             re_render();
+        }else if (e.target.classList.contains("block_user_done")) {//when user blockedd
+            let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
+            // refresh data with new changes
+            Object.keys(DATA_from_local_storage).forEach((tab) => {
+                DATA_from_local_storage[tab].forEach((individ) => {
+                    if (individ.user_name === selected_chat_username) {
+                        individ.messages.push({
+                            id: `${individ.messages[individ.messages.length -1].id +1}`,
+                            is_from_me: false,
+                            is_service_notifications: true,
+                            text: `You blocked ${individ.user_name}. He/she no longer bothers you :)`,
+                            time: new Date().getTime()
+                        });
+                    }
+                })
+            });
+            localStorage.setItem("DATA", JSON.stringify(DATA_from_local_storage));//sets to local storage
+            document.querySelector(".block_user_modal").classList.remove("active");//closes modal
+            //renders new data 
+            re_render();
         }
     });
 })
@@ -1164,7 +1213,11 @@ function re_render() {
 
 
 
-
+// more btn will be closed on blur
+// document.querySelector(".more-btn-content").addEventListener("blur", ()=>{
+//     console.log("aklsdjSLDALSKBL");
+//     document.querySelector(".more-btn-content").classList.remove("active");
+// });
 /***garbage  ISHLAMAGAN KODLAR
 
  *     // sets event listener for chat items
