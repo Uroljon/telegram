@@ -73,7 +73,7 @@
                         <div class="search-btn"><i class="fa fa-search" aria-hidden="true"></i></div>
                         <div class="more-btn"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></div>
                         <div class="more-btn-content">
-                            <ul id="control_menu_2">
+                            <ul id="control_menu_2" tabindex="0">
                                 <li class="more_btn_event_handler"><i class="fa fa-pencil" aria-hidden="true"></i> Edit
                                     contact</li>
                                 <li class="more_btn_event_handler"><i class="fa fa-trash" aria-hidden="true"></i> Delete
@@ -229,7 +229,8 @@
                     <div class="img_avatar">
                         <img class="modal_avatar delete_chat_avatar" src="https://picsum.photos/500/384" alt="avatar">
                     </div>
-                    <p>Are you absolutely sure you want to delete the chat with <span class="delete_chat_name"></span>?</p>
+                    <p>Are you absolutely sure you want to delete the chat with <span class="delete_chat_name"></span>?
+                    </p>
                 </div>
                 <div class="also_delete_for">
                     <input type="checkbox" name="also_delete_for">
@@ -249,12 +250,80 @@
                     <div class="img_avatar">
                         <img class="modal_avatar block_user_avatar" src="https://picsum.photos/500/384" alt="avatar">
                     </div>
-                    <p>Do you want to block <span class="block_user_name"></span> from messaging and calling you on telegram?</p>
+                    <p>Do you want to block <span class="block_user_name"></span> from messaging and calling you on
+                        telegram?</p>
                 </div>
                 <div class="row_3">
                     <button class="block_user_cancel">Cancel</button>
                     <button class="block_user_done">Block</button>
                 </div>
+            </div>
+        </div>
+
+        <!-- Manage group modal -->
+        <div class="manage_group_modal contact_modal">
+            <div class="contact_modal_wrapper">
+                <h2 class="manage_group_header">Edit group</h2>
+                <div class="row_1">
+                    <div class="img_avatar">
+                        <img class="modal_avatar" src="https://picsum.photos/500/384" alt="avatar">
+                    </div>
+                    <div class="row_2">
+                        <label for="edit_group_name">group name</label>
+                        <input id="edit_group_name" placeholder="eski ism">
+                    </div>
+                </div>
+
+                <div class="row_2">
+                    <label for="edit_group_bio">Description (optional)</label>
+                    <input id="edit_group_bio" placeholder="eski fam">
+                </div>
+                <div class="row_3">
+                    <button class="manage_group_cancel">Cancel</button>
+                    <button class="manage_group_done">Save</button>
+                </div>
+            </div>
+        </div>
+        <!-- Leave group modal -->
+        <div class="leave_group_modal contact_modal">
+            <div class="contact_modal_wrapper">
+                <h2>Leave <span class="leave_group_name"></span></h2>
+                <div class="row_1">
+                    <div class="img_avatar">
+                        <img class="modal_avatar leave_group_avatar" src="https://picsum.photos/500/384" alt="avatar">
+                    </div>
+                    <p>Are you sure you want to delete and leave the group <span class="leave_group_name"></span>?</p>
+                </div>
+                <div class="row_3">
+                    <button class="leave_group_cancel">Cancel</button>
+                    <button class="leave_group_done">Delete and leave</button>
+                </div>
+
+
+            </div>
+        </div>
+        <!-- Report modal -->
+        <div class="report_modal contact_modal">
+            <div class="contact_modal_wrapper">
+                <div class="row_1">
+                    <div class="img_avatar">
+                        <img class="modal_avatar report_avatar" src="https://picsum.photos/500/384" alt="avatar">
+                    </div>
+                    <p>Report <span class="report_name"></span>?</p>
+                </div>
+                <div class="row_2">
+                    <button class="report_done" value="spam">Spam</button>
+                    <button class="report_done" value="fake">Fake Account</button>
+                    <button class="report_done" value="violance">Violence</button>
+                    <button class="report_done" value="abuse">Child abuse</button>
+                    <button class="report_done" value="pornography">Pornography</button>
+                    <button class="report_done" value="other">Other</button>
+                </div>
+                <div class="row_3">
+                    <button class="report_cancel">Cancel</button>
+                </div>
+
+
             </div>
         </div>
 
