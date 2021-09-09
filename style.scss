@@ -330,8 +330,11 @@ $header-height: 56px;
                             align-items: center;
                             text-align: left;
                             color: rgba(0, 0, 0, 0.781);
-                            &:nth-child(4) {
+                            &.red {
                                 color: rgb(230, 5, 5);
+                                i{
+                                    color: rgb(230, 5, 5);
+                                }
                             }
                             &:hover {
                                 background: rgba(128, 128, 128, 0.116);
@@ -346,9 +349,9 @@ $header-height: 56px;
                                 align-items: center;
                                 margin-right: 20px;
                                 color: $secondary-text-color;
-                                &.fa-exclamation-triangle {
-                                    color: rgb(230, 5, 5);
-                                }
+                                // &.fa-exclamation-triangle, &.fa-lock {
+                                //     color: rgb(230, 5, 5);
+                                // }
                             }
                         }
                     }
@@ -735,7 +738,12 @@ $header-height: 56px;
             }
         }
     }
-
+    #control_menu_2{
+        &:focus{
+            border: none;
+            outline: none;
+        }
+    }
     // edit contact modal
     .contact_modal {
         position: absolute;
@@ -766,6 +774,10 @@ $header-height: 56px;
                 align-items: center;
                 margin: 5% 0;
                 grid-template-columns: auto 1fr;
+                .row_2{
+                    padding-left: 0.6875rem;
+
+                }
                 .img_avatar {
                     width: 55px;
                     height: 55px;
@@ -809,6 +821,19 @@ $header-height: 56px;
                         border-color: rgb(100, 133, 151);
                     }
                 }
+                .report_done{
+                    border: none;
+                    outline: none;
+                    cursor: pointer;
+                    text-align: left;
+                    padding: 3% 0% 3% 5%;
+                    background-color: transparent;
+                    &:hover{
+                        background-color: rgb(37, 120, 131);
+                        border: 1px solid rgb(128, 230, 255);
+                        color: rgb(255, 255, 255);
+                    }
+                }
             }
             .row_3 {
                 text-align: right;
@@ -845,6 +870,7 @@ $header-height: 56px;
                     height: 24px;
                     width: 24px;
                     line-height: 26px;
+                    cursor: pointer;
                 }
                 span{
                     font-weight: 400;

@@ -318,7 +318,10 @@
   text-align: left;
   color: rgba(0, 0, 0, 0.781);
 }
-#telegram #column-center .main-header .person .more-btn-content ul li:nth-child(4) {
+#telegram #column-center .main-header .person .more-btn-content ul li.red {
+  color: #e60505;
+}
+#telegram #column-center .main-header .person .more-btn-content ul li.red i {
   color: #e60505;
 }
 #telegram #column-center .main-header .person .more-btn-content ul li:hover {
@@ -334,9 +337,6 @@
   align-items: center;
   margin-right: 20px;
   color: #707579;
-}
-#telegram #column-center .main-header .person .more-btn-content ul li i.fa-exclamation-triangle {
-  color: #e60505;
 }
 #telegram #column-center .main-chat {
   padding: 56px 0 0;
@@ -695,6 +695,10 @@
 #telegram #column-right.expanded .right-header {
   width: 25%;
 }
+#telegram #control_menu_2:focus {
+  border: none;
+  outline: none;
+}
 #telegram .contact_modal {
   position: absolute;
   top: 0;
@@ -726,6 +730,9 @@
   align-items: center;
   margin: 5% 0;
   grid-template-columns: auto 1fr;
+}
+#telegram .contact_modal .contact_modal_wrapper .row_1 .row_2 {
+  padding-left: 0.6875rem;
 }
 #telegram .contact_modal .contact_modal_wrapper .row_1 .img_avatar {
   width: 55px;
@@ -771,6 +778,19 @@
 #telegram .contact_modal .contact_modal_wrapper .row_2 input:focus {
   border-color: #648597;
 }
+#telegram .contact_modal .contact_modal_wrapper .row_2 .report_done {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  text-align: left;
+  padding: 3% 0% 3% 5%;
+  background-color: transparent;
+}
+#telegram .contact_modal .contact_modal_wrapper .row_2 .report_done:hover {
+  background-color: #257883;
+  border: 1px solid #80e6ff;
+  color: white;
+}
 #telegram .contact_modal .contact_modal_wrapper .row_3 {
   text-align: right;
 }
@@ -807,6 +827,7 @@
   height: 24px;
   width: 24px;
   line-height: 26px;
+  cursor: pointer;
 }
 #telegram .contact_modal .contact_modal_wrapper .also_delete_for span {
   font-weight: 400;

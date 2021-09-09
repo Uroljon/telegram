@@ -170,7 +170,7 @@ let DATA = {
             id: 5,
             first_name: "Elon",
             last_name: "Musk",
-            avatar: [],
+            avatar: ["https://mettisglobal.news/wp-content/uploads/2021/02/IMG5410Elon-musk.jpg", "https://c.ndtvimg.com/2021-03/30jnpfl8_elon-musk_625x300_16_March_21.jpg", "https://fintechs.fi/wp-content/uploads/2021/02/201910210416054436_Musk-gone-offline-funny-posts-online_SECVPF.jpg", "https://i2.wp.com/codigoespagueti.com/wp-content/uploads/2020/06/Elon-Musk.jpg", "https://sm.mashable.com/mashable_in/news/e/elon-musk-/elon-musk-is-taking-a-break-from-twitter-again_k7es.jpg"],
             bio: null,
             phone_number: "+!@#$%^&*:)))",
             user_name: "@Elon_Musk",
@@ -180,7 +180,12 @@ let DATA = {
             shared_photos: 0,
             shared_voice: 0,
             activity: "typing...",
-            messages: []
+            messages: [{
+                id: 1,
+                is_from_me: true,
+                text: "Qachon Marsga uchamiz-ey Ilonjon",
+                time: new Date(2021, 8, 1, 22, 11, 11).getTime()
+            }]
         },
     ],
     groups: [
@@ -190,12 +195,13 @@ let DATA = {
             avatar: [],
             bio: "Vazifalar uchun: @mernperntasksbot",
             user_name: "private_group_mern",
+            members: 7,
             shared_links: 15,
             shared_files: 16,
             shared_photos: 16,
             shared_voice: 0,
             shared_videos: 11,
-            activity: "11 members, 2 online",
+            activity: " members, 2 online",
             messages: [
                 {
                     id: 1,
@@ -225,12 +231,13 @@ let DATA = {
             Omad yordir dovyuraklarga! • Судьба благоволит храбрым! • Fates Favors the Brave!
             Murojaat uchun: @Odilbek_Mirzayev_aloqabot`,
             user_name: "@OdilbekMirzayev",
+            members: 1657,
             shared_links: 94,
             shared_files: 1,
             shared_photos: 72,
             shared_voice: 3,
             shared_videos: 9,
-            activity: "1635 subscribers",
+            activity: " subscribers",
             messages: [
                 {
                     id: 1,
@@ -305,6 +312,29 @@ let DATA = {
                     time: new Date(2021, 8, 1, 11, 11, 11).getTime()
                 },
             ]
+        },
+        {
+            first_name: "Please select any chat to start messaging",
+            last_name: "",
+            avatar: ["https://res.cloudinary.com/jerrick/image/upload/v1613548658/602ccc72b2f2e2001df1a885.png"],
+            bio: ``,
+            phone_number: "not available",
+            user_name: "@deleted_account",
+            shared_links: 0,
+            shared_files: 0,
+            shared_photos: 0,
+            shared_voice: 0,
+            shared_videos: 0,
+            activity: "Last seen a long time ago",
+            messages: [
+                {
+                    id: 1,
+                    is_from_me: false,
+                    is_service_notifications: true,
+                    text: "This account has just been deleted",
+                    time: new Date().getTime()
+                }
+            ]
         }
     ]
 }
@@ -315,6 +345,8 @@ let weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 let selected_chat_username;
 let selected_chatlist;
 let is_searching_messages = false;
+
+////////////////////////////////////////////LEFT COLUMN//////////////////////////////////////////////////////////
 
 // search function styles
 document.querySelector("#search").addEventListener("focus", () => {
@@ -515,6 +547,9 @@ function fill_left_column(location) {
         })
     }
 }
+
+////////////////////////////////////////////MIDDLE COLUMN//////////////////////////////////////////////////////////
+
 // renders DATA to middle column and adds related functionality like search and newMessage input
 function fill_middle_column(what) {
 
@@ -535,7 +570,7 @@ function fill_middle_column(what) {
                 // change name
                 document.querySelector("#name").innerHTML = `${chatItem.first_name ? chatItem.first_name : chatItem.name} ${chatItem.last_name ? chatItem.last_name : ""}`;
                 // change status
-                document.querySelector("#status").innerHTML = `${chatItem.activity}`;
+                document.querySelector("#status").innerHTML = `${chatItem.members ? chatItem.members : ''}${chatItem.activity}`;
                 // re-render new messages after cleaning older ones
                 document.querySelector(".main-chat .container").innerHTML = "";
                 chatItem.messages.forEach((message) => {
@@ -698,38 +733,41 @@ document.querySelector(".person").addEventListener("click", (e) => {
             is_searching_messages = true;
         } else if (e.target.classList.contains("more-btn")) {//if more btn is clicked
 
+            document.querySelector("#control_menu_2").focus();//set focus to menuList 
             let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
 
             Object.keys(DATA_from_local_storage).forEach((tab) => {
                 DATA_from_local_storage[tab].forEach((individ) => {
-                    if (individ.user_name === "selected_chat_username") {/////////////SHETTA
+                    if (individ.user_name === selected_chat_username) {// more btn uchun menyular chat ga qarab o'zgaradi
                         if (tab === "people") {
                             document.querySelector("#control_menu_2").innerHTML = `
                             <li class="more_btn_event_handler"><i class="fa fa-pencil" aria-hidden="true"></i> Edit contact</li>
                             <li class="more_btn_event_handler"><i class="fa fa-trash" aria-hidden="true"></i> Delete contact</li>
                             <li class="more_btn_event_handler"><i class="fa fa-history" aria-hidden="true"></i> Clear history</li>
-                            <li class="more_btn_event_handler"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Delete chat</li>
+                            <li class="more_btn_event_handler red"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Delete chat</li>
                             <li class="more_btn_event_handler"><i class="fa fa-lock" aria-hidden="true"></i> Block user</li>`;
                         } else if (tab === "groups") {
-
+                            document.querySelector("#control_menu_2").innerHTML = `
+                            <li class="more_btn_event_handler"><i class="fa fa-users" aria-hidden="true"></i> Manage group</li>
+                            <li class="more_btn_event_handler"><i class="fa fa-history" aria-hidden="true"></i> Clear history</li>
+                            <li class="more_btn_event_handler red"><i class="fa fa-sign-out" aria-hidden="true"></i> Leave group</li>
+                            <li class="more_btn_event_handler"><i class="fa fa-flag" aria-hidden="true"></i> Report</li>`;
                         } else if (tab === "channels") {
-                            console.log("kanali mirzacho'l");
+                            document.querySelector("#control_menu_2").innerHTML = `
+                            <li class="more_btn_event_handler"><i class="fa fa-users" aria-hidden="true"></i> Manage channel</li>
+                            <li class="more_btn_event_handler"><i class="fa fa-history" aria-hidden="true"></i> Clear history</li>
+                            <li class="more_btn_event_handler red"><i class="fa fa-sign-out" aria-hidden="true"></i> Leave channel</li>
+                            <li class="more_btn_event_handler"><i class="fa fa-flag" aria-hidden="true"></i> Report</li>`;
                         } else if (tab === "bots") {
-                            console.log("botlar");
+                            document.querySelector("#control_menu_2").innerHTML = `
+                            <li class="more_btn_event_handler"><i class="fa fa-history" aria-hidden="true"></i> Clear history</li>
+                            <li class="more_btn_event_handler"><i class="fa fa-lock" aria-hidden="true"></i> Block user</li>
+                            <li class="more_btn_event_handler red"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Delete chat</li>
+                            <li class="more_btn_event_handler"><i class="fa fa-flag" aria-hidden="true"></i> Report</li>`;
                         }
-                        // more btn uchun menyular chat ga qarab o'zgaradi
-                        /***
-                        <li class="more_btn_event_handler"><i class="fa fa-pencil" aria-hidden="true"></i> Edit contact</li>
-                        <li class="more_btn_event_handler"><i class="fa fa-trash" aria-hidden="true"></i> Delete contact</li>
-                        <li class="more_btn_event_handler"><i class="fa fa-history" aria-hidden="true"></i> Clear history</li>
-                        <li class="more_btn_event_handler"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Delete chat</li>
-                        <li class="more_btn_event_handler"><i class="fa fa-lock" aria-hidden="true"></i> Block user</li>
-                        */
                     }
                 })
             })
-
-
 
             document.querySelector(".more-btn-content").classList.toggle("active");
         } else if (e.target.classList.contains("more_btn_event_handler")) {//more btn contents menu xullas aji buji :)
@@ -748,6 +786,15 @@ document.querySelector(".person").addEventListener("click", (e) => {
             } else if (e.target.firstElementChild.classList.contains("fa-lock")) {
                 block_user_modal();
                 document.querySelector(".more-btn-content").classList.remove("active");
+            } else if (e.target.firstElementChild.classList.contains("fa-users")) {
+                manage_group_modal();
+                document.querySelector(".more-btn-content").classList.remove("active");
+            } else if (e.target.firstElementChild.classList.contains("fa-sign-out")) {
+                leave_group_modal();
+                document.querySelector(".more-btn-content").classList.remove("active");
+            } else if (e.target.firstElementChild.classList.contains("fa-flag")) {
+                report_modal();
+                document.querySelector(".more-btn-content").classList.remove("active");
             }
         }
         else {
@@ -763,6 +810,359 @@ document.querySelector(".person").addEventListener("click", (e) => {
         }
     }
 });
+
+// if more-btn on blur, CLOSE F***ng more-btn-content
+document.querySelector("#control_menu_2").addEventListener("blur", () => {
+    document.querySelector(".more-btn-content").classList.remove("active");
+});
+// ********MODALS*********
+function edit_contact_modal() {
+    document.querySelector(".edit_contact_modal").classList.toggle("active");
+
+    let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
+    // render data
+    Object.keys(DATA_from_local_storage).forEach((tab) => {
+        DATA_from_local_storage[tab].forEach((individ) => {
+            if (individ.user_name === selected_chat_username) {
+
+                document.querySelector(".modal_avatar").src = ` ${individ.avatar[0] ? individ.avatar[0] : 'https://picsum.photos/id/115/400/384'} `;
+                document.querySelector("#edit_tel").innerHTML = ` ${individ.phone_number} `;
+                document.querySelector("#edit_status").innerHTML = `${individ.activity} `;
+                document.querySelector("#edit_first_name").value = `${individ.first_name ? individ.first_name : individ.name} `;
+                document.querySelector("#edit_last_name").value = `${individ.last_name ? individ.last_name : ''} `;
+            }
+        })
+    })
+};
+//delete contact modal button
+function delete_contact_modal() {
+    document.querySelector(".delete_contact_modal").classList.toggle("active");
+    let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
+    // render data
+    Object.keys(DATA_from_local_storage).forEach((tab) => {
+        DATA_from_local_storage[tab].forEach((individ) => {
+            if (individ.user_name === selected_chat_username) {
+                document.querySelector(".delete_contact_avatar").src = ` ${individ.avatar[0] ? individ.avatar[0] : 'https://picsum.photos/id/115/400/384'} `;
+                document.querySelector("#delete_contact_name").innerHTML = `${individ.first_name ? individ.first_name : individ.name} ${individ.last_name && individ.last_name}`;
+            }
+        })
+    })
+}
+//clear history modal button
+function clear_history_modal() {
+    document.querySelector(".clear_history_modal").classList.toggle("active");
+    let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
+    // render data
+    Object.keys(DATA_from_local_storage).forEach((tab) => {
+        DATA_from_local_storage[tab].forEach((individ) => {
+            if (individ.user_name === selected_chat_username) {
+                document.querySelector(".clear_history_avatar").src = ` ${individ.avatar[0] ? individ.avatar[0] : 'https://picsum.photos/id/115/400/384'} `;
+                document.querySelector("#clear_history_name").innerHTML = `${individ.first_name ? individ.first_name : individ.name} ${individ.last_name && individ.last_name}`;
+            }
+        })
+    })
+}
+//delete chat modal button
+function delete_chat_modal() {
+    document.querySelector(".delete_chat_modal").classList.toggle("active");
+    let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
+    // render data
+    Object.keys(DATA_from_local_storage).forEach((tab) => {
+        DATA_from_local_storage[tab].forEach((individ) => {
+            if (individ.user_name === selected_chat_username) {
+                document.querySelector(".delete_chat_avatar").src = ` ${individ.avatar[0] ? individ.avatar[0] : 'https://picsum.photos/id/115/400/384'} `;
+                document.querySelectorAll(".delete_chat_name").forEach((name) => {
+                    name.innerHTML = `${individ.first_name ? individ.first_name : individ.name} ${individ.last_name ? individ.last_name : ''}`;
+                });
+            }
+        })
+    })
+}
+//block user modal button
+function block_user_modal() {
+    document.querySelector(".block_user_modal").classList.toggle("active");
+    let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
+    // render data
+    Object.keys(DATA_from_local_storage).forEach((tab) => {
+        DATA_from_local_storage[tab].forEach((individ) => {
+            if (individ.user_name === selected_chat_username) {
+                document.querySelector(".block_user_avatar").src = ` ${individ.avatar[0] ? individ.avatar[0] : 'https://picsum.photos/id/115/400/384'} `;
+                document.querySelectorAll(".block_user_name").forEach((name) => {
+                    name.innerHTML = `${individ.first_name ? individ.first_name : individ.name} ${individ.last_name && individ.last_name}`;
+                });
+            }
+        })
+    })
+}
+// manage group
+function manage_group_modal() {
+    document.querySelector(".manage_group_modal").classList.toggle("active");
+
+    let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
+    // render data
+    Object.keys(DATA_from_local_storage).forEach((tab) => {
+       
+        DATA_from_local_storage[tab].forEach((individ) => {
+            if (individ.user_name === selected_chat_username) {
+
+                document.querySelector(".manage_group_header").innerHTML = (tab==="groups") ? "Edit group" : "Edit channel";
+                document.querySelector(".modal_avatar").forEach((img)=>{
+                    img.src = ` ${individ.avatar[0] ? individ.avatar[0] : 'https://picsum.photos/id/115/400/384'} `;
+                });
+                document.querySelector("#edit_group_name").value = `${individ.name ? individ.name : ''} `;
+                document.querySelector("#edit_group_bio").value = `${individ.bio ? individ.bio : ''} `;
+            }
+        })
+    })
+};
+// leave group
+function leave_group_modal() {
+    document.querySelector(".leave_group_modal").classList.toggle("active");
+    let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
+    // render data
+    Object.keys(DATA_from_local_storage).forEach((tab) => {
+        DATA_from_local_storage[tab].forEach((individ) => {
+            if (individ.user_name === selected_chat_username) {
+                document.querySelector(".leave_group_avatar").src = ` ${individ.avatar[0] ? individ.avatar[0] : 'https://picsum.photos/id/115/400/384'} `;
+                document.querySelectorAll(".leave_group_name").forEach((name) => {
+                    name.innerHTML = `${individ.first_name ? individ.first_name : individ.name} ${individ.last_name ? individ.last_name : ''}`;
+                });
+            }
+        })
+    })
+};
+// report
+function report_modal() {
+    document.querySelector(".report_modal").classList.toggle("active");
+    let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
+    // render data
+    Object.keys(DATA_from_local_storage).forEach((tab) => {
+        DATA_from_local_storage[tab].forEach((individ) => {
+            if (individ.user_name === selected_chat_username) {
+                document.querySelector(".report_avatar").src = ` ${individ.avatar[0] ? individ.avatar[0] : 'https://picsum.photos/id/115/400/384'} `;
+                document.querySelector(".report_name").innerHTML = `${individ.first_name ? individ.first_name : individ.name} ${individ.last_name ? individ.last_name : ''}`;
+            }
+        })
+    })
+};
+
+document.querySelectorAll(".contact_modal").forEach((modal) => {
+    modal.addEventListener("click", (e) => {
+        //close modal on click to outer area
+        if (e.target.classList.contains("contact_modal") | e.target.classList.contains("edit_contact_cancel") | e.target.classList.contains("delete_contact_cancel") | e.target.classList.contains("clear_history_cancel") | e.target.classList.contains("delete_chat_cancel") | e.target.classList.contains("manage_group_cancel") | e.target.classList.contains("leave_group_cancel") | e.target.classList.contains("leave_group_cancel") | e.target.classList.contains("report_cancel")) {
+            document.querySelectorAll(".contact_modal").forEach((modal_to_close) => {
+                modal_to_close.classList.remove("active");
+            })
+
+        } else if (e.target.classList.contains("edit_contact_done")) {//when edit is done
+
+            let firstName = document.querySelector("#edit_first_name").value;
+            let lastName = document.querySelector("#edit_last_name").value;
+
+            let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
+            // refresh data with new changes
+            Object.keys(DATA_from_local_storage).forEach((tab) => {
+                DATA_from_local_storage[tab].forEach((individ) => {
+                    if (individ.user_name === selected_chat_username) {
+                        if (individ.name) {
+                            individ.name = `${firstName ? firstName : ''} ${lastName ? lastName : ''}`;
+                        } else {
+                            individ.first_name = firstName;
+                            individ.last_name = lastName;
+                        }
+                    }
+                })
+            });
+            localStorage.setItem("DATA", JSON.stringify(DATA_from_local_storage));//sets to local storage
+            document.querySelector(".edit_contact_modal").classList.toggle("active");//closes modal
+            //renders new data 
+            re_render();
+        } else if (e.target.classList.contains("delete_contact_done")) {//when delete contact is done
+            let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
+            // refresh data with new changes
+            Object.keys(DATA_from_local_storage).forEach((tab) => {
+                DATA_from_local_storage[tab].forEach((individ) => {
+                    if (individ.user_name === selected_chat_username) {
+                        if (individ.name) {
+                            individ.name = `Unknown Organisation`;
+                        } else {
+                            individ.first_name = "Unknown";
+                            individ.last_name = "User";
+                        }
+                    }
+                })
+            });
+            localStorage.setItem("DATA", JSON.stringify(DATA_from_local_storage));//sets to local storage
+            document.querySelector(".delete_contact_modal").classList.remove("active");//closes modal
+            //renders new data 
+            re_render();
+        } else if (e.target.classList.contains("clear_history_done")) {//when history is cleared
+            let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
+            // refresh data with new changes
+            Object.keys(DATA_from_local_storage).forEach((tab) => {
+                DATA_from_local_storage[tab].forEach((individ) => {
+                    if (individ.user_name === selected_chat_username) {
+                        individ.shared_files = individ.shared_files && 0;
+                        individ.shared_links = individ.shared_links && 0;
+                        individ.shared_photos = individ.shared_photos && 0;
+                        individ.shared_voice = individ.shared_voice && 0;
+                        individ.shared_videos = individ.shared_videos && 0;
+                        individ.messages = [{
+                            id: 1,
+                            is_from_me: false,
+                            is_service_notifications: true,
+                            text: "History was cleared :(",
+                            time: new Date().getTime()
+                        }];
+                    }
+                })
+            });
+            localStorage.setItem("DATA", JSON.stringify(DATA_from_local_storage));//sets to local storage
+            document.querySelector(".clear_history_modal").classList.remove("active");//closes modal
+            //renders new data 
+            re_render();
+        } else if (e.target.classList.contains("delete_chat_done")) {//when chat is deleted
+            let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
+            // refresh data with new changes
+            Object.keys(DATA_from_local_storage).forEach((tab) => {
+                DATA_from_local_storage[tab].forEach((individ) => {
+                    if (individ.user_name === selected_chat_username) {
+                        individ.shared_files = individ.shared_files && 0;
+                        individ.shared_links = individ.shared_links && 0;
+                        individ.shared_photos = individ.shared_photos && 0;
+                        individ.shared_voice = individ.shared_voice && 0;
+                        individ.shared_videos = individ.shared_videos && 0;
+                        individ.messages = [];
+                    }
+                })
+            });
+            localStorage.setItem("DATA", JSON.stringify(DATA_from_local_storage));//sets to local storage
+            document.querySelector(".delete_chat_modal").classList.remove("active");//closes modal
+            //renders new data 
+
+            // TO LEFT COLUMN
+            selected_chatlist = document.querySelector(".navbar li.active").getAttribute("data-target");
+            fill_left_column(selected_chatlist);
+            // TO MIDDLE COLUMN
+            document.querySelector(".main-chat .container").innerHTML = `
+            <div style="display: flex; ">
+                    <div id="1" class="message to-me service_notification ">
+                        You deleted this chat
+                        <div class="message_time">${new Date().getHours()}:${new Date().getMinutes()} </div>
+                        <div class="tail"></div>
+                    </div>
+            </div>
+            `;
+            document.querySelector("#avatar").src = `${DATA_from_local_storage.me[1].avatar}`;
+            document.querySelector("#name").innerHTML = "Select a chat to start messaging";
+            document.querySelector("#status").innerHTML = "";
+
+            // TO RIGHT COLUMN
+            document.querySelector("#telegram").style.gridTemplateColumns = "27.5% 1fr 0%";
+            document.querySelector("#column-center").classList.remove("shrinked");
+            document.querySelector("#column-right").classList.remove("expanded");
+
+        } else if (e.target.classList.contains("block_user_done")) {//when user blockedd
+            let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
+            // refresh data with new changes
+            Object.keys(DATA_from_local_storage).forEach((tab) => {
+                DATA_from_local_storage[tab].forEach((individ) => {
+                    if (individ.user_name === selected_chat_username) {
+                        individ.messages.push({
+                            id: `${individ.messages[individ.messages.length - 1].id + 1}`,
+                            is_from_me: false,
+                            is_service_notifications: true,
+                            text: `You blocked ${individ.user_name}. He/she no longer bothers you :)`,
+                            time: new Date().getTime()
+                        });
+                    }
+                })
+            });
+            localStorage.setItem("DATA", JSON.stringify(DATA_from_local_storage));//sets to local storage
+            document.querySelector(".block_user_modal").classList.remove("active");//closes modal
+            //renders new data 
+            re_render();
+        } else if (e.target.classList.contains("manage_group_done")) {//when group is edited
+
+            let name = document.querySelector("#edit_group_name").value;
+            let bio = document.querySelector("#edit_group_bio").value;
+
+            let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
+            // refresh data with new changes
+            Object.keys(DATA_from_local_storage).forEach((tab) => {
+                DATA_from_local_storage[tab].forEach((individ) => {
+                    if (individ.user_name === selected_chat_username) {
+                        individ.name = `${name ? name : ''}`;
+                        individ.bio = `${bio ? bio : ''}`;
+                    }
+                })
+            });
+            localStorage.setItem("DATA", JSON.stringify(DATA_from_local_storage));//sets to local storage
+            document.querySelector(".manage_group_modal").classList.remove("active");//closes modal
+            //renders new data 
+            re_render();
+        } else if (e.target.classList.contains("leave_group_done")) {//when you leave group
+
+            let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
+            // remove group from DATA
+            Object.keys(DATA_from_local_storage).forEach((tab) => {
+                DATA_from_local_storage[tab].forEach((individ, index) => {
+                    if (individ.user_name === selected_chat_username) {
+                        DATA_from_local_storage[tab].splice(index, 1);
+                    }
+                })
+            });
+            localStorage.setItem("DATA", JSON.stringify(DATA_from_local_storage));//sets to local storage
+            document.querySelector(".leave_group_modal").classList.remove("active");//closes modal
+            //renders new data 
+
+            // TO LEFT COLUMN
+            fill_left_column(document.querySelector(".navbar li.active").getAttribute("data-target"));
+            // TO MIDDLE COLUMN
+            document.querySelector(".main-chat .container").innerHTML = `
+            <div style="display: flex; ">
+                    <div id="1" class="message to-me service_notification ">
+                        You left this group
+                        <div class="message_time">${new Date().getHours()}:${new Date().getMinutes()} </div>
+                        <div class="tail"></div>
+                    </div>
+            </div>
+            `;
+            document.querySelector("#avatar").src = `${DATA_from_local_storage.me[1].avatar}`;
+            document.querySelector("#name").innerHTML = "Select a chat to start messaging";
+            document.querySelector("#status").innerHTML = "";
+
+            // TO RIGHT COLUMN
+            document.querySelector("#telegram").style.gridTemplateColumns = "27.5% 1fr 0%";
+            document.querySelector("#column-center").classList.remove("shrinked");
+            document.querySelector("#column-right").classList.remove("expanded");
+        } else if (e.target.classList.contains("report_done")) {//when you leave group
+
+            let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
+            // remove group from DATA
+            Object.keys(DATA_from_local_storage).forEach((tab) => {
+                DATA_from_local_storage[tab].forEach((individ) => {
+                    if (individ.user_name === selected_chat_username) {
+                        individ.report = [e.target.value];
+                        individ.messages.push({
+                            id: `${individ.messages[individ.messages.length - 1].id + 1}`,
+                            is_from_me: false,
+                            is_service_notifications: true,
+                            text: `Successfully reported !`,
+                            time: new Date().getTime()
+                        });
+                    }
+                })
+            });
+            localStorage.setItem("DATA", JSON.stringify(DATA_from_local_storage));//sets to local storage
+            document.querySelector(".report_modal").classList.remove("active");//closes modal
+            //renders new data 
+            re_render();
+        }
+    });
+})
+
+////////////////////////////////////////////RIGHT COLUMN//////////////////////////////////////////////////////////
 
 // renders DATA to right column
 function fill_right_column() {
@@ -804,7 +1204,7 @@ function fill_right_column() {
 
                 }
                 // render name and status
-                document.querySelector(".carousel-items-info .profile-name").innerHTML = `${individ.first_name ? individ.first_name : individ.name} ${individ.last_name && individ.last_name}`;
+                document.querySelector(".carousel-items-info .profile-name").innerHTML = `${individ.first_name ? individ.first_name : individ.name} ${individ.last_name ? individ.last_name : ''}`;
                 document.querySelector(".carousel-items-info .profile-subtitle").innerHTML = `${individ.activity}`;
 
                 // balo battar ma'lumomtlar bori namoyon bo'lur :)
@@ -953,215 +1353,6 @@ document.querySelector(".close-btn").addEventListener("click", (e) => {
 
 // edit contact button (modal)
 document.querySelector(".edit-btn").addEventListener("click", edit_contact_modal);
-function edit_contact_modal() {
-    document.querySelector(".edit_contact_modal").classList.toggle("active");
-
-    let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
-    // render data
-    Object.keys(DATA_from_local_storage).forEach((tab) => {
-        DATA_from_local_storage[tab].forEach((individ) => {
-            if (individ.user_name === selected_chat_username) {
-
-                document.querySelector(".modal_avatar").src = ` ${individ.avatar[0] ? individ.avatar[0] : 'https://picsum.photos/id/115/400/384'} `;
-                document.querySelector("#edit_tel").innerHTML = ` ${individ.phone_number} `;
-                document.querySelector("#edit_status").innerHTML = `${individ.activity} `;
-                document.querySelector("#edit_first_name").value = `${individ.first_name ? individ.first_name : individ.name} `;
-                document.querySelector("#edit_last_name").value = `${individ.last_name ? individ.last_name : ''} `;
-            }
-        })
-    })
-};
-//delete contact modal button
-function delete_contact_modal() {
-    document.querySelector(".delete_contact_modal").classList.toggle("active");
-    let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
-    // render data
-    Object.keys(DATA_from_local_storage).forEach((tab) => {
-        DATA_from_local_storage[tab].forEach((individ) => {
-            if (individ.user_name === selected_chat_username) {
-                document.querySelector(".delete_contact_avatar").src = ` ${individ.avatar[0] ? individ.avatar[0] : 'https://picsum.photos/id/115/400/384'} `;
-                document.querySelector("#delete_contact_name").innerHTML = `${individ.first_name ? individ.first_name : individ.name} ${individ.last_name && individ.last_name}`;
-            }
-        })
-    })
-}
-//clear history modal button
-function clear_history_modal() {
-    document.querySelector(".clear_history_modal").classList.toggle("active");
-    let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
-    // render data
-    Object.keys(DATA_from_local_storage).forEach((tab) => {
-        DATA_from_local_storage[tab].forEach((individ) => {
-            if (individ.user_name === selected_chat_username) {
-                document.querySelector(".clear_history_avatar").src = ` ${individ.avatar[0] ? individ.avatar[0] : 'https://picsum.photos/id/115/400/384'} `;
-                document.querySelector("#clear_history_name").innerHTML = `${individ.first_name ? individ.first_name : individ.name} ${individ.last_name && individ.last_name}`;
-            }
-        })
-    })
-}
-//clear history modal button
-function delete_chat_modal() {
-    document.querySelector(".delete_chat_modal").classList.toggle("active");
-    let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
-    // render data
-    Object.keys(DATA_from_local_storage).forEach((tab) => {
-        DATA_from_local_storage[tab].forEach((individ) => {
-            if (individ.user_name === selected_chat_username) {
-                document.querySelector(".delete_chat_avatar").src = ` ${individ.avatar[0] ? individ.avatar[0] : 'https://picsum.photos/id/115/400/384'} `;
-                document.querySelectorAll(".delete_chat_name").forEach((name) => {
-                    name.innerHTML = `${individ.first_name ? individ.first_name : individ.name} ${individ.last_name && individ.last_name}`;
-                });
-            }
-        })
-    })
-}
-//clear history modal button
-function block_user_modal() {
-    document.querySelector(".block_user_modal").classList.toggle("active");
-    let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
-    // render data
-    Object.keys(DATA_from_local_storage).forEach((tab) => {
-        DATA_from_local_storage[tab].forEach((individ) => {
-            if (individ.user_name === selected_chat_username) {
-                document.querySelector(".block_user_avatar").src = ` ${individ.avatar[0] ? individ.avatar[0] : 'https://picsum.photos/id/115/400/384'} `;
-                document.querySelectorAll(".block_user_name").forEach((name) => {
-                    name.innerHTML = `${individ.first_name ? individ.first_name : individ.name} ${individ.last_name && individ.last_name}`;
-                });
-            }
-        })
-    })
-}
-
-
-
-
-
-
-
-
-
-
-
-
-document.querySelectorAll(".contact_modal").forEach((modal) => {
-    modal.addEventListener("click", (e) => {
-
-        //close modal on click to outer area
-        if (e.target.classList.contains("contact_modal") | e.target.classList.contains("edit_contact_cancel") | e.target.classList.contains("delete_contact_cancel") | e.target.classList.contains("clear_history_cancel") | e.target.classList.contains("delete_chat_cancel")) {
-            document.querySelectorAll(".contact_modal").forEach((modal_to_close) => {
-                modal_to_close.classList.remove("active");
-            })
-
-        } else if (e.target.classList.contains("edit_contact_done")) {//when edit is done
-
-            let firstName = document.querySelector("#edit_first_name").value;
-            let lastName = document.querySelector("#edit_last_name").value;
-
-            let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
-            // refresh data with new changes
-            Object.keys(DATA_from_local_storage).forEach((tab) => {
-                DATA_from_local_storage[tab].forEach((individ) => {
-                    if (individ.user_name === selected_chat_username) {
-                        if (individ.name) {
-                            individ.name = `${firstName ? firstName : ''} ${lastName ? lastName : ''}`;
-                        } else {
-                            individ.first_name = firstName;
-                            individ.last_name = lastName;
-                        }
-                    }
-                })
-            });
-            localStorage.setItem("DATA", JSON.stringify(DATA_from_local_storage));//sets to local storage
-            document.querySelector(".edit_contact_modal").classList.toggle("active");//closes modal
-            //renders new data 
-            re_render();
-        } else if (e.target.classList.contains("delete_contact_done")) {//when delete contact is done
-            let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
-            // refresh data with new changes
-            Object.keys(DATA_from_local_storage).forEach((tab) => {
-                DATA_from_local_storage[tab].forEach((individ) => {
-                    if (individ.user_name === selected_chat_username) {
-                        if (individ.name) {
-                            individ.name = `Unknown Organisation`;
-                        } else {
-                            individ.first_name = "Unknown";
-                            individ.last_name = "User";
-                        }
-                    }
-                })
-            });
-            localStorage.setItem("DATA", JSON.stringify(DATA_from_local_storage));//sets to local storage
-            document.querySelector(".delete_contact_modal").classList.remove("active");//closes modal
-            //renders new data 
-            re_render();
-        } else if (e.target.classList.contains("clear_history_done")) {//when history is cleared
-            let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
-            // refresh data with new changes
-            Object.keys(DATA_from_local_storage).forEach((tab) => {
-                DATA_from_local_storage[tab].forEach((individ) => {
-                    if (individ.user_name === selected_chat_username) {
-                        individ.shared_files = individ.shared_files && 0;
-                        individ.shared_links = individ.shared_links && 0;
-                        individ.shared_photos = individ.shared_photos && 0;
-                        individ.shared_voice = individ.shared_voice && 0;
-                        individ.shared_videos = individ.shared_videos && 0;
-                        individ.messages = [{
-                            id: 1,
-                            is_from_me: false,
-                            is_service_notifications: true,
-                            text: "History was cleared :(",
-                            time: new Date().getTime()
-                        }];
-                    }
-                })
-            });
-            localStorage.setItem("DATA", JSON.stringify(DATA_from_local_storage));//sets to local storage
-            document.querySelector(".clear_history_modal").classList.remove("active");//closes modal
-            //renders new data 
-            re_render();
-        } else if (e.target.classList.contains("delete_chat_done")) {//when chat is deleted
-            let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
-            // refresh data with new changes
-            Object.keys(DATA_from_local_storage).forEach((tab) => {
-                DATA_from_local_storage[tab].forEach((individ) => {
-                    if (individ.user_name === selected_chat_username) {
-                        individ.shared_files = individ.shared_files && 0;
-                        individ.shared_links = individ.shared_links && 0;
-                        individ.shared_photos = individ.shared_photos && 0;
-                        individ.shared_voice = individ.shared_voice && 0;
-                        individ.shared_videos = individ.shared_videos && 0;
-                        individ.messages = [];
-                    }
-                })
-            });
-            localStorage.setItem("DATA", JSON.stringify(DATA_from_local_storage));//sets to local storage
-            document.querySelector(".delete_chat_modal").classList.remove("active");//closes modal
-            //renders new data 
-            re_render();
-        }else if (e.target.classList.contains("block_user_done")) {//when user blockedd
-            let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
-            // refresh data with new changes
-            Object.keys(DATA_from_local_storage).forEach((tab) => {
-                DATA_from_local_storage[tab].forEach((individ) => {
-                    if (individ.user_name === selected_chat_username) {
-                        individ.messages.push({
-                            id: `${individ.messages[individ.messages.length -1].id +1}`,
-                            is_from_me: false,
-                            is_service_notifications: true,
-                            text: `You blocked ${individ.user_name}. He/she no longer bothers you :)`,
-                            time: new Date().getTime()
-                        });
-                    }
-                })
-            });
-            localStorage.setItem("DATA", JSON.stringify(DATA_from_local_storage));//sets to local storage
-            document.querySelector(".block_user_modal").classList.remove("active");//closes modal
-            //renders new data 
-            re_render();
-        }
-    });
-})
-
 
 //renders new data 
 function re_render() {
