@@ -901,12 +901,12 @@ function manage_group_modal() {
     let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
     // render data
     Object.keys(DATA_from_local_storage).forEach((tab) => {
-       
+
         DATA_from_local_storage[tab].forEach((individ) => {
             if (individ.user_name === selected_chat_username) {
 
-                document.querySelector(".manage_group_header").innerHTML = (tab==="groups") ? "Edit group" : "Edit channel";
-                document.querySelector(".modal_avatar").forEach((img)=>{
+                document.querySelector(".manage_group_header").innerHTML = (tab === "groups") ? "Edit group" : (tab==="channels" ? "Edit channel" : "Edit bot");
+                document.querySelectorAll(".modal_avatar").forEach((img) => {
                     img.src = ` ${individ.avatar[0] ? individ.avatar[0] : 'https://picsum.photos/id/115/400/384'} `;
                 });
                 document.querySelector("#edit_group_name").value = `${individ.name ? individ.name : ''} `;
@@ -949,7 +949,7 @@ function report_modal() {
 document.querySelectorAll(".contact_modal").forEach((modal) => {
     modal.addEventListener("click", (e) => {
         //close modal on click to outer area
-        if (e.target.classList.contains("contact_modal") | e.target.classList.contains("edit_contact_cancel") | e.target.classList.contains("delete_contact_cancel") | e.target.classList.contains("clear_history_cancel") | e.target.classList.contains("delete_chat_cancel") | e.target.classList.contains("manage_group_cancel") | e.target.classList.contains("leave_group_cancel") | e.target.classList.contains("leave_group_cancel") | e.target.classList.contains("report_cancel")) {
+        if (e.target.classList.contains("contact_modal") | e.target.classList.contains("edit_contact_cancel") | e.target.classList.contains("delete_contact_cancel") | e.target.classList.contains("clear_history_cancel") | e.target.classList.contains("delete_chat_cancel") | e.target.classList.contains("manage_group_cancel") | e.target.classList.contains("block_user_cancel") | e.target.classList.contains("leave_group_cancel") | e.target.classList.contains("report_cancel")) {
             document.querySelectorAll(".contact_modal").forEach((modal_to_close) => {
                 modal_to_close.classList.remove("active");
             })
@@ -1176,6 +1176,12 @@ function fill_right_column() {
     Object.keys(DATA_from_local_storage).forEach((tab) => {
         DATA_from_local_storage[tab].forEach((individ) => {
             if (individ.user_name === selected_chat_username) {
+                // header edit btn
+                if (tab === "people") {
+                    document.querySelector(".edit-btn").addEventListener("click", edit_contact_modal);
+                } else {
+                    document.querySelector(".edit-btn").addEventListener("click", manage_group_modal);
+                }
 
                 // carousel image rendering
                 if (individ.avatar.length === 0) {//if there's no image
@@ -1350,9 +1356,6 @@ document.querySelector(".close-btn").addEventListener("click", (e) => {
     document.querySelector("#column-center").classList.toggle("shrinked");
     document.querySelector("#column-right").classList.toggle("expanded");
 });
-
-// edit contact button (modal)
-document.querySelector(".edit-btn").addEventListener("click", edit_contact_modal);
 
 //renders new data 
 function re_render() {
