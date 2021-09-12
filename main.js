@@ -373,7 +373,323 @@ EMOJI_PACK = [
     ]
 ];
 
-
+KEYBOARD_PACK = {
+    first_line: [
+        {
+            key: '`',
+            shift: '~',
+            cyrill: 'ё',
+            cyrill_shift: 'Ё'
+        },
+        {
+            key: '1',
+            shift: '!',
+            cyrill: '1',
+            cyrill_shift: '!'
+        },
+        {
+            key: '2',
+            shift: '@',
+            cyrill: '2',
+            cyrill_shift: '"'
+        },
+        {
+            key: '3',
+            shift: '#',
+            cyrill: '3',
+            cyrill_shift: '№'
+        },
+        {
+            key: '4',
+            shift: '$',
+            cyrill: '4',
+            cyrill_shift: ';'
+        },
+        {
+            key: '5',
+            shift: '%',
+            cyrill: '5',
+            cyrill_shift: '%'
+        },
+        {
+            key: '6',
+            shift: '^',
+            cyrill: '6',
+            cyrill_shift: ':'
+        },
+        {
+            key: '7',
+            shift: '&',
+            cyrill: '7',
+            cyrill_shift: '?'
+        },
+        {
+            key: '8',
+            shift: '*',
+            cyrill: '8',
+            cyrill_shift: '*'
+        },
+        {
+            key: '9',
+            shift: '(',
+            cyrill: '9',
+            cyrill_shift: '('
+        },
+        {
+            key: '0',
+            shift: ')',
+            cyrill: '0',
+            cyrill_shift: ')'
+        },
+        {
+            key: '-',
+            shift: '_',
+            cyrill: '-',
+            cyrill_shift: '_'
+        },
+        {
+            key: '=',
+            shift: '+',
+            cyrill: '=',
+            cyrill_shift: '+'
+        },
+        {
+            key: "Back",
+            shift: false
+        },
+    ],
+    second_line: [
+        {
+            key: "Tab",
+            shift: false
+        },
+        {
+            key: 'q',
+            shift: 'Q',
+            cyrill: 'й',
+            cyrill_shift: 'Й'
+        },
+        {
+            key: 'w',
+            shift: 'W',
+            cyrill: 'ц',
+            cyrill_shift: 'Ц'
+            
+        },
+        {
+            key: 'e',
+            shift: 'E',
+            cyrill: 'у',
+            cyrill_shift: 'У'
+        },
+        {
+            key: 'r',
+            shift: 'R',
+            cyrill: 'к',
+            cyrill_shift: 'К'
+        },
+        {
+            key: 't',
+            shift: 'T',
+            cyrill: 'е',
+            cyrill_shift: 'Е'
+        },
+        {
+            key: 'y',
+            shift: 'Y',
+            cyrill: 'н',
+            cyrill_shift: 'Н'
+        },
+        {
+            key: 'u',
+            shift: 'U',
+            cyrill: 'г',
+            cyrill_shift: 'Г'
+        },
+        {
+            key: 'i',
+            shift: 'I',
+            cyrill: 'ш',
+            cyrill_shift: 'Ш'
+        },
+        {
+            key: 'o',
+            shift: 'O',
+            cyrill: 'щ',
+            cyrill_shift: 'Щ'
+        },
+        {
+            key: 'p',
+            shift: 'P',
+            cyrill: 'з',
+            cyrill_shift: 'З'
+        },
+        {
+            key: '[',
+            shift: '{',
+            cyrill: 'х',
+            cyrill_shift: 'Х'
+        },
+        {
+            key: ']',
+            shift: '}',
+            cyrill: 'ъ',
+            cyrill_shift: 'Ъ'
+        },
+        {
+            key: '\\',
+            shift: '|',
+            cyrill: '\\',
+            cyrill_shift: '/'
+        },
+    ],
+    third_line: [
+        {
+            key: "Caps",
+            shift: false
+        },
+        {
+            key: 'a',
+            shift: 'A',
+            cyrill: 'ф',
+            cyrill_shift: 'Ф'
+        },
+        {
+            key: 's',
+            shift: 'S',
+            cyrill: 'ы',
+            cyrill_shift: 'Ы'
+        },
+        {
+            key: 'd',
+            shift: 'D',
+            cyrill: 'в',
+            cyrill_shift: 'В'
+        },
+        {
+            key: 'f',
+            shift: 'F',
+            cyrill: 'а',
+            cyrill_shift: 'А'
+        },
+        {
+            key: 'g',
+            shift: 'G',
+            cyrill: 'п',
+            cyrill_shift: 'П'
+        },
+        {
+            key: 'h',
+            shift: 'H',
+            cyrill: 'р',
+            cyrill_shift: 'Р'
+        },
+        {
+            key: 'j',
+            shift: 'J',
+            cyrill: 'о',
+            cyrill_shift: 'О'
+        },
+        {
+            key: 'k',
+            shift: 'K',
+            cyrill: 'л',
+            cyrill_shift: 'Л'
+        },
+        {
+            key: 'l',
+            shift: 'L',
+            cyrill: 'д',
+            cyrill_shift: 'Д'
+        },
+        {
+            key: ';',
+            shift: ':',
+            cyrill: 'ж',
+            cyrill_shift: 'Ж'
+        },
+        {
+            key: '\'',
+            shift: '"',
+            cyrill: 'э',
+            cyrill_shift: 'Э'
+        },
+        {
+            key: "Enter",
+            shift: false
+        }
+    ],
+    fourth_line: [
+        {
+            key: "Shift",
+            shift: false
+        },
+        {
+            key: 'z',
+            shift: 'Z',
+            cyrill: 'я',
+            cyrill_shift: 'Я'
+        },
+        {
+            key: 'x',
+            shift: 'X',
+            cyrill: 'ч',
+            cyrill_shift: 'Ч'
+        },
+        {
+            key: 'c',
+            shift: 'C',
+            cyrill: 'с',
+            cyrill_shift: 'С'
+        },
+        {
+            key: 'v',
+            shift: 'V',
+            cyrill: 'м',
+            cyrill_shift: 'М'
+        },
+        {
+            key: 'b',
+            shift: 'B',
+            cyrill: 'и',
+            cyrill_shift: 'И'
+        },
+        {
+            key: 'n',
+            shift: 'N',
+            cyrill: 'т',
+            cyrill_shift: 'Т'
+        },
+        {
+            key: 'm',
+            shift: 'M',
+            cyrill: 'ь',
+            cyrill_shift: 'Ь'
+        },
+        {
+            key: ',',
+            shift: '<',
+            cyrill: 'б',
+            cyrill_shift: 'Б'
+        },
+        {
+            key: '.',
+            shift: '>',
+            cyrill: 'ю',
+            cyrill_shift: 'Ю'
+        },
+        {
+            key: '/',
+            shift: '?',
+            cyrill: '.',
+            cyrill_shift: ','
+        },
+        {
+            key: "Shift",
+            shift: false
+        },
+    ]
+}
 ////////////////////////////////////////////LEFT COLUMN//////////////////////////////////////////////////////////
 
 // search function styles
@@ -638,137 +954,91 @@ function fill_middle_column(what) {
 }
 
 // when input new message, button alsa changes
-document.querySelector(".new-message-text input").addEventListener("keyup", (e) => {
+let multi_key_logger = {};//keeps track of 2 keypress
+document.querySelector(".new-message-text #input").addEventListener("keydown", (e) => {
+    multi_key_logger[e.keyCode] = true;//when key is pressed, return true
+})
+document.querySelector(".new-message-text #input").addEventListener("keyup", (e) => {
+    if (multi_key_logger[13] && !multi_key_logger[16]) {//if ENTER is pressed not in ccombination with SHIFT, send message
+        if (e.target.value && e.target.value.trim()) { //if input isn't empty
+            set_new_message();// NEW MESSAGE CODES HERE
+        } else {
+            document.querySelector(".new-message-text #input").value = '';
+        }
+    }
+    multi_key_logger[e.keyCode] = false;//when key is released, return false
 
     if (e.target.value && e.target.value.trim()) { //if input isn't empty
         document.querySelector(".new-message-voice i").classList.remove("fa-microphone");
         document.querySelector(".new-message-voice i").classList.add("fa-paper-plane");
-        if (e.keyCode === 13) {//if enter is pressed, send message
-
-            // NEW MESSAGE CODES HERE
-            let new_message = document.querySelector(".new-message-text input").value;
-            let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
-            Object.keys(DATA_from_local_storage).forEach((tab) => {
-                DATA_from_local_storage[tab].forEach((individ) => {
-                    if (individ.user_name === selected_chat_username) {
-
-                        // writes new message to local var
-                        individ.messages.push({
-                            id: individ.messages[individ.messages.length - 1].id + 1,
-                            is_from_me: true,
-                            text: new_message,
-                            time: new Date().getTime()
-                        });
-                        // sets new message to localStorage
-                        localStorage.setItem("DATA", JSON.stringify(DATA_from_local_storage))
-
-                        // re-render middle column with new messages
-                        let last_message = individ.messages[individ.messages.length - 1];//clean code uchun ohirgi message ni qisqa nomlash
-
-                        document.querySelector(".main-chat .container").innerHTML += `
-                        <div style="display: flex; ${last_message.is_from_me ? 'justify-content: flex-end;' : ''}">
-                        <div id="${last_message.id}" class="message ${last_message.is_from_me ? "from-me" : "to-me"} has-tail">
-                            ${last_message.text}
-                            <div class="message_time">${new Date(last_message.time).getHours()}:${new Date(last_message.time).getMinutes()} ${last_message.is_from_me ? '<i class="fa fa-check" aria-hidden="true"></i>' : ''}</div>
-                            <div class="tail"></div>
-                        </div>
-                        </div>
-                        `;
-                        // input ni tozalab qoyadi
-                        document.querySelector(".new-message-text input").value = "";
-
-                        // go to last or selected message
-                        location.href = `#${last_message.id}`;
-
-                        // send btn ham ishlamaydi, chunki input pustoy
-                        document.querySelector(".new-message-voice i").classList.add("fa-microphone");
-                        document.querySelector(".new-message-voice i").classList.remove("fa-paper-plane");
-                        document.querySelector(".new-message-text input").focus();
-                        // LEFT column a re-render bo'lyapti. Yangilab qoysin chatlarni
-                        fill_left_column(selected_chatlist);
-
-                    }
-                })
-            });
-
-        }else if(e.keyCode === 8){ //if backspace if clicked
-            let input = document.querySelector(".new-message-text input");
-            if (input.value) {
-                input.value = input.value.slice(0, input.value.length - 1)
-            }
-        }
     }
     else {//if input is empty
         document.querySelector(".new-message-voice i").classList.add("fa-microphone");
         document.querySelector(".new-message-voice i").classList.remove("fa-paper-plane");
     }
+    document.querySelector("#emoji_dropdown").classList.remove("active")
 });
+
+// NEW MESSAGE CODES HERE
+function set_new_message() {
+    let new_message = document.querySelector(".new-message-text #input").value;
+    let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
+    Object.keys(DATA_from_local_storage).forEach((tab) => {
+        DATA_from_local_storage[tab].forEach((individ) => {
+            if (individ.user_name === selected_chat_username) {
+
+                // writes new message to local var
+                individ.messages.push({
+                    id: Number(individ.messages[individ.messages.length - 1].id) + 1,
+                    is_from_me: true,
+                    text: new_message,
+                    time: new Date().getTime()
+                });
+                // sets new message to localStorage
+                localStorage.setItem("DATA", JSON.stringify(DATA_from_local_storage))
+
+                // re-render middle column with new messages
+                let last_message = individ.messages[individ.messages.length - 1];//clean code uchun ohirgi message ni qisqa nomlash
+                last_message.text = last_message.text.replace(new RegExp("\n", 'g'), "<br>");
+                document.querySelector(".main-chat .container").innerHTML += `
+        <div style="display: flex; ${last_message.is_from_me ? 'justify-content: flex-end;' : ''}">
+            <div id="${last_message.id}" class="message ${last_message.is_from_me ? "from-me" : "to-me"} has-tail">
+                ${last_message.text}
+                <div class="message_time">${new Date(last_message.time).getHours()}:${new Date(last_message.time).getMinutes()} ${last_message.is_from_me ? '<i class="fa fa-check" aria-hidden="true"></i>' : ''}</div>
+                <div class="tail"></div>
+            </div>
+        </div>`;
+                // go to last or selected message
+                location.href = `#${last_message.id}`;
+                // input ni tozalab qoyadi
+                document.querySelector(".new-message-text #input").value = '';
+                // send btn ham ishlamaydi, chunki input pustoy
+                document.querySelector(".new-message-voice i").classList.add("fa-microphone");
+                document.querySelector(".new-message-voice i").classList.remove("fa-paper-plane");
+                document.querySelector(".new-message-text #input").focus();
+                // LEFT column a re-render bo'lyapti. Yangilab qoysin chatlarni
+                fill_left_column(selected_chatlist);
+            }
+        })
+    });
+    // close emoji modal if present
+    document.querySelector("#emoji_dropdown").classList.remove("active")
+}
 
 // send button only works when input isn't empty
 document.querySelector(".new-message-voice").addEventListener("click", (e) => {
-    let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
-
     if (e.target.firstElementChild.classList.contains("fa-paper-plane")) {
 
-        // if no chat selected :
+        // if no chat selected : //bunaqa bomidi-yu, mayli turaversin
         if (!selected_chat_username) {
-            document.querySelector(".new-message-text input").value = ``;
-            document.querySelector(".new-message-text input").placeholder = `Avval birorta chatni tanlang, Janob ${ism && ism}`;
+            document.querySelector(".new-message-text #input").value = ``;
+            document.querySelector(".new-message-text #input").placeholder = `Avval birorta chatni tanlang, Janob ${ism && ism}`;
         }
         // if a chat is selected
         else {
-            // set input placeholder to "Message"
-            document.querySelector(".new-message-text input").placeholder = `Message`;
-
-            // NEW MESSAGE CODES HERE
-            let new_message = document.querySelector(".new-message-text input").value;
-            Object.keys(DATA_from_local_storage).forEach((tab) => {
-                DATA_from_local_storage[tab].forEach((individ) => {
-                    if (individ.user_name === selected_chat_username) {
-
-                        // writes new message to local var
-                        individ.messages.push({
-                            id: individ.messages[individ.messages.length - 1].id + 1,
-                            is_from_me: true,
-                            text: new_message,
-                            time: new Date().getTime()
-                        });
-                        // sets new message to localStorage
-                        localStorage.setItem("DATA", JSON.stringify(DATA_from_local_storage))
-
-                        // re-render middle column with new messages
-                        let last_message = individ.messages[individ.messages.length - 1];//clean code uchun ohirgi message ni qisqa nomlash
-
-                        document.querySelector(".main-chat .container").innerHTML += `
-                        <div style="display: flex; ${last_message.is_from_me ? 'justify-content: flex-end;' : ''}">
-                        <div id="${last_message.id}" class="message ${last_message.is_from_me ? "from-me" : "to-me"} has-tail">
-                            ${last_message.text}
-                            <div class="message_time">${new Date(last_message.time).getHours()}:${new Date(last_message.time).getMinutes()} ${last_message.is_from_me ? '<i class="fa fa-check" aria-hidden="true"></i>' : ''}</div>
-                            <div class="tail"></div>
-                        </div>
-                        </div>
-                        `;
-                        // input ni tozalab qoyadi
-                        document.querySelector(".new-message-text input").value = "";
-
-                        // go to last or selected message
-                        location.href = `#${last_message.id}`;
-
-                        // send btn ham ishlamaydi, chunki input pustoy
-                        document.querySelector(".new-message-voice i").classList.add("fa-microphone");
-                        document.querySelector(".new-message-voice i").classList.remove("fa-paper-plane");
-                        document.querySelector(".new-message-text input").focus();
-                        // LEFT column a re-render bo'lyapti. Yangilab qoysin chatlarni
-                        fill_left_column(selected_chatlist);
-
-                    }
-                })
-            });
-            // close emoji modal if present
-            document.querySelector("#emoji_dropdown").classList.remove("active")
+            set_new_message(); // NEW MESSAGE CODES HERE
         }
     }
-
 });
 
 // toggle right column window + search + more btn
@@ -1422,19 +1692,12 @@ function re_render() {
 
 // //////////////////////////////////EMOJI UCHUN///////////////////////////////////// 
 // open&close emoji
-document.querySelector(".emoji").addEventListener("mouseenter", open_emoji)
-document.querySelector(".emoji").addEventListener("click", () => { document.querySelector("#emoji_dropdown").classList.toggle("active") })
-// document.querySelector(".emoji").addEventListener("mouseleave", () => {
-//     document.querySelector("#emoji_dropdown").classList.remove("active")
-// })
-function open_emoji() {
-    document.querySelector("#emoji_dropdown").classList.add("active");
-}
+document.querySelector(".emoji").addEventListener("click", () => document.querySelector("#emoji_dropdown").classList.toggle("active"));
 // emoji-sticker-gif-tabs navigation match
 document.querySelectorAll(".emoji-tabs button").forEach((elem) => {
     elem.addEventListener("click", (e) => {
         if (e.target.id === "backspace") {//if erase btn is clicked
-            let input = document.querySelector(".new-message-text input");
+            let input = document.querySelector(".new-message-text #input");
             if (input.value) {
                 input.value = input.value.slice(0, input.value.length - 1)
             }
@@ -1478,14 +1741,160 @@ document.querySelectorAll(".emoji_nav button").forEach((button) => {
 // connect to input when emo is clicked
 function set_emo_event() {
     document.querySelectorAll("#emoji_here button").forEach((emo_button) => {
-        emo_button.addEventListener("click", (e)=>{
-            document.querySelector(".new-message-text input").value += `${e.target.innerHTML}`;
+        emo_button.addEventListener("click", (e) => {
+            document.querySelector(".new-message-text #input").value += `${e.target.innerHTML}`;
             // activate input
-            document.querySelector(".new-message-text input").focus();
+            document.querySelector(".new-message-text #input").focus();
             document.querySelector(".new-message-voice i").classList.remove("fa-microphone");
             document.querySelector(".new-message-voice i").classList.add("fa-paper-plane");
         })
     })
+}
+// //////////////////////////////////KEYBOARD UCHUN/////////////////////////////////////
+let is_shifted = false;
+let is_caps_on = false;
+let is_cyrillic = false;
+document.querySelector(".keyboard").addEventListener("click", (e) => {
+    document.querySelector("#keyboard_dropdown").classList.toggle("active");
+    document.querySelector("#emoji_dropdown").classList.remove("active");//close emoji if present
+    if (document.querySelector("#keyboard_dropdown").classList.contains("active")) { //render keys if keyboard active
+        render_keys(is_shifted);
+        document.querySelector(".new-message-text #input").focus();
+    }
+});
+
+function render_keys(isShifted, isCyrillic) {
+    // clear lines before rendering
+    document.querySelectorAll(".line").forEach((line) => {
+        line.innerHTML = "";
+    })
+    Object.keys(KEYBOARD_PACK).forEach((line) => {//render qilopti
+        if (line === "first_line") {
+            KEYBOARD_PACK[line].forEach((obj_key) => {
+                if (obj_key.key === "Back") {
+                    document.querySelector(".first-line").innerHTML += `<span class="back button-style">${obj_key.key}</span>`
+                } else {
+                    document.querySelector(".first-line").innerHTML += `<span class="button button-style">${isShifted ? (isCyrillic ? obj_key.cyrill_shift : obj_key.shift) : (isCyrillic ? obj_key.cyrill : obj_key.key)}</span>`
+                }
+            })
+        }
+        else if (line === "second_line") {
+            KEYBOARD_PACK[line].forEach((obj_key) => {
+                if (obj_key.key === "Tab") {
+                    document.querySelector(".second-line").innerHTML += `<span class="tab button-style">${obj_key.key}</span>`
+                } else {
+                    document.querySelector(".second-line").innerHTML += `<span class="button button-style">${isShifted ? (isCyrillic ? obj_key.cyrill_shift : obj_key.shift) : (isCyrillic ? obj_key.cyrill : obj_key.key)}</span>`
+                }
+            })
+        }
+        else if (line === "third_line") {
+            KEYBOARD_PACK[line].forEach((obj_key) => {
+                if (obj_key.key === "Caps" | obj_key.key === "Enter") {
+                    document.querySelector(".third-line").innerHTML += `<span class="${obj_key.key === "Caps" ? "capsLock" : "enter"} button-style">${obj_key.key}</span>`
+                }
+                else {
+                    document.querySelector(".third-line").innerHTML += `<span class="button button-style">${isShifted ? (isCyrillic ? obj_key.cyrill_shift : obj_key.shift) : (isCyrillic ? obj_key.cyrill : obj_key.key)}</span>`
+                }
+            })
+        }
+        else if (line === "fourth_line") {
+            KEYBOARD_PACK[line].forEach((obj_key) => {
+                if (obj_key.key === "Shift") {
+                    document.querySelector(".forth-line").innerHTML += `<span class="shift button-style">${obj_key.key}</span>`
+                } else {
+                    document.querySelector(".forth-line").innerHTML += `<span class="button button-style">${isShifted ? (isCyrillic ? obj_key.cyrill_shift : obj_key.shift) : (isCyrillic ? obj_key.cyrill : obj_key.key)}</span>`
+                }
+            })
+        }
+    })
+    
+    // check caps was on or not
+    if (is_caps_on) {
+        caps_function()
+    }
+    // sets event listeners to newly created buttonchalar :)
+    
+    // buttons for writing 
+    document.querySelectorAll(".button").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+            // shift sozlamasi
+            if (isShifted) {
+                is_shifted = false;
+                render_keys(is_shifted, is_cyrillic);
+            }
+            document.querySelector(".new-message-text #input").value += `${e.target.innerText}`;
+            // activate input
+            document.querySelector(".new-message-text #input").focus();
+            document.querySelector(".new-message-voice i").classList.remove("fa-microphone");
+            document.querySelector(".new-message-voice i").classList.add("fa-paper-plane");
+        });
+    })
+    // caps lock
+    document.querySelector(".capsLock").addEventListener("click", caps_function);
+    // shift
+    document.querySelectorAll(".shift").forEach((one_shift) => {
+        one_shift.addEventListener("click", shift_func);
+    })
+    // esc
+    document.querySelector(".esc").addEventListener("click", (e) => {
+        document.querySelector("#keyboard_dropdown").classList.remove("active")
+    });
+    // back
+    document.querySelector(".back").addEventListener("click", (e) => {
+        document.querySelector(".new-message-text #input").value = document.querySelector(".new-message-text #input").value.slice(0, document.querySelector(".new-message-text #input").value.length - 1);
+        if (!document.querySelector(".new-message-text #input").value) {
+            document.querySelector(".new-message-voice i").classList.add("fa-microphone");
+            document.querySelector(".new-message-voice i").classList.remove("fa-paper-plane");
+        }
+        document.querySelector(".new-message-text #input").focus();
+    });
+    // tab
+    document.querySelector(".tab").addEventListener("click", (e) => {
+        document.querySelector(".new-message-text #input").value += "    ";
+        document.querySelector(".new-message-text #input").focus();
+    });
+    // enter
+    document.querySelector(".enter").addEventListener("click", (e) => {
+        document.querySelector(".new-message-text #input").value += "\n";
+        document.querySelector(".new-message-text #input").focus();
+    });
+    // lang
+    document.querySelector(".language").addEventListener("click", lang_func);
+}
+
+// shift functionality
+function shift_func(e) {
+    if (!is_shifted) {
+        is_shifted = true;
+        render_keys(is_shifted, is_cyrillic)
+    } else {
+        is_shifted = false;
+        render_keys(is_shifted, is_cyrillic)
+    }
+};
+// cap functionality
+function caps_function(e) {
+    document.querySelector(".capsLock").classList.toggle("active")
+    if (document.querySelector(".capsLock").classList.contains("active")) {
+        document.querySelectorAll(".button").forEach((btn) => {
+            btn.style.textTransform = "upperCase";
+        })
+    } else {
+        document.querySelectorAll(".button").forEach((btn) => {
+            btn.style.textTransform = "lowerCase";
+        })
+    }
+    is_caps_on = document.querySelector(".capsLock").classList.contains("active");
+}
+// lang func
+function lang_func(){
+    if(!is_cyrillic){
+        is_cyrillic = true;
+        render_keys(is_shifted, is_cyrillic)
+    }else{
+        is_cyrillic = false;
+        render_keys(is_shifted, is_cyrillic)
+    }
 }
 
 
@@ -1494,7 +1903,55 @@ function set_emo_event() {
 
 
 
-           // else {//bu toggle edi . kerak emas ekan
+
+
+
+
+
+
+
+
+
+
+
+    // if (multi_key_logger[13] && multi_key_logger[16]) {//enter + shift
+    //     console.log("multi");// no nned to use. Because textarea has default event listener for enter+shift. I just need to set constraint to enter key event listener below(line:874)
+    // }
+
+
+
+
+// document.querySelector(".emoji").addEventListener("mouseenter", open_emoji)
+// function open_emoji() {
+//     if (!document.querySelector("#emoji_dropdown").classList.contains("active")) {
+//         document.querySelector("#emoji_dropdown").classList.add("active");
+//     }
+// }
+
+
+
+/***garbage  ISHLAMAGAN KODLAR
+
+:)))))))))
+
+    // else if (e.keyCode === 8) { //if backspace if clicked
+        //     let input = document.querySelector(".new-message-text #input");
+        //     console.log("poq");
+        //     if (input.value) {
+        //         console.log(input.value);
+        //         input.value = input.value.slice(0, input.value.length - 1)
+        //         console.log(input.value);
+        //     }
+        // }
+
+// more btn will be closed on blur
+// document.querySelector(".more-btn-content").addEventListener("blur", ()=>{
+//     console.log("aklsdjSLDALSKBL");
+//     document.querySelector(".more-btn-content").classList.remove("active");
+// });
+
+
+         // else {//bu toggle edi . kerak emas ekan
             //     document.querySelector("#telegram").style.gridTemplateColumns = "27.5% 1fr 0%";
             // }804-qator
 // document.querySelectorAll(".row_2 input").forEach((input) => {
@@ -1508,26 +1965,16 @@ function set_emo_event() {
 // })
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// more btn will be closed on blur
-// document.querySelector(".more-btn-content").addEventListener("blur", ()=>{
-//     console.log("aklsdjSLDALSKBL");
-//     document.querySelector(".more-btn-content").classList.remove("active");
-// });
-/***garbage  ISHLAMAGAN KODLAR
+ * // let blur_emo = false;
+// document.querySelector("#emoji_dropdown").addEventListener("blur", (e) => {
+//     console.log(blur_emo);
+//     if(blur_emo){
+//         document.querySelector("#emoji_dropdown").classList.remove("active")
+//         blur_emo = false;
+//     }
+// })
+        // document.querySelector("#emoji_dropdown").focus();
+        // setTimeout(function () { blur_emo = true }, 100)
 
  *     // sets event listener for chat items
     // document.querySelectorAll(".chat-item").forEach((item)=>{
@@ -1558,5 +2005,5 @@ function set_emo_event() {
                 //     </div>
                 // </div>
                 //     `;
-                // })
+                //
  */
