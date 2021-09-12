@@ -420,8 +420,43 @@
   padding: 0 15px;
   color: #707579;
 }
+#telegram #column-center .main-footer .main-footer-wrapper .new-message-wrapper .emoji:hover {
+  -webkit-animation: emo_anim 0.5s 1 linear;
+          animation: emo_anim 0.5s 1 linear;
+}
 #telegram #column-center .main-footer .main-footer-wrapper .new-message-wrapper .emoji i {
   font-size: 24px;
+}
+#telegram #column-center .main-footer .main-footer-wrapper .new-message-wrapper .keyboard:hover, #telegram #column-center .main-footer .main-footer-wrapper .new-message-wrapper .file:hover {
+  transform: scale(1.2);
+}
+@-webkit-keyframes emo_anim {
+  0% {
+    transform: rotate(0) scale(1);
+  }
+  25% {
+    transform: rotate(-45deg) scale(1.1);
+  }
+  75% {
+    transform: rotate(45deg) scale(1.1);
+  }
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+}
+@keyframes emo_anim {
+  0% {
+    transform: rotate(0) scale(1);
+  }
+  25% {
+    transform: rotate(-45deg) scale(1.1);
+  }
+  75% {
+    transform: rotate(45deg) scale(1.1);
+  }
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
 }
 #telegram #column-center .main-footer .main-footer-wrapper .new-message-wrapper #emoji_dropdown {
   transform: scale(0);
@@ -436,6 +471,9 @@
 }
 #telegram #column-center .main-footer .main-footer-wrapper .new-message-wrapper #emoji_dropdown.active {
   transform: scale(1);
+}
+#telegram #column-center .main-footer .main-footer-wrapper .new-message-wrapper #emoji_dropdown:focus {
+  outline: none;
 }
 #telegram #column-center .main-footer .main-footer-wrapper .new-message-wrapper #emoji_dropdown button {
   cursor: pointer;
@@ -506,26 +544,147 @@
   padding: 0 5px;
   height: 100%;
   display: grid;
-  align-self: center;
+  align-items: center;
 }
-#telegram #column-center .main-footer .main-footer-wrapper .new-message-wrapper .new-message-text input {
+#telegram #column-center .main-footer .main-footer-wrapper .new-message-wrapper .new-message-text #input {
   font-size: 16px;
   font-family: sans-serif;
   border: none;
   width: 100%;
   outline: none;
+  display: block;
 }
 #telegram #column-center .main-footer .main-footer-wrapper .new-message-wrapper .keyboard {
   cursor: pointer;
   color: #707579;
+  transition: 300ms;
 }
 #telegram #column-center .main-footer .main-footer-wrapper .new-message-wrapper .keyboard i {
   font-size: 24px;
+}
+#telegram #column-center .main-footer .main-footer-wrapper .new-message-wrapper #keyboard_dropdown {
+  position: absolute;
+  border-radius: 15px;
+  width: 900px;
+  height: 365px;
+  padding: 20px;
+  right: 0;
+  bottom: 110%;
+  transition: 300ms;
+  background-color: #5e5e5e;
+  transform: scale(0);
+}
+#telegram #column-center .main-footer .main-footer-wrapper .new-message-wrapper #keyboard_dropdown.active {
+  transform: scale(1);
+}
+#telegram #column-center .main-footer .main-footer-wrapper .new-message-wrapper #keyboard_dropdown .keyboard_wrapper {
+  display: grid;
+  grid-template-rows: 25px repeat(5, 50px);
+  row-gap: 10px;
+  grid-template-columns: 100%;
+  width: 100%;
+  height: 100%;
+}
+#telegram #column-center .main-footer .main-footer-wrapper .new-message-wrapper #keyboard_dropdown .keyboard_wrapper span:not(.arrows):not(.middle-arrows):active {
+  transform: scale(0.95);
+  box-shadow: none;
+}
+#telegram #column-center .main-footer .main-footer-wrapper .new-message-wrapper #keyboard_dropdown .keyboard_wrapper .button-style {
+  box-shadow: 0 0 10px -5px black;
+  background: #3e3e3e;
+  height: 50px;
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 5px;
+  line-height: 45px;
+  position: relative;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+#telegram #column-center .main-footer .main-footer-wrapper .new-message-wrapper #keyboard_dropdown .keyboard_wrapper .esc.button-style {
+  width: 50px;
+  height: 25px;
+  font-size: 15px;
+  line-height: 25px;
+}
+#telegram #column-center .main-footer .main-footer-wrapper .new-message-wrapper #keyboard_dropdown .keyboard_wrapper .capsLock.active::after {
+  background-color: gold;
+  box-shadow: 0px 0px 5px gold;
+}
+#telegram #column-center .main-footer .main-footer-wrapper .new-message-wrapper #keyboard_dropdown .keyboard_wrapper .capsLock::after {
+  content: "";
+  width: 5px;
+  height: 5px;
+  position: absolute;
+  border-radius: 50%;
+  top: 5px;
+  right: 5px;
+  background-color: #999999;
+}
+#telegram #column-center .main-footer .main-footer-wrapper .new-message-wrapper #keyboard_dropdown .keyboard_wrapper .line {
+  -moz-column-gap: 10px;
+       column-gap: 10px;
+}
+#telegram #column-center .main-footer .main-footer-wrapper .new-message-wrapper #keyboard_dropdown .keyboard_wrapper .first-line {
+  display: grid;
+  grid-template-columns: 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 80px;
+}
+#telegram #column-center .main-footer .main-footer-wrapper .new-message-wrapper #keyboard_dropdown .keyboard_wrapper .second-line {
+  display: grid;
+  grid-template-columns: 60px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 70px;
+}
+#telegram #column-center .main-footer .main-footer-wrapper .new-message-wrapper #keyboard_dropdown .keyboard_wrapper .third-line {
+  display: grid;
+  grid-template-columns: 80px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 110px;
+}
+#telegram #column-center .main-footer .main-footer-wrapper .new-message-wrapper #keyboard_dropdown .keyboard_wrapper .forth-line {
+  display: grid;
+  grid-template-columns: 125px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 125px;
+}
+#telegram #column-center .main-footer .main-footer-wrapper .new-message-wrapper #keyboard_dropdown .keyboard_wrapper .fifth-line {
+  display: grid;
+  grid-template-columns: 50px 50px 50px 50px 250px 50px 50px 50px auto;
+  -moz-column-gap: 10px;
+       column-gap: 10px;
+}
+#telegram #column-center .main-footer .main-footer-wrapper .new-message-wrapper #keyboard_dropdown .keyboard_wrapper .arrows {
+  height: 50px;
+  display: grid;
+  grid-template-columns: 55px 50px 55px;
+  grid-column-gap: 10px;
+}
+#telegram #column-center .main-footer .main-footer-wrapper .new-message-wrapper #keyboard_dropdown .keyboard_wrapper .middle-arrows {
+  width: 50px;
+  height: 50px;
+  display: grid;
+  grid-template-rows: 24px 24px;
+  row-gap: 2px;
+}
+#telegram #column-center .main-footer .main-footer-wrapper .new-message-wrapper #keyboard_dropdown .keyboard_wrapper .up-arrow,
+#telegram #column-center .main-footer .main-footer-wrapper .new-message-wrapper #keyboard_dropdown .keyboard_wrapper .down-arrow {
+  background: #3e3e3e;
+  width: 50px;
+  height: 24px;
+  color: white;
+  font-size: 15px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 5px;
+  line-height: 20px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 #telegram #column-center .main-footer .main-footer-wrapper .new-message-wrapper .file {
   cursor: pointer;
   padding: 0 15px;
   color: #707579;
+  transition: 300ms;
 }
 #telegram #column-center .main-footer .main-footer-wrapper .new-message-wrapper .file i {
   font-size: 24px;

@@ -6,6 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Telegram</title>
+    <!-- fav icon -->
+    <link rel="shortcut icon"
+        href="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/1024px-Telegram_logo.svg.png"
+        type="image/x-icon">
     <!-- font awesome -->
     <script src="https://kit.fontawesome.com/e7b8e12aee.js" crossorigin="anonymous"></script>
     <!-- roboto -->
@@ -102,14 +106,22 @@
                                 <div class="emoji-container">
                                     <div class="emoji-tab emojis active">
                                         <div class="emoji_nav">
-                                            <button data-target="0" class="active"><i class="fa fa-history" aria-hidden="true"></i></button>
-                                            <button data-target="1"><i class="fa fa-smile-o" aria-hidden="true"></i></button>
-                                            <button data-target="2"><i class="fa fa-github-alt" aria-hidden="true"></i></button>
-                                            <button data-target="3"><i class="fa fa-apple" aria-hidden="true"></i></button>
-                                            <button data-target="4"><i class="fa fa-futbol-o" aria-hidden="true"></i></button>
-                                            <button data-target="5"><i class="fa fa-car" aria-hidden="true"></i></button>
-                                            <button data-target="6"><i class="fa fa-lightbulb-o" aria-hidden="true"></i></button>
-                                            <button data-target="7"><i class="fa fa-flag-o" aria-hidden="true"></i></button>
+                                            <button data-target="0" class="active"><i class="fa fa-history"
+                                                    aria-hidden="true"></i></button>
+                                            <button data-target="1"><i class="fa fa-smile-o"
+                                                    aria-hidden="true"></i></button>
+                                            <button data-target="2"><i class="fa fa-github-alt"
+                                                    aria-hidden="true"></i></button>
+                                            <button data-target="3"><i class="fa fa-apple"
+                                                    aria-hidden="true"></i></button>
+                                            <button data-target="4"><i class="fa fa-futbol-o"
+                                                    aria-hidden="true"></i></button>
+                                            <button data-target="5"><i class="fa fa-car"
+                                                    aria-hidden="true"></i></button>
+                                            <button data-target="6"><i class="fa fa-lightbulb-o"
+                                                    aria-hidden="true"></i></button>
+                                            <button data-target="7"><i class="fa fa-flag-o"
+                                                    aria-hidden="true"></i></button>
                                         </div>
                                         <div id="emoji_here"></div>
                                     </div>
@@ -127,8 +139,40 @@
 
                                 </div>
                             </div>
-                            <div class="new-message-text"><input type="text" placeholder="Message"></div>
+                            <div class="new-message-text"><textarea name="Message" id="input" cols="1" rows="1"
+                                    placeholder="Message"></textarea></div>
                             <div class="keyboard"><i class="fa fa-keyboard-o" aria-hidden="true"></i></div>
+                            <div id="keyboard_dropdown">
+                                <div class="keyboard_wrapper">
+                                    <span class="esc button-style">Esc</span>
+                                    <div class="first-line line"></div>
+                                    <div class="second-line line"></div>
+                                    <div class="third-line line"></div>
+                                    <div class="forth-line line"></div>
+                                    <div class="fifth-line">
+                                        <span class="ctrl button-style">Ctrl</span>
+                                        <span class="fn button-style">Fn</span>
+                                        <span class="language button-style"><i class="fa fa-globe"
+                                                aria-hidden="true"></i></span>
+                                        <span class="alt button-style">Alt</span>
+                                        <span class="button button-style"> </span>
+                                        <span class="ctrl button-style">Alt</span>
+                                        <span class="alt button-style"><i class="fa fa-list"
+                                                aria-hidden="true"></i></span>
+                                        <span class="alt button-style">ctrl</span>
+                                        <span class="arrows">
+                                            <span class="left-arrow button-style">&leftarrow;</span>
+                                            <span class="middle-arrows">
+                                                <span class="up-arrow">&uparrow;</span>
+                                                <span class="down-arrow">&downarrow;</span>
+                                            </span>
+                                            <span class="right-arrow button-style">&rightarrow;</span>
+                                        </span>
+
+
+                                    </div>
+                                </div>
+                            </div>
                             <div class="file"><i class="fa fa-paperclip" aria-hidden="true"></i></div>
                         </div>
                         <div class="new-message-voice"><i class="fa fa-microphone" aria-hidden="true"></i></div>
@@ -357,13 +401,13 @@
         </div>
 
     </div>
-
-
     <script src="./main.js"></script>
 </body>
 
 </html>
 
 
-
 <!-- https://picsum.photos/500/384 384/384 -->
+<!-- <textarea name="message" id="" cols="1" rows="1"></textarea> 
+<div id="input" contenteditable="true" placeholder="Message"></div> -->
+<!-- <input type="text" placeholder="Message"> -->
