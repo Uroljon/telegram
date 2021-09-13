@@ -1897,8 +1897,22 @@ function lang_func(){
     }
 }
 
-
-
+// /////////////////////SPEECH RECOGNITION////////////////////////
+document.querySelector(".new-message-voice").addEventListener("click", record_ma_voice);
+function record_ma_voice() {  
+    let recognition = new webkitSpeechRecognition();
+    // recognition.lang = "en-GB";
+    recognition.lang = "uz-Latn";
+    recognition.onresult = function(e){
+        console.log(e);
+        if(document.querySelector(".new-message-text #input").value){
+            document.querySelector(".new-message-text #input").value += e.results[0][0].transcript;
+        }else{
+            document.querySelector(".new-message-text #input").value = e.results[0][0].transcript;
+        }
+    }
+    recognition.start();
+}
 
 
 
