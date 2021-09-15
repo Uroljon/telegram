@@ -306,6 +306,9 @@ $header-height: 56px;
                 grid-template-rows: $header-height;
                 align-items: center;
                 width: 100%;
+                .back_for_mobile{
+                    display: none;
+                }
                 .avatar {
                     border-radius: 50%;
                     width: 42px;
@@ -1070,6 +1073,8 @@ $header-height: 56px;
                 transform: scale(0);
                 &.active {
                     transform: scale(1);
+                    padding: 1rem;
+                    color: rgba(0, 0, 0, 0.658);
                 }
             }
         }
@@ -1233,9 +1238,8 @@ $header-height: 56px;
 // MEDIA
 @media (max-width: 700px) {
     #telegram {
-        grid-template-columns: 100% 0 !important; ///////////////////////
+        grid-template-columns: 100% 0 0 !important; ///////////////////////
         #column-left {
-            display: none; ////////////////////////////////////////////
             .left-header {
                 @include header-style(100%);
                 #search {
@@ -1256,6 +1260,34 @@ $header-height: 56px;
                 @include header-style(100%);
                 .person {
                     width: 100%; //////////////////
+                    grid-template-columns: auto auto 1fr auto auto;
+                    .back_for_mobile{
+                        cursor: pointer;
+                        width: 35px;
+                        height: 40px;
+                        margin-right: 5px;
+                        display: grid;
+                        place-items: center;
+                        transition: 300ms;
+                        border-radius: 35%;
+                        font-size: 16px;
+                        &:hover {
+                            background-color: rgba(128, 128, 128, 0.103);
+                            border-radius: 50%;
+                        }
+                        i {
+                            color: #707579;
+                        }
+                    }
+                 
+                    .info {
+                        padding-left: 8px;
+                        
+                    }
+                    .search-btn,
+                    .more-btn {
+                        margin-left: 0px;
+                    }
                 }
             }
             .main-chat {

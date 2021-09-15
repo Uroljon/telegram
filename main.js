@@ -954,7 +954,13 @@ function fill_left_column(location) {
 
 // renders DATA to middle column and adds related functionality like search and newMessage input
 function fill_middle_column(what) {
-
+    // /////////////////////////////////MEDIA////////////////////////////////////////
+    if (screen.width < 700) {
+        document.querySelector("#telegram").setAttribute("style", "grid-template-columns: 100% 0 !important;")
+        document.querySelector("#column-left").style.display = "none";
+        document.querySelector("#column-center").classList.remove("shrinked");
+        document.querySelector("#column-right").classList.remove("expanded");
+    }
     let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
     let message_to_show = what.lastElementChild.lastElementChild.firstElementChild.getAttribute("message_id");
 
@@ -1677,12 +1683,7 @@ function fill_right_column() {
         DATA_from_local_storage[tab].forEach((individ) => {
             if (individ.user_name === selected_chat_username) {
                 // header edit btn
-                if (tab === "people") {
-                    document.querySelector(".edit-btn").addEventListener("click", edit_contact_modal);
-                } else {
-                    document.querySelector(".edit-btn").addEventListener("click", manage_group_modal);
-                }
-
+                document.querySelector(".edit-btn").addEventListener("click", edit_btn_bug_fixer)
                 // carousel image rendering
                 if (individ.avatar.length === 0) {//if there's no image
                     // put rainy image on carousel
@@ -1764,14 +1765,29 @@ function fill_right_column() {
                     document.querySelector(".toggle-notification").firstElementChild.classList.toggle("fa-toggle-on");
                     document.querySelector(".toggle-notification").firstElementChild.classList.toggle("fa-toggle-off");
                 });
-
-
+                // shared media
+                let selected_medialist = document.querySelector(".shared-media .active").getAttribute("data-target");
+                document.querySelector(`#${selected_medialist}`).innerHTML = individ[selected_medialist] ? `You have ${individ[selected_medialist]} ${selected_medialist}. But I can't show them at the moment 😬` : "You don't have anything shared here. Start sharing 🤗 now :)";
             }
         })
     });
-
 }
-
+function edit_btn_bug_fixer() {
+    let active_tab;
+    let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
+    Object.keys(DATA_from_local_storage).forEach((tab) => {
+        DATA_from_local_storage[tab].forEach((individ) => {
+            if (individ.user_name === selected_chat_username) {
+                active_tab = tab;
+            }
+        })
+    })
+    if (active_tab === "people") {
+        edit_contact_modal()
+    } else {
+        manage_group_modal()
+    }
+}
 // carousel next/prev buttons
 let carousel_items = document.querySelector(".carousel-items");
 document.querySelectorAll(".carousel-items-arrow").forEach((navbtn) => {
@@ -1821,9 +1837,7 @@ document.querySelectorAll(".carousel-items-arrow").forEach((navbtn) => {
 // chat-tabs navigation match
 document.querySelectorAll(".shared-media li").forEach((elem) => {
     elem.addEventListener("click", (e) => {
-
         let selected_medialist = e.target.getAttribute("data-target");
-
         // toggle .active on tabs
         document.querySelectorAll(".shared-media li").forEach((elem) => {
             elem.classList.remove("active");
@@ -1833,20 +1847,18 @@ document.querySelectorAll(".shared-media li").forEach((elem) => {
         // corresponding tabs will be shown
         document.querySelectorAll(".shared_media_content").forEach((elem) => {
             elem.classList.remove("active");
-            //elem.innerHTML = ""; // qolgan tab larni ichini tozalaydi
+            elem.innerHTML = ""; // qolgan tab larni ichini tozalaydi
         });
         document.querySelector(`#${selected_medialist}`).classList.add("active");
         // tanlangan chat ni ichini kontent bilan to'ldiradi
-
-        /***
-                    groups_common: 4,
-            shared_links: 15,
-            shared_files: 1,
-            shared_photos: 20,
-            shared_voice: 15,
-            shared_videos: 11,
-        */
-
+        let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
+        Object.keys(DATA_from_local_storage).forEach((tab) => {
+            DATA_from_local_storage[tab].forEach((individ) => {
+                if (individ.user_name === selected_chat_username) {
+                    document.querySelector(`#${selected_medialist}`).innerHTML = individ[selected_medialist] ? `You have ${individ[selected_medialist]} ${selected_medialist}. But I can't show them at the moment 😬` : "You don't have anything shared here. Start sharing 🤗 now :)";
+                }
+            })
+        })
     })
 })
 
@@ -2122,35 +2134,14 @@ function lang_func() {
     }
 }
 
+// /////////////////////////////////MEDIA/////////////////////////////////////////////////
+document.querySelector(".back_for_mobile").addEventListener("click", (e) => {
+    document.querySelector("#telegram").setAttribute("style", "grid-template-columns: 100% 0 0 !important;")
+    document.querySelector("#column-left").style.display = "block";
 
+});
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // if (multi_key_logger[13] && multi_key_logger[16]) {//enter + shift
-    //     console.log("multi");// no nned to use. Because textarea has default event listener for enter+shift. I just need to set constraint to enter key event listener below(line:874)
-    // }
-
-
-
-
-// document.querySelector(".emoji").addEventListener("mouseenter", open_emoji)
-// function open_emoji() {
-//     if (!document.querySelector("#emoji_dropdown").classList.contains("active")) {
-//         document.querySelector("#emoji_dropdown").classList.add("active");
-//     }
-// }
-
+// 15. September. 2021 TUGADI :)
 
 
 /***garbage  ISHLAMAGAN KODLAR
