@@ -31,10 +31,17 @@
                         <div class="toggle-settings"><i class="fa fa-bars" aria-hidden="true"></i></div>
                         <div class="settings hide">
                             <ul>
-                                <li>Saved messages</li>
+                                <li id="new_group"><i class="fa fa-fw fa-users" aria-hidden="true"></i> New Group</li>
+                                <li id="new_channel"><i class="fa fa-fw fa-bullhorn" aria-hidden="true"></i> New Channel</li>
+                                <li><i class="fa fa-fw fa-user-o" aria-hidden="true"></i> Contacts</li>
+                                <li><i class="fa fa-fw fa-phone" aria-hidden="true"></i> Calls</li>
+                                <li id="saved_messages"><i class="fa fa-fw fa-bookmark-o" aria-hidden="true"></i> Saved messages</li>
+                                <li><i class="fa fa-fw fa-cog fa-spin" aria-hidden="true"></i> Settings</li>
+                                <li><i class="fa fa-fw fa-moon-o" aria-hidden="true"></i> Night mode</li>
                             </ul>
+                            <a href="https://t.me/Uroljon_khidirboev" target="_blank">Contact Developer</a>
                         </div>
-                        <div style="padding: 0 7px; width: 100%;">
+                        <div class="width-correcter">
                             <div class="search-wrapper">
                                 <i class="fa fa-search" aria-hidden="true"></i>
                                 <input type="text" placeholder="Search" id="search">
@@ -62,7 +69,7 @@
             </div>
 
         </div>
-        <!-- center -->
+        <!-- center --> 
         <div id="column-center">
             <div class="main-header">
                 <div class="container">
@@ -150,21 +157,21 @@
                                     <div class="third-line line"></div>
                                     <div class="forth-line line"></div>
                                     <div class="fifth-line">
-                                        <span class="ctrl button-style">Ctrl</span>
-                                        <span class="fn button-style">Fn</span>
+                                        <span class="ctrl button-style funny_modal_trigger">Ctrl</span>
+                                        <span class="fn button-style funny_modal_trigger" >Fn</span>
                                         <span class="language button-style"><i class="fa fa-globe"
                                                 aria-hidden="true"></i></span>
-                                        <span class="alt button-style">Alt</span>
+                                        <span class="alt button-style funny_modal_trigger" >Alt</span>
                                         <span class="button button-style"> </span>
-                                        <span class="ctrl button-style">Alt</span>
-                                        <span class="alt button-style"><i class="fa fa-list"
+                                        <span class="alt button-style funny_modal_trigger" >Alt</span>
+                                        <span class="list button-style funny_modal_trigger" ><i class="fa fa-list"
                                                 aria-hidden="true"></i></span>
-                                        <span class="alt button-style">ctrl</span>
+                                        <span class="ctrl button-style funny_modal_trigger" >ctrl</span>
                                         <span class="arrows">
                                             <span class="left-arrow button-style">&leftarrow;</span>
                                             <span class="middle-arrows">
-                                                <span class="up-arrow">&uparrow;</span>
-                                                <span class="down-arrow">&downarrow;</span>
+                                                <span class="up-arrow funny_modal_trigger" >&uparrow;</span>
+                                                <span class="down-arrow funny_modal_trigger" >&downarrow;</span>
                                             </span>
                                             <span class="right-arrow button-style">&rightarrow;</span>
                                         </span>
@@ -173,7 +180,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="file"><i class="fa fa-paperclip" aria-hidden="true"></i></div>
+                            <div class="file">
+                                <i class="fa fa-paperclip" aria-hidden="true"></i>
+                                <input type="file" name="new_file" id="new_file">
+                            </div>
                         </div>
                         <div class="new-message-voice"><i class="fa fa-microphone" aria-hidden="true"></i></div>
                     </div>
@@ -399,7 +409,71 @@
 
             </div>
         </div>
+<!-- SETTINGS MODALS -->
+        <!-- new group modal -->
+        <div class="new_group_modal contact_modal">
+            <div class="contact_modal_wrapper">
+                <h2>Create New Group</h2>
+                <div class="row_1">
+                    <div class="img_avatar">
+                        <img id="new_group_avatar" class="modal_avatar" src="https://picsum.photos/500/384" alt="avatar">
+                    </div>
+                </div>
+                <div class="row_2">
+                    <label for="new_group_name">Group Name</label>
+                    <input id="new_group_name" placeholder="guruh nomi" required>
+                </div>
+                <div class="row_2">
+                    <label for="edit_last_name">Group Description</label>
+                    <input id="new_group_bio" placeholder="guruh haqida ma'lumot">
+                </div>
+                <div class="row_2">
+                    <label for="edit_last_name">Group Link</label>
+                    <input id="new_group_link" placeholder="@username" required class="check_for_uniqueness">
+                    <p class="unique_id_warning">Bu nom allaqachon kiritilgan. Boshqa nom kiriting</p>
+                </div>
+                <div class="row_3">
+                    <button class="new_group_cancel">Cancel</button>
+                    <button class="new_group_done">Done</button>
+                </div>
+            </div>
+        </div>
+        <!-- new group modal -->
+        <div class="new_channel_modal contact_modal">
+            <div class="contact_modal_wrapper">
+                <h2>Create New Channel</h2>
+                <div class="row_1">
+                    <div class="img_avatar">
+                        <img id="new_channel_avatar" class="modal_avatar" src="https://picsum.photos/500/384" alt="avatar">
+                    </div>
+                </div>
+                <div class="row_2">
+                    <label for="new_channel_name">Channel Name</label>
+                    <input id="new_channel_name" placeholder="kanal nomi" required>
+                </div>
+                <div class="row_2">
+                    <label for="edit_last_name">Channel Description</label>
+                    <input id="new_channel_bio" placeholder="kanal haqida ma'lumot">
+                </div>
+                <div class="row_2">
+                    <label for="edit_last_name">Channel Link</label>
+                    <input id="new_channel_link" placeholder="@username" required class="check_for_uniqueness">
+                    <p class="unique_id_warning">Bu nom allaqachon kiritilgan. Boshqa nom kiriting</p>
+                </div>
+                <div class="row_3">
+                    <button class="new_channel_cancel">Cancel</button>
+                    <button class="new_channel_done">Done</button>
+                </div>
+            </div>
+        </div>
 
+
+        <!-- FUNNY MODAL -->
+        <div id="funny_modal" class="contact_modal">
+            <div class="contact_modal_wrapper">
+                <p id="funny_modal_text"></p>
+            </div>
+        </div>
     </div>
     <script src="./main.js"></script>
 </body>

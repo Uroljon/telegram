@@ -179,7 +179,7 @@ let DATA = {
             shared_files: 0,
             shared_photos: 0,
             shared_voice: 0,
-            activity: "typing...",
+            activity: "typing",
             messages: [{
                 id: 1,
                 is_from_me: true,
@@ -474,7 +474,7 @@ KEYBOARD_PACK = {
             shift: 'W',
             cyrill: 'ц',
             cyrill_shift: 'Ц'
-            
+
         },
         {
             key: 'e',
@@ -789,10 +789,68 @@ document.querySelector(".clear-search-btn").addEventListener("click", () => {
 
 })
 
+// ///SETTINGS///
 // toggle settings window
 document.querySelector(".toggle-settings").addEventListener("click", () => {
-    document.querySelector(".settings").classList.toggle("hide");
+    document.querySelector(".settings").classList.toggle("hide")
 })
+// new group
+document.querySelector("#new_group").addEventListener("click", () => {
+    document.querySelector(".new_group_modal").classList.toggle("active")
+    document.querySelector(".settings").classList.add("hide")
+})
+document.querySelector("#column-center").addEventListener("click", (e) => {
+    document.querySelector(".settings").classList.add("hide")
+});
+document.querySelectorAll(".check_for_uniqueness").forEach((each) => {
+    each.addEventListener("keyup", (e) => {
+        let unique_id_warning = false;
+        let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
+        Object.keys(DATA_from_local_storage).forEach((tab) => {
+            DATA_from_local_storage[tab].forEach((individ) => {
+                if (individ.user_name === e.target.value) {
+                    unique_id_warning = true;
+                }
+            })
+        });
+        if (unique_id_warning) {
+            document.querySelectorAll(".unique_id_warning").forEach((each) => {
+                each.classList.add("show");
+            })
+        } else {
+            document.querySelectorAll(".unique_id_warning").forEach((each) => {
+                each.classList.remove("show");
+            })
+        }
+    });
+})
+// new channel
+document.querySelector("#new_channel").addEventListener("click", () => {
+    document.querySelector(".new_channel_modal").classList.toggle("active")
+    document.querySelector(".settings").classList.add("hide")
+})
+// saved messages
+document.querySelector("#saved_messages").addEventListener("click", (e) => {
+    document.querySelector(".settings").classList.add("hide")
+
+    // TO LEFT COLUMN
+    document.querySelectorAll(".navbar li").forEach((elem) => {
+        elem.classList.remove("active");
+    })
+    document.querySelector(`[data-target="all_chats"]`).classList.add("active");
+    document.querySelectorAll(".tabs-content").forEach((elem) => {
+        elem.classList.remove("active");
+        elem.innerHTML = ""; // qolgan tab larni ichini tozalaydi
+    });
+    document.querySelector(`#all_chats`).classList.add("active");
+    fill_left_column("all_chats");
+
+    // TO MIDDLE COLUMN
+    fill_middle_column(document.querySelector("#all_chats").lastElementChild.previousElementSibling)
+    // TO RIGHT COLUMN
+    fill_right_column()
+});
+
 // chat-tabs navigation match
 document.querySelectorAll(".navbar li").forEach((elem) => {
 
@@ -914,7 +972,11 @@ function fill_middle_column(what) {
                 // change name
                 document.querySelector("#name").innerHTML = `${chatItem.first_name ? chatItem.first_name : chatItem.name} ${chatItem.last_name ? chatItem.last_name : ""}`;
                 // change status
-                document.querySelector("#status").innerHTML = `${chatItem.members ? chatItem.members : ''}${chatItem.activity}`;
+                if (chatItem.activity === "typing") {
+                    document.querySelector("#status").innerHTML = `${chatItem.activity} <span class="typewriterDot">.</span><span class="typewriterDot">.</span><span class="typewriterDot">.</span>`;
+                } else {
+                    document.querySelector("#status").innerHTML = `${chatItem.members ? chatItem.members : ''}${chatItem.activity}`;
+                }
                 // re-render new messages after cleaning older ones
                 document.querySelector(".main-chat .container").innerHTML = "";
                 chatItem.messages.forEach((message) => {
@@ -1025,7 +1087,7 @@ function set_new_message() {
     document.querySelector("#emoji_dropdown").classList.remove("active")
 }
 
-// send button only works when input isn't empty
+// send button only works when input isn't empty + VOICE input
 document.querySelector(".new-message-voice").addEventListener("click", (e) => {
     if (e.target.firstElementChild.classList.contains("fa-paper-plane")) {
 
@@ -1038,7 +1100,27 @@ document.querySelector(".new-message-voice").addEventListener("click", (e) => {
         else {
             set_new_message(); // NEW MESSAGE CODES HERE
         }
+    } else if (e.target.firstElementChild.classList.contains("fa-microphone")) { //voice input
+
+        let recognition = new webkitSpeechRecognition();
+        recognition.lang = "uz-Latn"; //"en-GB"; //uz-Cyrl  //en-US
+        recognition.onresult = function (e) {
+            document.querySelector(".new-message-text #input").value += e.results[0][0].transcript;
+            // set focus and some styling
+            document.querySelector(".new-message-voice").classList.remove("active");
+            document.querySelector("#input").focus();
+        }
+
+        if (!e.target.classList.contains("active")) { //if voice input isn't acivated
+            e.target.classList.add("active")
+            recognition.start();
+        } else { //if voice input is active and user wants to stop voice input
+            e.target.classList.remove("active");
+            recognition.stop();
+            // console.log('Speech recognition has stopped.');
+        }
     }
+
 });
 
 // toggle right column window + search + more btn
@@ -1267,7 +1349,7 @@ function report_modal() {
 document.querySelectorAll(".contact_modal").forEach((modal) => {
     modal.addEventListener("click", (e) => {
         //close modal on click to outer area
-        if (e.target.classList.contains("contact_modal") | e.target.classList.contains("edit_contact_cancel") | e.target.classList.contains("delete_contact_cancel") | e.target.classList.contains("clear_history_cancel") | e.target.classList.contains("delete_chat_cancel") | e.target.classList.contains("manage_group_cancel") | e.target.classList.contains("block_user_cancel") | e.target.classList.contains("leave_group_cancel") | e.target.classList.contains("report_cancel")) {
+        if (e.target.classList.contains("contact_modal") | e.target.classList.contains("edit_contact_cancel") | e.target.classList.contains("delete_contact_cancel") | e.target.classList.contains("clear_history_cancel") | e.target.classList.contains("delete_chat_cancel") | e.target.classList.contains("manage_group_cancel") | e.target.classList.contains("block_user_cancel") | e.target.classList.contains("leave_group_cancel") | e.target.classList.contains("report_cancel") | e.target.classList.contains("new_group_cancel") | e.target.classList.contains("new_channel_cancel")) {
             document.querySelectorAll(".contact_modal").forEach((modal_to_close) => {
                 modal_to_close.classList.remove("active");
             })
@@ -1476,6 +1558,106 @@ document.querySelectorAll(".contact_modal").forEach((modal) => {
             document.querySelector(".report_modal").classList.remove("active");//closes modal
             //renders new data 
             re_render();
+        } else if (e.target.classList.contains("new_group_done")) {//for creating a new group
+
+            let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
+            let name = document.querySelector("#new_group_name").value;
+            let username = document.querySelector("#new_group_link").value;
+            let bio = document.querySelector("#new_group_bio").value;
+            let avatar = document.querySelector("#new_group_avatar").src;
+
+            DATA_from_local_storage.groups.push({
+                id: 1,
+                name: name,
+                avatar: [avatar],
+                bio: bio,
+                user_name: username,
+                members: 1,
+                shared_links: 0,
+                shared_files: 0,
+                shared_photos: 0,
+                shared_voice: 0,
+                shared_videos: 0,
+                activity: " members, 1 online",
+                messages: [
+                    {
+                        id: 1,
+                        is_from_me: false,
+                        is_service_notifications: true,
+                        text: `new group '${name}' has been created`,
+                        time: new Date().getTime()
+                    }
+                ]
+            })
+            localStorage.setItem("DATA", JSON.stringify(DATA_from_local_storage));//sets to local storage
+            document.querySelector(".new_group_modal").classList.remove("active");//closes modal
+
+            // TO LEFT COLUMN
+            document.querySelectorAll(".navbar li").forEach((elem) => {
+                elem.classList.remove("active");
+            })
+            document.querySelector(`[data-target="groups"]`).classList.add("active");
+            document.querySelectorAll(".tabs-content").forEach((elem) => {
+                elem.classList.remove("active");
+                elem.innerHTML = ""; // qolgan tab larni ichini tozalaydi
+            });
+            document.querySelector(`#groups`).classList.add("active");
+            fill_left_column("groups");
+
+            // TO MIDDLE COLUMN
+            fill_middle_column(document.querySelector("#groups").lastElementChild)
+            // TO RIGHT COLUMN
+            fill_right_column()
+        } else if (e.target.classList.contains("new_channel_done")) {//for creating a new channel
+
+            let DATA_from_local_storage = JSON.parse(localStorage.getItem("DATA"));
+            let name = document.querySelector("#new_channel_name").value;
+            let username = document.querySelector("#new_channel_link").value;
+            let bio = document.querySelector("#new_channel_bio").value;
+            let avatar = document.querySelector("#new_channel_avatar").src;
+
+            DATA_from_local_storage.channels.push({
+                id: 1,
+                name: name,
+                avatar: [avatar],
+                bio: bio,
+                user_name: username,
+                members: 1,
+                shared_links: 0,
+                shared_files: 0,
+                shared_photos: 0,
+                shared_voice: 0,
+                shared_videos: 0,
+                activity: " members, 1 online",
+                messages: [
+                    {
+                        id: 1,
+                        is_from_me: false,
+                        is_service_notifications: true,
+                        text: `new channel '${name}' has been created`,
+                        time: new Date().getTime()
+                    }
+                ]
+            })
+            localStorage.setItem("DATA", JSON.stringify(DATA_from_local_storage));//sets to local storage
+            document.querySelector(".new_channel_modal").classList.remove("active");//closes modal
+
+            // TO LEFT COLUMN
+            document.querySelectorAll(".navbar li").forEach((elem) => {
+                elem.classList.remove("active");
+            })
+            document.querySelector(`[data-target="channels"]`).classList.add("active");
+            document.querySelectorAll(".tabs-content").forEach((elem) => {
+                elem.classList.remove("active");
+                elem.innerHTML = ""; // qolgan tab larni ichini tozalaydi
+            });
+            document.querySelector(`#channels`).classList.add("active");
+            fill_left_column("channels");
+
+            // TO MIDDLE COLUMN
+            fill_middle_column(document.querySelector("#channels").lastElementChild)
+            // TO RIGHT COLUMN
+            fill_right_column()
         }
     });
 })
@@ -1807,13 +1989,13 @@ function render_keys(isShifted, isCyrillic) {
             })
         }
     })
-    
+
     // check caps was on or not
     if (is_caps_on) {
         caps_function()
     }
     // sets event listeners to newly created buttonchalar :)
-    
+
     // buttons for writing 
     document.querySelectorAll(".button").forEach((btn) => {
         btn.addEventListener("click", (e) => {
@@ -1860,6 +2042,49 @@ function render_keys(isShifted, isCyrillic) {
     });
     // lang
     document.querySelector(".language").addEventListener("click", lang_func);
+    // left-right-arrows
+    let caret_index = 0;
+    document.querySelector(".left-arrow").addEventListener("click", (e) => {
+        document.querySelector(".new-message-text #input").focus();
+        let length = document.querySelector(".new-message-text #input").value.length;
+        if (caret_index < length) {
+            caret_index++;//bitta orqaga
+        }
+        document.querySelector(".new-message-text #input").setSelectionRange(length - caret_index, length - caret_index);
+    });
+    document.querySelector(".right-arrow").addEventListener("click", (e) => {
+        document.querySelector(".new-message-text #input").focus();
+        let length = document.querySelector(".new-message-text #input").value.length;
+        if (caret_index !== 0) {
+            caret_index--;//bitta oldinga
+        }
+        document.querySelector(".new-message-text #input").setSelectionRange(length - caret_index, length - caret_index);
+    });
+
+    // FUNNY MODAL
+    let joke_shown = 0;
+    document.querySelectorAll(".funny_modal_trigger").forEach((funny) => {
+        funny.addEventListener("click", () => {
+            document.querySelector("#funny_modal").classList.add('active');
+            let joke = [
+                "Ako🙄 nima bu sizga haqiqiy telegrammi 😟",
+                "Iya, bu knopkani bosib nima qilasiz-eee 😀",
+                "Ayttim-a shuni bosmaaang, deb 🤦🏻‍♂️",
+                "Ako, keling shu shu knopkani bosmaylik 🥺",
+                "Hisobingizga 100$ tushdi deb tassavur qilamiz 😁",
+                "Bo'ldi-e, o'ynayvermang klaviturani 😠"
+            ];
+            let random = Math.floor(Math.random() * (joke.length - 1));
+            joke_shown++;
+            if (joke_shown === 7) {
+                document.querySelector("#funny_modal_text").innerHTML = joke[joke.length - 1];
+            } else {
+                document.querySelector("#funny_modal_text").innerHTML = joke[random];
+            };
+            setTimeout(() => document.querySelector("#funny_modal").classList.remove('active'), 2000)
+        });
+    })
+
 }
 
 // shift functionality
@@ -1887,17 +2112,15 @@ function caps_function(e) {
     is_caps_on = document.querySelector(".capsLock").classList.contains("active");
 }
 // lang func
-function lang_func(){
-    if(!is_cyrillic){
+function lang_func() {
+    if (!is_cyrillic) {
         is_cyrillic = true;
         render_keys(is_shifted, is_cyrillic)
-    }else{
+    } else {
         is_cyrillic = false;
         render_keys(is_shifted, is_cyrillic)
     }
 }
-
-
 
 
 
