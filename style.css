@@ -318,6 +318,9 @@
   margin-top: 1px;
   color: #707579;
 }
+#telegram #column-center .main-header .person .info #status.typing {
+  color: rgba(0, 102, 255, 0.863);
+}
 #telegram #column-center .main-header .person .search-btn,
 #telegram #column-center .main-header .person .more-btn {
   margin-left: 7px;
