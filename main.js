@@ -980,8 +980,10 @@ function fill_middle_column(what) {
                 // change status
                 if (chatItem.activity === "typing") {
                     document.querySelector("#status").innerHTML = `${chatItem.activity} <span class="typewriterDot">.</span><span class="typewriterDot">.</span><span class="typewriterDot">.</span>`;
+                    document.querySelector("#status").classList.add("typing")
                 } else {
                     document.querySelector("#status").innerHTML = `${chatItem.members ? chatItem.members : ''}${chatItem.activity}`;
+                    document.querySelector("#status").classList.remove("typing")
                 }
                 // re-render new messages after cleaning older ones
                 document.querySelector(".main-chat .container").innerHTML = "";
