@@ -1027,7 +1027,7 @@ document.querySelector(".new-message-text #input").addEventListener("keydown", (
     multi_key_logger[e.keyCode] = true;//when key is pressed, return true
 })
 document.querySelector(".new-message-text #input").addEventListener("keyup", (e) => {
-    if (multi_key_logger[13] && !multi_key_logger[16]) {//if ENTER is pressed not in ccombination with SHIFT, send message
+    if (multi_key_logger[13] && !multi_key_logger[16]) {//if ENTER is pressed not in combination with SHIFT, send message
         if (e.target.value && e.target.value.trim()) { //if input isn't empty
             set_new_message();// NEW MESSAGE CODES HERE
         } else {
@@ -1039,6 +1039,8 @@ document.querySelector(".new-message-text #input").addEventListener("keyup", (e)
     if (e.target.value && e.target.value.trim()) { //if input isn't empty
         document.querySelector(".new-message-voice i").classList.remove("fa-microphone");
         document.querySelector(".new-message-voice i").classList.add("fa-paper-plane");
+        e.target.style.height = e.target.scrollHeight + "px";
+        console.log(e.target.scrollHeight);
     }
     else {//if input is empty
         document.querySelector(".new-message-voice i").classList.add("fa-microphone");
@@ -1090,7 +1092,9 @@ function set_new_message() {
         })
     });
     // close emoji modal if present
-    document.querySelector("#emoji_dropdown").classList.remove("active")
+    document.querySelector("#emoji_dropdown").classList.remove("active");
+    document.querySelector("#input").style.height = "18.4px";
+    console.log("height");
 }
 
 // send button only works when input isn't empty + VOICE input
