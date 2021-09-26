@@ -306,7 +306,7 @@ $header-height: 56px;
                 grid-template-rows: $header-height;
                 align-items: center;
                 width: 100%;
-                .back_for_mobile{
+                .back_for_mobile {
                     display: none;
                 }
                 .avatar {
@@ -442,7 +442,7 @@ $header-height: 56px;
                 min-height: 30px;
                 display: inline-block;
                 line-height: 1.3125;
-                // word-break: break-word;
+                word-break: break-word;
                 // white-space: pre-line;
                 // white-space: pre-wrap;
                 position: relative;
@@ -509,8 +509,9 @@ $header-height: 56px;
                     align-items: center;
                     position: relative;
                     .emoji {
+                        align-self: flex-end;
                         cursor: pointer;
-                        padding: 0 15px;
+                        padding: 0 15px 10px;
                         color: $secondary-text-color;
                         &:hover {
                             animation: emo_anim 0.5s 1 linear;
@@ -522,6 +523,8 @@ $header-height: 56px;
 
                     .keyboard,
                     .file {
+                        align-self: flex-end;
+                        padding-bottom: 10px;
                         &:hover {
                             transform: scale(1.2);
                         }
@@ -636,12 +639,13 @@ $header-height: 56px;
                         }
                     }
                     .new-message-text {
-                        padding: 0 5px;
-                        height: 100%;
+                        padding: 5px;
+                        height: auto;
                         display: grid;
                         // align-self: center;
                         align-items: center;
                         #input {
+                            height: fit-content;
                             font-size: 16px;
                             font-family: sans-serif;
                             border: none;
@@ -649,6 +653,7 @@ $header-height: 56px;
                             outline: none;
                             display: block;
                             resize: none;
+
                             // &[placeholder]:empty:before {
                             //     content: attr(placeholder);
                             //     color: #555;
@@ -783,11 +788,11 @@ $header-height: 56px;
                     }
                     .file {
                         cursor: pointer;
-                        padding: 0 15px;
+                        padding: 0 15px 10px;
                         color: $secondary-text-color;
                         transition: 300ms;
                         position: relative;
-                        i {
+                        i { 
                             font-size: 24px;
                         }
                         input {
@@ -806,6 +811,7 @@ $header-height: 56px;
                     display: flex;
                     align-items: center;
                     justify-content: center;
+                    align-self: flex-end;
                     margin-right: 10px;
                     width: 46px;
                     height: 46px;
@@ -1261,7 +1267,7 @@ $header-height: 56px;
                 .person {
                     width: 100%; //////////////////
                     grid-template-columns: auto auto 1fr auto auto;
-                    .back_for_mobile{
+                    .back_for_mobile {
                         cursor: pointer;
                         width: 35px;
                         height: 40px;
@@ -1279,10 +1285,9 @@ $header-height: 56px;
                             color: #707579;
                         }
                     }
-                 
+
                     .info {
                         padding-left: 8px;
-                        
                     }
                     .search-btn,
                     .more-btn {
@@ -1304,7 +1309,7 @@ $header-height: 56px;
                     .new-message-wrapper {
                         border-radius: 7px;
                         .emoji {
-                            padding: 0 5px 0 10px;
+                            padding: 0 5px 10px 10px;
                         }
 
                         #emoji_dropdown {
@@ -1333,9 +1338,7 @@ $header-height: 56px;
                             }
                         }
                         .keyboard {
-                            i {
-                                font-size: 20px;
-                            }
+                            display: none;
                         }
                         #keyboard_dropdown {
                             $keyboard_height: 50px;
@@ -1459,7 +1462,7 @@ $header-height: 56px;
                             }
                         }
                         .file {
-                            padding: 0 7px;
+                            padding: 0 7px 10px;
                             i {
                                 font-size: 22px;
                             }
