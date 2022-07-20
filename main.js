@@ -1042,7 +1042,6 @@ document.querySelector(".new-message-text #input").addEventListener("keyup", (e)
         document.querySelector(".new-message-voice i").classList.remove("fa-microphone");
         document.querySelector(".new-message-voice i").classList.add("fa-paper-plane");
         e.target.style.height = e.target.scrollHeight + "px";
-        console.log(e.target.scrollHeight);
     }
     else {//if input is empty
         document.querySelector(".new-message-voice i").classList.add("fa-microphone");
@@ -1096,7 +1095,6 @@ function set_new_message() {
     // close emoji modal if present
     document.querySelector("#emoji_dropdown").classList.remove("active");
     document.querySelector("#input").style.height = "18.4px";
-    console.log("height");
 }
 
 // send button only works when input isn't empty + VOICE input
@@ -1115,7 +1113,7 @@ document.querySelector(".new-message-voice").addEventListener("click", (e) => {
     } else if (e.target.firstElementChild.classList.contains("fa-microphone")) { //voice input
 
         let recognition = new webkitSpeechRecognition();
-        recognition.lang = "uz-Latn"; //"en-GB"; //uz-Cyrl  //en-US
+        recognition.lang = "en-GB"; //"en-GB"; //uz-Cyrl  //en-US
         recognition.onresult = function (e) {
             document.querySelector(".new-message-text #input").value += e.results[0][0].transcript;
             // set focus and some styling
@@ -1129,7 +1127,6 @@ document.querySelector(".new-message-voice").addEventListener("click", (e) => {
         } else { //if voice input is active and user wants to stop voice input
             e.target.classList.remove("active");
             recognition.stop();
-            // console.log('Speech recognition has stopped.');
         }
     }
 
