@@ -20,9 +20,6 @@ $header-height: 56px;
     width: 100%;
 }
 @mixin header-style($width) {
-    // cursor: pointer;
-    // height: 56px;//grid -tem-row qildi buni ishini
-    // padding: 0 3px;
     background-color: #fff;
     box-shadow: 0px 1px 5px 0px rgb(0 0 0 / 21%);
     position: fixed;
@@ -185,6 +182,7 @@ $header-height: 56px;
                         outline: none;
                         font-size: 100%;
                         border: none;
+                        width: 100%;
                     }
                 }
             }
@@ -298,7 +296,6 @@ $header-height: 56px;
             }
             @include header-style($column-center-width);
             cursor: pointer;
-            // height: 56px;//grid -tem-row qildi buni ishini
             padding: 0 3px;
             .person {
                 display: grid;
@@ -446,8 +443,6 @@ $header-height: 56px;
                 display: inline-block;
                 line-height: 1.3125;
                 word-break: break-word;
-                // white-space: pre-line;
-                // white-space: pre-wrap;
                 position: relative;
                 font-weight: 400;
                 border-radius: 10px;
@@ -673,18 +668,22 @@ $header-height: 56px;
                     }
                     #keyboard_dropdown {
                         $keyboard_height: 50px;
-                        position: absolute;
+                        position: fixed;
                         border-radius: 15px;
                         width: 900px;
                         height: 365px;
                         padding: 20px;
-                        right: 0;
-                        bottom: 110%;
-                        transition: 300ms;
+                        left: -150vw;
+                        top: 50%;
+                        transition: 500ms;
                         background-color: #5e5e5e;
-                        transform: scale(0);
+                        transform: translate(-50%, -50%);
+                        opacity: 0;
+                        z-index: -10;
                         &.active {
-                            transform: scale(1);
+                            z-index: 10;
+                            left: 50%;
+                            opacity: 1;
                         }
                         .keyboard_wrapper {
                             display: grid;
@@ -905,6 +904,7 @@ $header-height: 56px;
             padding-top: $header-height;
             position: relative;
             cursor: pointer;
+            z-index: -1;
             .carousel-items {
                 overflow: hidden;
                 position: relative;
@@ -990,7 +990,7 @@ $header-height: 56px;
                 bottom: 0;
                 width: calc(100% / 3);
                 opacity: 0;
-                background-image: url(https://web.telegram.org/k/assets/img/avatarprevious.svg);
+                background-image: url("./img/icon-left.svg");
                 background-position: 1.125rem 55%;
                 background-repeat: no-repeat;
                 background-size: 1.25rem;
@@ -998,7 +998,7 @@ $header-height: 56px;
                 &.arrow-next {
                     left: auto;
                     right: 0;
-                    background-image: url(https://web.telegram.org/k/assets/img/avatarnext.svg);
+                    background-image: url("./img/icon-right.svg");
                     background-position: calc(100% - 1.125rem) 55%;
                 }
                 &:hover {
@@ -1006,7 +1006,6 @@ $header-height: 56px;
                 }
             }
         }
-
         .right-main {
             padding: 8px;
             .right-main-item {
@@ -1344,125 +1343,7 @@ $header-height: 56px;
                             display: none;
                         }
                         #keyboard_dropdown {
-                            $keyboard_height: 50px;
-                            position: absolute;
-                            border-radius: 15px;
-                            width: 900px;
-                            height: 365px;
-                            padding: 20px;
-                            right: 0;
-                            bottom: 110%;
-                            transition: 300ms;
-                            background-color: #5e5e5e;
-                            transform: scale(0);
-                            &.active {
-                                transform: scale(1);
-                            }
-                            .keyboard_wrapper {
-                                display: grid;
-                                grid-template-rows: 25px repeat(
-                                        5,
-                                        $keyboard_height
-                                    );
-                                row-gap: 10px;
-                                grid-template-columns: 100%;
-                                width: 100%;
-                                height: 100%;
-                                span:not(.arrows):not(.middle-arrows):active {
-                                    transform: scale(0.95);
-                                    box-shadow: none;
-                                }
-                                .button-style {
-                                    box-shadow: 0 0 10px -5px black;
-                                    background: #3e3e3e;
-                                    height: 50px;
-                                    color: white;
-                                    font-size: 20px;
-                                    text-align: center;
-                                    cursor: pointer;
-                                    border-radius: 5px;
-                                    line-height: 45px;
-                                    position: relative;
-                                    user-select: none;
-                                }
-                                .esc.button-style {
-                                    width: 50px;
-                                    height: 25px;
-                                    font-size: 15px;
-                                    line-height: 25px;
-                                }
-                                .capsLock {
-                                    &.active {
-                                        &::after {
-                                            background-color: gold;
-                                            box-shadow: 0px 0px 5px gold;
-                                        }
-                                    }
-                                }
-                                .capsLock::after {
-                                    content: "";
-                                    width: 5px;
-                                    height: 5px;
-                                    position: absolute;
-                                    border-radius: 50%;
-                                    top: 5px;
-                                    right: 5px;
-                                    background-color: #999999;
-                                }
-
-                                .line {
-                                    column-gap: 10px;
-                                }
-                                .first-line {
-                                    display: grid;
-                                    grid-template-columns: 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 80px;
-                                }
-                                .second-line {
-                                    display: grid;
-                                    grid-template-columns: 60px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 70px;
-                                }
-                                .third-line {
-                                    display: grid;
-                                    grid-template-columns: 80px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 110px;
-                                }
-                                .forth-line {
-                                    display: grid;
-                                    grid-template-columns: 125px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 125px;
-                                }
-                                .fifth-line {
-                                    display: grid;
-                                    grid-template-columns: 50px 50px 50px 50px 250px 50px 50px 50px auto;
-                                    column-gap: 10px;
-                                }
-                                .arrows {
-                                    height: 50px;
-                                    display: grid;
-                                    grid-template-columns: 55px 50px 55px;
-                                    grid-column-gap: 10px;
-                                }
-
-                                .middle-arrows {
-                                    width: 50px;
-                                    height: 50px;
-                                    display: grid;
-                                    grid-template-rows: 24px 24px;
-                                    row-gap: 2px;
-                                }
-
-                                .up-arrow,
-                                .down-arrow {
-                                    background: #3e3e3e;
-                                    width: 50px;
-                                    height: 24px;
-                                    color: white;
-                                    font-size: 15px;
-                                    text-align: center;
-                                    cursor: pointer;
-                                    border-radius: 5px;
-                                    line-height: 20px;
-                                    user-select: none;
-                                }
-                            }
+                            display: none;
                         }
                         .file {
                             padding: 0 7px 10px;
