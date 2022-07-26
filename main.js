@@ -94,7 +94,7 @@ let DATA = {
                 {
                     id: 1,
                     is_from_me: false,
-                    text: "Assalomu aaykum yaxshimisiz, to'lovingiz tushdi belgilab qo'ydim😊",
+                    text: "Assalomu alaykum yaxshimisiz?",
                     time: new Date(2021, 7, 30, 12, 54, 01).getTime()
                 },
 
