@@ -492,6 +492,7 @@ $header-height: 56px;
         .main-footer {
             display: none;
             position: fixed;
+            z-index: 2;
             bottom: 1rem;
             width: $column-center-width;
             .main-footer-wrapper {
@@ -904,7 +905,6 @@ $header-height: 56px;
             padding-top: $header-height;
             position: relative;
             cursor: pointer;
-            z-index: -1;
             .carousel-items {
                 overflow: hidden;
                 position: relative;

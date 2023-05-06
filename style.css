@@ -384,34 +384,16 @@
 }
 #telegram #column-center .main-header .typewriterDot {
   opacity: 0;
-  -webkit-animation: typewriterDot 4s infinite linear;
-          animation: typewriterDot 4s infinite linear;
+  animation: typewriterDot 4s infinite linear;
 }
 #telegram #column-center .main-header .typewriterDot:nth-of-type(1) {
-  -webkit-animation-delay: 0s;
-          animation-delay: 0s;
+  animation-delay: 0s;
 }
 #telegram #column-center .main-header .typewriterDot:nth-of-type(2) {
-  -webkit-animation-delay: 0.5s;
-          animation-delay: 0.5s;
+  animation-delay: 0.5s;
 }
 #telegram #column-center .main-header .typewriterDot:nth-of-type(3) {
-  -webkit-animation-delay: 1s;
-          animation-delay: 1s;
-}
-@-webkit-keyframes typewriterDot {
-  0% {
-    opacity: 0;
-  }
-  49% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 1;
-  }
+  animation-delay: 1s;
 }
 @keyframes typewriterDot {
   0% {
@@ -489,6 +471,7 @@
 #telegram #column-center .main-footer {
   display: none;
   position: fixed;
+  z-index: 2;
   bottom: 1rem;
   width: 72.5%;
 }
@@ -512,8 +495,7 @@
   color: #707579;
 }
 #telegram #column-center .main-footer .main-footer-wrapper .new-message-wrapper .emoji:hover {
-  -webkit-animation: emo_anim 0.5s 1 linear;
-          animation: emo_anim 0.5s 1 linear;
+  animation: emo_anim 0.5s 1 linear;
 }
 #telegram #column-center .main-footer .main-footer-wrapper .new-message-wrapper .emoji i {
   font-size: 24px;
@@ -526,20 +508,6 @@
 #telegram #column-center .main-footer .main-footer-wrapper .new-message-wrapper .keyboard:hover,
 #telegram #column-center .main-footer .main-footer-wrapper .new-message-wrapper .file:hover {
   transform: scale(1.2);
-}
-@-webkit-keyframes emo_anim {
-  0% {
-    transform: rotate(0) scale(1);
-  }
-  25% {
-    transform: rotate(-45deg) scale(1.1);
-  }
-  75% {
-    transform: rotate(45deg) scale(1.1);
-  }
-  100% {
-    transform: rotate(0deg) scale(1);
-  }
 }
 @keyframes emo_anim {
   0% {
@@ -644,7 +612,6 @@
   align-items: center;
 }
 #telegram #column-center .main-footer .main-footer-wrapper .new-message-wrapper .new-message-text #input {
-  height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
   font-size: 16px;
@@ -707,7 +674,6 @@
   position: relative;
   -webkit-user-select: none;
      -moz-user-select: none;
-      -ms-user-select: none;
           user-select: none;
 }
 #telegram #column-center .main-footer .main-footer-wrapper .new-message-wrapper #keyboard_dropdown .keyboard_wrapper .esc.button-style {
@@ -782,7 +748,6 @@
   line-height: 20px;
   -webkit-user-select: none;
      -moz-user-select: none;
-      -ms-user-select: none;
           user-select: none;
 }
 #telegram #column-center .main-footer .main-footer-wrapper .new-message-wrapper .file {
@@ -819,22 +784,10 @@
   box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.21);
 }
 #telegram #column-center .main-footer .main-footer-wrapper .new-message-voice.active {
-  -webkit-animation: voice_input_animation 500ms infinite;
-          animation: voice_input_animation 500ms infinite;
+  animation: voice_input_animation 500ms infinite;
 }
 #telegram #column-center .main-footer .main-footer-wrapper .new-message-voice.active i {
   color: #0093ce;
-}
-@-webkit-keyframes voice_input_animation {
-  0% {
-    box-shadow: 0 0 0px 0px #7cd0f1;
-  }
-  50% {
-    box-shadow: 0 0 5px 5px #0077ff;
-  }
-  100% {
-    box-shadow: 0 0 0px 0px #98dcf7;
-  }
 }
 @keyframes voice_input_animation {
   0% {
@@ -902,7 +855,6 @@
   padding-top: 56px;
   position: relative;
   cursor: pointer;
-  z-index: -1;
 }
 #telegram #column-right .carousel .carousel-items {
   overflow: hidden;
@@ -1284,7 +1236,7 @@
     padding-left: 8px;
   }
   #telegram #column-center .main-header .person .search-btn,
-#telegram #column-center .main-header .person .more-btn {
+  #telegram #column-center .main-header .person .more-btn {
     margin-left: 0px;
   }
   #telegram #column-center .main-chat .container {
@@ -1349,7 +1301,7 @@
     display: none;
   }
   #telegram #column-center.shrinked .main-header,
-#telegram #column-center.shrinked .main-footer {
+  #telegram #column-center.shrinked .main-footer {
     width: 0px;
     display: none;
   }
